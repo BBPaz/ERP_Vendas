@@ -10,5 +10,10 @@ package Isso;
  * @author logonaf
  */
 public class OrdemExpedicao {
-    
+    private String status;
+    private String numero_nota;
+    private String data_entrega;
+    private String id_vendedor;
+    private Pedido Pedido;
+   
 }
