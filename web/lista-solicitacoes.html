@@ -1,0 +1,112 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Livros Fiscais</title>
+
+    <link rel="stylesheet" href="css/all.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Grupo 1 - Livros Fiscais" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+</head>
+
+<body>
+
+    <header>
+
+        <div class="logotipo">
+            <a href="dashboard-livros-fiscais.html"><img src="img/logo.jpg"></a>
+        </div>
+
+        <div class="navegacao">
+            <a href="perfil.html"><img src="img/btn-perfil.png" class="btn-hover"></a>
+            <a><img src="img/btn-sair.png" onClick="popup_sair()" class="btn-hover"></a>
+        </div>
+
+    </header>
+
+    <div id="btnMenu"><img src="img/btn-menu.png"></div>
+
+    <nav>
+        <ul>
+            <li><a href="#">Vendas</a></li>
+            <li><a href="#">Logística</a></li>
+            <li><a href="#">E-commerce</a></li>
+            <li><a href="#">Caixa</a></li>
+            <li><a href="livros-fiscais.html" class="active">Livros Fiscais</a></li>
+            <li><a href="#">RH</a></li>
+            <li><a href="#">PCP</a></li>
+            <li><a href="#">Estoque</a></li>
+            <li><a href="#">Contas a Pagar</a></li>
+            <li><a href="#">Contas a Receber</a></li>
+            <li><a href="#">Compras</a></li>
+            <li><a href="#">Folha de Pagamento</a></li>
+            <li class="some-pc"><a href="#"></a></li>
+            <li class="some-pc"><a href="perfil.html">Meu Perfil</a></li>
+            <li class="some-pc"><a onClick="popup_sair()">Sair</a></li>
+        </ul>
+    </nav>
+
+    <div class="cont">
+
+        <p class="page-atual">
+            <a href="dashboard-livros-fiscais.html">Home</a> <img src="img/arrow.png" />
+            <a href="livros-fiscais.html">Livros Fiscais</a> <img src="img/arrow.png" />
+            <a href="">Lista de Solicitações</a>
+        </p>
+
+        <p class="page-btn">
+            <a href="#"><img src="img/btn-filtrar.png" onClick="popup_filtrar()" class="btn-hover"></a>
+        </p>
+
+        <div class="col-md-12">
+            <div class="border-titulo">
+
+                <h2>Lista de Solicitações</h2>
+
+                <br>
+                
+                <ul class="lista-fiscal">
+                    
+                    <li>
+                        <p>#000001 - 01/01/2018</p>
+                        <p>EMPRESA DE TESTE QUE SOLICITOU &nbsp; | &nbsp; SP</p>
+
+                        <a class="ver"><img src="img/btn-entregar.png" onClick="popup_entregar()" class="btn-hover" /></a>
+                    </li>
+                
+                    <li>
+                        <p>#000002 - 01/01/2018</p>
+                        <p>EMPRESA DE TESTE QUE SOLICITOU &nbsp; | &nbsp; SP</p>
+
+                        <a class="ver"><img src="img/btn-entregar.png" onClick="popup_entregar()" class="btn-hover" /></a>
+                    </li>
+                
+                    <li>
+                        <p>#000003 - 01/01/2018</p>
+                        <p>EMPRESA DE TESTE QUE SOLICITOU &nbsp; | &nbsp; SP</p>
+
+                        <a class="ver"><img src="img/btn-entregar.png" onClick="popup_entregar()" class="btn-hover" /></a>
+                    </li>
+
+                </ul>
+
+                <div class="clearfix"></div>
+        
+            </div>
+        </div>
+
+    </div>
+
+<div id="popup"></div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.dataTables.min.js"></script>
+<script src="js/dataTables.bootstrap4.min.js"></script>
+<script src="js/scripts.js"></script>
+
+</body>
+
+</html>
