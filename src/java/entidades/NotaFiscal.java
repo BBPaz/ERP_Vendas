@@ -22,6 +22,7 @@ public class NotaFiscal {
     }
 
     public NotaFiscal() {
+        estado = "uf";
     }
 
     public String getData_emissao() {
