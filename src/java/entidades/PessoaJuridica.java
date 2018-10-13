@@ -3,17 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Isso;
+package entidades;
 
 /**
  *
  * @author logonaf
  */
-public class OrdemExpedicao {
-    private String status;
-    private String numero_nota;
-    private String data_entrega;
-    private String id_vendedor;
-    private Pedido Pedido;
+public class PessoaJuridica extends Cliente {
+    String cnpj, razao_social, inscricao_municipal;
+    
    
+    
 }

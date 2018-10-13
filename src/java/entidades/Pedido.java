@@ -1,5 +1,5 @@
 
-package Isso;
+package entidades;
 
 public class Pedido {
     String id_pedido;

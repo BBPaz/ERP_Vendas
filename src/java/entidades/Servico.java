@@ -3,38 +3,34 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Isso;
+package entidades;
 
 /**
  *
  * @author logonaf
  */
-public class Produto {
-    private String produto;
+public class Servico {
+    private String id;
     private float valor;
     private String descricao;
     private String nome;
-    private String tipo;
 
-    public Produto() {
+    public Servico() {
     }
 
-    
-    
-    public Produto(String produto, float valor, String descricao, String nome, String tipo) {
-        this.produto = produto;
+    public Servico(String id, float valor, String descricao, String nome) {
+        this.id = id;
         this.valor = valor;
         this.descricao = descricao;
         this.nome = nome;
-        this.tipo = tipo;
-    }
-    
-    public String getProduto() {
-        return produto;
     }
 
-    public void setProduto(String produto) {
-        this.produto = produto;
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public float getValor() {
@@ -60,15 +56,6 @@ public class Produto {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-    
     
     
 }

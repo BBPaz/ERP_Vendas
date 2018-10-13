@@ -1,4 +1,4 @@
-package Isso;
+package entidades;
 
 
 public class Endereco {

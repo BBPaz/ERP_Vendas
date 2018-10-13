@@ -1,4 +1,4 @@
-package Isso;
+package entidades;
 
 import Defaut.Icms;
 
