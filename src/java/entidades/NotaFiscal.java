@@ -3,20 +3,33 @@ package entidades;
 
 public class NotaFiscal {
 
+    String data_emissao;
+    boolean tipo_emit;
+    String numero;
+    int cfop;
+    float valor_total;
+    String dados_adicionais;
+    String estado;
+
+    public NotaFiscal(String data_emissao, boolean tipo_emit, String numero, int cfop, float valor_total, String dados_adicionais, String estado) {
+        this.data_emissao = data_emissao;
+        this.tipo_emit = tipo_emit;
+        this.numero = numero;
+        this.cfop = cfop;
+        this.valor_total = valor_total;
+        this.dados_adicionais = dados_adicionais;
+        this.estado = estado;
+    }
+
+    public NotaFiscal() {
+    }
+
     public String getData_emissao() {
         return data_emissao;
     }
 
     public void setData_emissao(String data_emissao) {
         this.data_emissao = data_emissao;
-    }
-
-    public String getDados_adicionais() {
-        return dados_adicionais;
-    }
-
-    public void setDados_adicionais(String dados_adicionais) {
-        this.dados_adicionais = dados_adicionais;
     }
 
     public boolean isTipo_emit() {
@@ -27,12 +40,12 @@ public class NotaFiscal {
         this.tipo_emit = tipo_emit;
     }
 
-    public float getValor_total() {
-        return valor_total;
+    public String getNumero() {
+        return numero;
     }
 
-    public void setValor_total(float valor_total) {
-        this.valor_total = valor_total;
+    public void setNumero(String numero) {
+        this.numero = numero;
     }
 
     public int getCfop() {
@@ -43,6 +56,22 @@ public class NotaFiscal {
         this.cfop = cfop;
     }
 
+    public float getValor_total() {
+        return valor_total;
+    }
+
+    public void setValor_total(float valor_total) {
+        this.valor_total = valor_total;
+    }
+
+    public String getDados_adicionais() {
+        return dados_adicionais;
+    }
+
+    public void setDados_adicionais(String dados_adicionais) {
+        this.dados_adicionais = dados_adicionais;
+    }
+
     public String getEstado() {
         return estado;
     }
@@ -50,10 +79,7 @@ public class NotaFiscal {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-    String data_emissao, dados_adicionais;
-    boolean tipo_emit;
-    float valor_total;
-    int cfop;
-    String estado;
+    
+    
     
 }

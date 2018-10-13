@@ -20,8 +20,23 @@ public class NfSaida {
     float val_ipi;
     String natureza_op;
     String emitente;
-  
 
+    public NfSaida() {
+    }
+
+    public NfSaida(String especie, String serie, String insc_estadual, String cnpj, String procedencia, String cod_contabil, float val_icms, float val_ipi, String natureza_op, String emitente) {
+        this.especie = especie;
+        this.serie = serie;
+        this.insc_estadual = insc_estadual;
+        this.cnpj = cnpj;
+        this.procedencia = procedencia;
+        this.cod_contabil = cod_contabil;
+        this.val_icms = val_icms;
+        this.val_ipi = val_ipi;
+        this.natureza_op = natureza_op;
+        this.emitente = emitente;
+    }
+      
     public String getEspecie() {
         return especie;
     }
