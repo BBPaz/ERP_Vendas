@@ -42,7 +42,7 @@ try{
     //nome.setValue("Igor pauduro");
     //ide.setAttributeNode(nome);
     root.appendChild(ide);
-    
+//------------------------------------------------------------------------------    
     // tag estado
     Element cUF = documentoXML.createElement("cUF");
     cUF.appendChild(documentoXML.createTextNode(nf.getEstado()));
@@ -95,7 +95,7 @@ try{
       Element tpNF = documentoXML.createElement("tpNF");
     tpNF.appendChild(documentoXML.createTextNode("1"));
     ide.appendChild(tpNF);
-    
+//------------------------------------------------------------------------------        
     // node emitente
     Element emit = documentoXML.createElement("emit");
     root.appendChild(emit);
@@ -118,7 +118,7 @@ try{
     Element IE = documentoXML.createElement("IE");
     IE.appendChild(documentoXML.createTextNode(ct.getIe()));
     emit.appendChild(IE);
-    
+//------------------------------------------------------------------------------        
     //enderEmit
     Element enderEmit = documentoXML.createElement("enderEmit");
     emit.appendChild(enderEmit);
@@ -162,6 +162,308 @@ try{
     Element fone = documentoXML.createElement("fone");
     fone.appendChild(documentoXML.createTextNode("948601713"));
     enderEmit.appendChild(fone);
+//------------------------------------------------------------------------------        
+    // node dest
+    Element dest = documentoXML.createElement("dest");
+    root.appendChild(dest);
+    
+    // cnpj/cpf pessoa
+    Element CNPJD = documentoXML.createElement("CNPJ");
+    CNPJD.appendChild(documentoXML.createTextNode("CNPJ CLIENTE"));
+    dest.appendChild(CNPJD);
+   
+    Element xNomeD = documentoXML.createElement("xNome");
+    xNomeD.appendChild(documentoXML.createTextNode("Nome destinatrio"));
+    dest.appendChild(xNomeD);
+//------------------------------------------------------------------------------        
+    
+    Element enderDest = documentoXML.createElement("enderDest");
+    root.appendChild(enderDest);
+    
+    
+    //Lgr
+    Element xLgrD = documentoXML.createElement("xLgr");
+    xLgrD.appendChild(documentoXML.createTextNode("Longradouro cliente"));
+    enderDest.appendChild(xLgr);
+    
+    //nro
+     Element nroD = documentoXML.createElement("nro");
+    nroD.appendChild(documentoXML.createTextNode(String.valueOf("Numero destinatrio")));
+    enderDest.appendChild(nroD);
+    
+    //bairro
+     Element bairroD = documentoXML.createElement("bairro");
+    bairroD.appendChild(documentoXML.createTextNode("bairro desti"));
+    enderDest.appendChild(bairroD);
+   
+    //xMuni
+     Element xMuniD = documentoXML.createElement("xMuni");
+    xMuniD.appendChild(documentoXML.createTextNode("Municipio desti"));
+    enderDest.appendChild(xMuniD);
+    
+    //UF
+     Element UFD = documentoXML.createElement("UF");
+    UFD.appendChild(documentoXML.createTextNode("UF desti"));
+    enderDest.appendChild(UFD);
+    
+    //cep
+     Element cepD = documentoXML.createElement("CEP");
+    cepD.appendChild(documentoXML.createTextNode("000000"));
+    enderDest.appendChild(cepD);
+    
+    //pais
+    Element xPaisD = documentoXML.createElement("xPais");
+    xPaisD.appendChild(documentoXML.createTextNode("Brasil"));
+    enderDest.appendChild(xPaisD);
+    
+    //fone
+    Element foneD = documentoXML.createElement("fone");
+    foneD.appendChild(documentoXML.createTextNode("948601713"));
+    enderDest.appendChild(foneD);
+    
+//------------------------------------------------------------------------------ 
+    Element entrega = documentoXML.createElement("entrega");
+    root.appendChild(entrega);
+    
+    Element CNPJE = documentoXML.createElement("CNPJ");
+    CNPJE.appendChild(documentoXML.createTextNode("CNPJ CLIENTE"));
+    entrega.appendChild(CNPJE);
+    
+    Element xLgrE = documentoXML.createElement("xLgr");
+    xLgrE.appendChild(documentoXML.createTextNode("Longradouro cliente"));
+    entrega.appendChild(xLgrE);
+    
+     Element nroE = documentoXML.createElement("nro");
+    nroE.appendChild(documentoXML.createTextNode(String.valueOf("Numero destinatrio")));
+    entrega.appendChild(nroE);
+    
+    Element xCpl = documentoXML.createElement("xCpl");
+    xCpl.appendChild(documentoXML.createTextNode("COMPLEMENTO"));
+    entrega.appendChild(xCpl);
+    
+       Element bairroE = documentoXML.createElement("bairro");
+    bairroE.appendChild(documentoXML.createTextNode("bairro entrega"));
+    entrega.appendChild(bairroE);
+    
+        //xMuni
+     Element xMuniE = documentoXML.createElement("xMuni");
+    xMuniE.appendChild(documentoXML.createTextNode("Municipio entrega"));
+    entrega.appendChild(xMuniE);
+    
+    //UF
+     Element UFE = documentoXML.createElement("UF");
+    UFE.appendChild(documentoXML.createTextNode("UF entrega"));
+    entrega.appendChild(UFE);
+//------------------------------------------------------------------------------
+    Element det  = documentoXML.createElement("det");
+    Attr nItem = documentoXML.createAttribute("nItem");
+    nItem.setValue("1");
+    det.setAttributeNode(nItem);
+    root.appendChild(det);
+    
+    Element prod = documentoXML.createElement("prod");
+    det.appendChild(prod);
+    
+    Element cProd = documentoXML.createElement("cProd");
+    cProd.appendChild(documentoXML.createTextNode("codigo do produto"));
+    prod.appendChild(cProd);
+    
+    Element cEAN = documentoXML.createElement("cEAN");
+    cEAN.appendChild(documentoXML.createTextNode("codigo EAN" ));
+    prod.appendChild(cEAN);
+    
+    Element xProd = documentoXML.createElement("xProd");
+    xProd.appendChild(documentoXML.createTextNode("Nome produto"));
+    prod.appendChild(xProd);
+    
+    Element CFOP = documentoXML.createElement("CFOP");
+    CFOP.appendChild(documentoXML.createTextNode("CFOP"));
+    prod.appendChild(CFOP);
+    
+    Element uCom = documentoXML.createElement("uCom");
+    uCom.appendChild(documentoXML.createTextNode("Unidade do produto"));
+    prod.appendChild(uCom);
+    
+    Element qCom = documentoXML.createElement("qCom");
+    qCom.appendChild(documentoXML.createTextNode("156456"));
+    prod.appendChild(qCom);
+    
+    Element vUnCom = documentoXML.createElement("vUnCom");
+    vUnCom.appendChild(documentoXML.createTextNode("qtde unide"));
+    prod.appendChild(vUnCom);
+    
+    Element vProd = documentoXML.createElement("vProd");
+    vProd.appendChild(documentoXML.createTextNode("valor produto"));
+    prod.appendChild(vProd);
+    
+    Element vEANTrib = documentoXML.createElement("vEANTrib");
+    vEANTrib.appendChild(documentoXML.createTextNode("Nao sri"));
+    prod.appendChild(vEANTrib);
+    
+    Element uTrib = documentoXML.createElement("uTrib");
+    uTrib.appendChild(documentoXML.createTextNode("Unidade"));
+    prod.appendChild(uTrib);
+    
+    Element qTrib = documentoXML.createElement("qTrib");
+    qTrib.appendChild(documentoXML.createTextNode("10000"));
+    prod.appendChild(qTrib);
+    
+    Element vUnTrib = documentoXML.createElement("vUnTrib");
+    vUnTrib.appendChild(documentoXML.createTextNode("1"));
+    prod.appendChild(vUnTrib);
+    
+    Element ICMS = documentoXML.createElement("ICMS");
+    root.appendChild(ICMS);
+    
+    Element ICMS00 = documentoXML.createElement("ICMS00");
+    ICMS.appendChild(ICMS00);
+    
+    // Origem sempre sera zero pois parte de producao propria
+    Element orig = documentoXML.createElement("orig");
+    orig.appendChild(documentoXML.createTextNode("0"));
+    ICMS00.appendChild(orig);
+    
+    Element CST = documentoXML.createElement("CST");
+    CST.appendChild(documentoXML.createTextNode("00"));
+    ICMS00.appendChild(CST);
+    
+    Element modBC = documentoXML.createElement("modBC");
+    modBC.appendChild(documentoXML.createTextNode("00"));
+    ICMS00.appendChild(modBC);
+    
+    Element vBC = documentoXML.createElement("vBC");
+    vBC.appendChild(documentoXML.createTextNode("Valor de b calculo"));
+    ICMS00.appendChild(vBC);
+    
+    Element pICMS = documentoXML.createElement("pICMS");
+    pICMS.appendChild(documentoXML.createTextNode("00"));
+    ICMS00.appendChild(pICMS);
+    
+    Element vICMS = documentoXML.createElement("vICMS");
+    vICMS.appendChild(documentoXML.createTextNode("00"));
+    ICMS00.appendChild(vICMS);
+    
+    Element PIS = documentoXML.createElement("PIS");
+    root.appendChild(PIS);
+    
+    Element PISAliq = documentoXML.createElement("PISAliq");
+    PIS.appendChild(PISAliq);
+    
+    Element CSTAliq = documentoXML.createElement("CST");
+    CSTAliq.appendChild(documentoXML.createTextNode("CST"));
+    PISAliq.appendChild(CSTAliq);
+    
+    Element vBCAliq = documentoXML.createElement("vBC");
+    vBCAliq.appendChild(documentoXML.createTextNode("2121"));
+    PISAliq.appendChild(vBCAliq);
+    
+    Element pPisAliq = documentoXML.createElement("pPisAliq");
+    pPisAliq.appendChild(documentoXML.createTextNode("2121"));
+    PISAliq.appendChild(pPisAliq);
+    
+    Element vPisAliq = documentoXML.createElement("vPisAliq");
+    vPisAliq.appendChild(documentoXML.createTextNode("2121"));
+    PISAliq.appendChild(vPisAliq);
+    
+    Element COFINS = documentoXML.createElement("COFINS");
+    root.appendChild(COFINS);
+    
+    Element COFINSAliq = documentoXML.createElement("COFINSAliq");
+    COFINS.appendChild(COFINSAliq);
+    
+    Element CSTCofins = documentoXML.createElement("CST");
+    CSTCofins.appendChild(documentoXML.createTextNode("2121"));
+    COFINSAliq.appendChild(CSTCofins);
+    
+    Element vBCConfins = documentoXML.createElement("vBC");
+    vBCConfins.appendChild(documentoXML.createTextNode("2121"));
+    COFINSAliq.appendChild(vBCConfins);
+    
+     Element pCOFINS= documentoXML.createElement("pCOFINS");
+    pCOFINS.appendChild(documentoXML.createTextNode("2121"));
+    COFINSAliq.appendChild(pCOFINS);
+    
+    Element vCOFINS= documentoXML.createElement("vCOFINS");
+    vCOFINS.appendChild(documentoXML.createTextNode("2121"));
+    COFINSAliq.appendChild(vCOFINS);
+    
+    Element total = documentoXML.createElement("total");
+    root.appendChild(total);
+    
+    Element ICMSTotal = documentoXML.createElement("ICMSTot");
+    total.appendChild(ICMSTotal);
+    
+    Element vBCTotal= documentoXML.createElement("vBC");
+    vBCTotal.appendChild(documentoXML.createTextNode("Valor de base total"));
+    ICMSTotal.appendChild(vBCTotal);
+   
+    Element vICMSTotal= documentoXML.createElement("vICMSTotal");
+    vICMSTotal.appendChild(documentoXML.createTextNode("Valor"));
+    ICMSTotal.appendChild(vICMSTotal);
+    
+    Element vBCST= documentoXML.createElement("vBCST");
+    vBCST.appendChild(documentoXML.createTextNode("Valor"));
+    ICMSTotal.appendChild(vBCST);
+    
+    // valor sempre sera 0
+    Element vST= documentoXML.createElement("vST");
+    vST.appendChild(documentoXML.createTextNode("0"));
+    ICMSTotal.appendChild(vST);
+    
+    Element vProdTotal= documentoXML.createElement("vProd");
+    vProdTotal.appendChild(documentoXML.createTextNode("0"));
+    ICMSTotal.appendChild(vProdTotal);
+    
+    Element vFrete= documentoXML.createElement("vFrete");
+    vFrete.appendChild(documentoXML.createTextNode("0"));
+    ICMSTotal.appendChild(vFrete);
+    
+    Element vSeg = documentoXML.createElement("vSeg");
+    vSeg.appendChild(documentoXML.createTextNode("0"));
+    ICMSTotal.appendChild(vFrete);
+    
+    Element vDesc = documentoXML.createElement("vDesc");
+    vDesc.appendChild(documentoXML.createTextNode("0"));
+    ICMSTotal.appendChild(vDesc);
+    
+    Element vPIS = documentoXML.createElement("vPIS");
+    vPIS.appendChild(documentoXML.createTextNode("0"));
+    ICMSTotal.appendChild(vPIS);
+    
+    Element vCOFINSTotal = documentoXML.createElement("vCOFINS");
+    vCOFINSTotal.appendChild(documentoXML.createTextNode("0"));
+    ICMSTotal.appendChild(vCOFINSTotal);
+    
+    Element vOutro = documentoXML.createElement("vOutro");
+    vOutro.appendChild(documentoXML.createTextNode("0"));
+    ICMSTotal.appendChild(vOutro);
+    
+    Element vNF = documentoXML.createElement("vNF");
+    vNF.appendChild(documentoXML.createTextNode("0"));
+    ICMSTotal.appendChild(vNF);
+    
+    
+    
+    
+    
+            
+    
+    
+    
+    
+    
+    
+    
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -171,10 +473,10 @@ try{
    
     
     DOMSource DocumentoFonte = new DOMSource (documentoXML);
-    StreamResult documento = new StreamResult(new File("C:\\temp\\dados.xml"));    
+    StreamResult documento = new StreamResult(new File("C:\\temp\\dados" + nf.getNumero() +".xml"));    
 
     transformer.transform(DocumentoFonte, documento);
-            
+        
     
 }catch (ParserConfigurationException ex){
     Logger.getLogger(GeradorNf.class.getName()).log(Level.SEVERE, null, ex);
