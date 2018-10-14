@@ -57,7 +57,7 @@ header .logotipo {
 }
 
 header .logotipo img {
-    height: 85%;
+    /*height: 85%;*/
     padding-top:15px;
 }
 
@@ -213,7 +213,7 @@ p.page-atual{
     font-size: 14px;
     text-transform: uppercase;
     background: #eee;
-    position: absolute;
+    /*position: absolute;*/
     top: -25px;
     padding: 0 20px;
     font-weight: 600;

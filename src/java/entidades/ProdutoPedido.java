@@ -9,22 +9,27 @@ package entidades;
  *
  * @author logonaf
  */
-public class ProdutoPedido {
+public class ProdutoPedido extends Produto{
     private int qtd;
     private float valor_total;
     private boolean devolvido;
-    private Produto produto;
+    private Pedido pedido;
 
     public ProdutoPedido() {
     }
 
-    public ProdutoPedido(int qtd, Produto produto) {
+    public ProdutoPedido(int qtd, Pedido pedido) {
         this.qtd = qtd;
-        this.produto = produto;
+        this.pedido = pedido;
         this.devolvido = false;
     }
 
-
+    public ProdutoPedido(int qtd, Pedido pedido, Produto produto) {
+        super(produto);
+        this.qtd = qtd;
+        this.pedido = pedido;
+        this.devolvido = false;
+    }
 
     public int getQtd() {
         return qtd;
@@ -49,15 +54,17 @@ public class ProdutoPedido {
     public void setDevolvido(boolean devolvido) {
         this.devolvido = devolvido;
     }
-    
-    public void calcValor(){
-        float val;
-        val = produto.getValor()*qtd;
-        this.valor_total = val;
+
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
     
     public ProdutoPedido devolverProduto(int qtd){
-        ProdutoPedido _new = new ProdutoPedido(this.qtd,this.produto);
+        ProdutoPedido _new = new ProdutoPedido(this.qtd,this.pedido);
         this.devolvido = true;
         _new.qtd = _new.qtd-qtd;
         return _new;

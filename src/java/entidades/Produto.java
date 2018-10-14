@@ -10,7 +10,7 @@ package entidades;
  * @author logonaf
  */
 public class Produto {
-    private String produto;
+    private String id;
     private float valor;
     private String descricao;
     private String nome;
@@ -19,22 +19,28 @@ public class Produto {
     public Produto() {
     }
 
-    
-    
-    public Produto(String produto, float valor, String descricao, String nome, String tipo) {
-        this.produto = produto;
+    public Produto(String id, float valor, String descricao, String nome, String tipo) {
+        this.id = id;
         this.valor = valor;
         this.descricao = descricao;
         this.nome = nome;
         this.tipo = tipo;
     }
     
-    public String getProduto() {
-        return produto;
+    public Produto(Produto produto){
+        this.setId(produto.getId()); 
+        this.setValor(produto.getValor()); 
+        this.setNome(produto.getNome()); 
+        this.setTipo(produto.getTipo()); 
+        this.setDescricao(produto.getDescricao()); 
     }
 
-    public void setProduto(String produto) {
-        this.produto = produto;
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public float getValor() {
@@ -68,6 +74,10 @@ public class Produto {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+
+    
+    
+
     
     
     

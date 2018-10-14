@@ -24,6 +24,13 @@ public class Servico {
         this.descricao = descricao;
         this.nome = nome;
     }
+    
+    public Servico(Servico servico) {
+        this.id = servico.getId();
+        this.valor = servico.getValor();
+        this.descricao = servico.getDescricao();
+        this.nome = servico.getNome();
+    }
 
     public String getId() {
         return id;
