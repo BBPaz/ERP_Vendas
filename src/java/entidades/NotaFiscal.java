@@ -23,6 +23,8 @@ public class NotaFiscal {
 
     public NotaFiscal() {
         estado = "uf";
+        data_emissao =  "13/10/2018";
+        numero = "123";
     }
 
     public String getData_emissao() {
