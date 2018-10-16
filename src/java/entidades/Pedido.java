@@ -10,8 +10,8 @@ public class Pedido {
     private String data_fechamento;
     private String forma_pagamento;
     private String tipo_pedido;
-    private ArrayList<ProdutoPedido> lista_produtos;
-    private ArrayList<ServicoPedido> lista_servicos;
+    private ArrayList<ProdutoPedido> lista_produtos = new ArrayList<ProdutoPedido>();
+    private ArrayList<ServicoPedido> lista_servicos = new ArrayList<ServicoPedido>();
     private Vendedor vendedor;
     private Cliente cliente;
     private String tipo_pagamento;

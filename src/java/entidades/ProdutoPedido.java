@@ -9,11 +9,12 @@ package entidades;
  *
  * @author logonaf
  */
-public class ProdutoPedido extends Produto{
+public class ProdutoPedido{
     private int qtd;
     private float valor_total;
     private boolean devolvido;
     private Pedido pedido;
+    private Produto produto;
 
     public ProdutoPedido() {
     }
@@ -25,7 +26,6 @@ public class ProdutoPedido extends Produto{
     }
 
     public ProdutoPedido(int qtd, Pedido pedido, Produto produto) {
-        super(produto);
         this.qtd = qtd;
         this.pedido = pedido;
         this.devolvido = false;
@@ -62,7 +62,15 @@ public class ProdutoPedido extends Produto{
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
     }
-    
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
+        
     public ProdutoPedido devolverProduto(int qtd){
         ProdutoPedido _new = new ProdutoPedido(this.qtd,this.pedido);
         this.devolvido = true;

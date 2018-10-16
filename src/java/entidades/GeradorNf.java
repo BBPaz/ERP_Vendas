@@ -20,13 +20,43 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 public class GeradorNf {
-    
-    
+
 
 public static void  main(String [] args){
 NotaFiscal nf = new NotaFiscal();
 CentroCusto ct = new CentroCusto();
-    
+
+Pedido pd = new Pedido();
+
+Produto pdt = new Produto();
+pdt.setId("124125");
+pdt.setValor(1.2f);
+pdt.setDescricao("Uma panela bem bonita.");
+pdt.setNome("Panela bonita");
+pdt.setTipo("Tipo 2");
+
+Produto pdt2 = new Produto();
+pdt2.setId("3");
+pdt2.setValor(1.8f);
+pdt2.setDescricao("Uma panela bem feia.");
+pdt2.setNome("Panela feia");
+pdt2.setTipo("Tipo 5");
+
+ProdutoPedido pdp = new ProdutoPedido();
+pdp.setProduto(pdt);
+pdp.setPedido(pd);
+pdp.setDevolvido(false);
+pdp.setQtd(3);
+
+ProdutoPedido pdp2 = new ProdutoPedido();
+pdp2.setProduto(pdt2);
+pdp2.setPedido(pd);
+pdp2.setDevolvido(false);
+pdp2.setQtd(3);
+
+pd.getLista_produtos().add(pdp);
+pd.getLista_produtos().add(pdp2);
+
 try{
     DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
     DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
@@ -255,13 +285,55 @@ try{
     UFE.appendChild(documentoXML.createTextNode("UF entrega"));
     entrega.appendChild(UFE);
 //------------------------------------------------------------------------------
+if(pd.getLista_produtos().size()>0){
     Element det  = documentoXML.createElement("det");
     Attr nItem = documentoXML.createAttribute("nItem");
-    nItem.setValue("1");
+    nItem.setValue(String.valueOf(pd.getLista_produtos().size()));
     det.setAttributeNode(nItem);
     root.appendChild(det);
-    
-    Element prod = documentoXML.createElement("prod");
+    for(ProdutoPedido p : pd.getLista_produtos()){
+         Element prod = documentoXML.createElement("prod");
+        det.appendChild(prod);
+
+        Element cProd = documentoXML.createElement("cProd");
+        cProd.appendChild(documentoXML.createTextNode(String.valueOf(p.getProduto().getId())));
+        prod.appendChild(cProd);
+
+        Element cEAN = documentoXML.createElement("cEAN");
+        cEAN.appendChild(documentoXML.createTextNode(String.valueOf(p.getProduto().getId())));
+        prod.appendChild(cEAN);
+
+        Element xProd = documentoXML.createElement("xProd");
+        xProd.appendChild(documentoXML.createTextNode(String.valueOf(p.getProduto().getNome())));
+        prod.appendChild(xProd);
+
+        Element CFOP = documentoXML.createElement("CFOP");
+        CFOP.appendChild(documentoXML.createTextNode("CFOP"));
+        prod.appendChild(CFOP);
+
+        Element uCom = documentoXML.createElement("uCom");
+        uCom.appendChild(documentoXML.createTextNode("Un"));
+        prod.appendChild(uCom);
+
+        Element qCom = documentoXML.createElement("qCom");
+        qCom.appendChild(documentoXML.createTextNode(String.valueOf(p.getQtd())));
+        prod.appendChild(qCom);
+
+        Element vUnCom = documentoXML.createElement("vUnCom");
+        vUnCom.appendChild(documentoXML.createTextNode(String.valueOf(p.getProduto().getValor())));
+        prod.appendChild(vUnCom);
+
+        Element vProd = documentoXML.createElement("vProd");
+        vProd.appendChild(documentoXML.createTextNode(String.valueOf(p.getProduto().getValor())));
+        prod.appendChild(vProd);
+
+        Element vEANTrib = documentoXML.createElement("vEANTrib");
+        vEANTrib.appendChild(documentoXML.createTextNode("Nao sri"));
+        prod.appendChild(vEANTrib);
+        
+    }
+}
+    /*Element prod = documentoXML.createElement("prod");
     det.appendChild(prod);
     
     Element cProd = documentoXML.createElement("cProd");
@@ -311,6 +383,7 @@ try{
     Element vUnTrib = documentoXML.createElement("vUnTrib");
     vUnTrib.appendChild(documentoXML.createTextNode("1"));
     prod.appendChild(vUnTrib);
+    */
     
     Element ICMS = documentoXML.createElement("ICMS");
     root.appendChild(ICMS);
