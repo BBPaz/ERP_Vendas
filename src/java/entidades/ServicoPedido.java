@@ -9,18 +9,19 @@ package entidades;
  *
  * @author Bruno
  */
-public class ServicoPedido extends Servico {
+public class ServicoPedido {
     private Pedido pedido;
+    private Servico servico;
+    private int duracao;
 
-    public ServicoPedido(Pedido pedido) {
-        this.pedido = pedido;
+    public ServicoPedido() {
     }
 
     public ServicoPedido(Pedido pedido, Servico servico) {
-        super(servico);
         this.pedido = pedido;
+        this.servico = servico;
     }
-
+    
     public Pedido getPedido() {
         return pedido;
     }
@@ -28,6 +29,29 @@ public class ServicoPedido extends Servico {
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
     }
+
+    public Servico getServico() {
+        return servico;
+    }
+
+    public void setServico(Servico servico) {
+        this.servico = servico;
+    }
+
+    public int getDuracao() {
+        return duracao;
+    }
+
+    public void setDuracao(int duracao) {
+        this.duracao = duracao;
+    }
+    
+    public float valorTotal(){
+        float val = 0f;
+        val = servico.getValor()*duracao;
+        return val;
+    }
+
     
     
 }

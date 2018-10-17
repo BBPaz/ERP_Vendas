@@ -19,17 +19,13 @@ public class ProdutoPedido{
     public ProdutoPedido() {
     }
 
-    public ProdutoPedido(int qtd, Pedido pedido) {
-        this.qtd = qtd;
-        this.pedido = pedido;
-        this.devolvido = false;
-    }
-
     public ProdutoPedido(int qtd, Pedido pedido, Produto produto) {
         this.qtd = qtd;
         this.pedido = pedido;
-        this.devolvido = false;
-    }
+        this.produto = produto;
+        valor_total = this.calcValor();
+        devolvido = false;
+    }  
 
     public int getQtd() {
         return qtd;
@@ -72,7 +68,7 @@ public class ProdutoPedido{
     }
         
     public ProdutoPedido devolverProduto(int qtd){
-        ProdutoPedido _new = new ProdutoPedido(this.qtd,this.pedido);
+        ProdutoPedido _new = new ProdutoPedido(this.qtd,this.pedido,this.produto);
         this.devolvido = true;
         _new.qtd = _new.qtd-qtd;
         return _new;
@@ -81,4 +77,9 @@ public class ProdutoPedido{
     public void devolverProduto(){
         this.devolvido = true;
     }
+    
+    public float calcValor(){
+        return qtd*produto.getValor();
+    }
+    
 }

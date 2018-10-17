@@ -3,7 +3,13 @@ package entidades;
 
 public class Endereco {
     
-    String uf,cep,bairro,cidade,rua,numero,complemento;
+    String uf;
+    String cep;
+    String bairro;
+    String cidade;
+    String rua;
+    String numero;
+    String complemento;
 
     public Endereco(String uf, String cep, String bairro, String cidade, String rua, String numero, String complemento) {
         this.uf = uf;

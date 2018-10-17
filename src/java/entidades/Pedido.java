@@ -4,12 +4,11 @@ package entidades;
 import java.util.ArrayList;
 
 public class Pedido {
-    private String id_pedido;
-    private String rastreabilidade_pedido;
+    private String id;
+    private String rastreabilidade;
     private String data_abertura;
     private String data_fechamento;
     private String forma_pagamento;
-    private String tipo_pedido;
     private ArrayList<ProdutoPedido> lista_produtos = new ArrayList<ProdutoPedido>();
     private ArrayList<ServicoPedido> lista_servicos = new ArrayList<ServicoPedido>();
     private Vendedor vendedor;
@@ -19,34 +18,31 @@ public class Pedido {
     public Pedido() {
     }
 
-    public Pedido(String id_pedido, String rastreabilidade_pedido, String data_abertura, String data_fechamento, String forma_pagamento, String tipo_pedido, ArrayList<ProdutoPedido> lista_produtos, ArrayList<ServicoPedido> lista_servicos, Vendedor vendedor, Cliente cliente, String tipo_pagamento) {
-        this.id_pedido = id_pedido;
-        this.rastreabilidade_pedido = rastreabilidade_pedido;
+    public Pedido(String id, String rastreabilidade, String data_abertura, String data_fechamento, String forma_pagamento, Vendedor vendedor, Cliente cliente, String tipo_pagamento) {
+        this.id = id;
+        this.rastreabilidade = rastreabilidade;
         this.data_abertura = data_abertura;
         this.data_fechamento = data_fechamento;
         this.forma_pagamento = forma_pagamento;
-        this.tipo_pedido = tipo_pedido;
-        this.lista_produtos = lista_produtos;
-        this.lista_servicos = lista_servicos;
         this.vendedor = vendedor;
         this.cliente = cliente;
         this.tipo_pagamento = tipo_pagamento;
     }
 
-    public String getId_pedido() {
-        return id_pedido;
+    public String getId() {
+        return id;
     }
 
-    public void setId_pedido(String id_pedido) {
-        this.id_pedido = id_pedido;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getRastreabilidade_pedido() {
-        return rastreabilidade_pedido;
+    public String getRastreabilidade() {
+        return rastreabilidade;
     }
 
-    public void setRastreabilidade_pedido(String rastreabilidade_pedido) {
-        this.rastreabilidade_pedido = rastreabilidade_pedido;
+    public void setRastreabilidade(String rastreabilidade) {
+        this.rastreabilidade = rastreabilidade;
     }
 
     public String getData_abertura() {
@@ -71,14 +67,6 @@ public class Pedido {
 
     public void setForma_pagamento(String forma_pagamento) {
         this.forma_pagamento = forma_pagamento;
-    }
-
-    public String getTipo_pedido() {
-        return tipo_pedido;
-    }
-
-    public void setTipo_pedido(String tipo_pedido) {
-        this.tipo_pedido = tipo_pedido;
     }
 
     public ArrayList<ProdutoPedido> getLista_produtos() {
@@ -120,6 +108,18 @@ public class Pedido {
     public void setTipo_pagamento(String tipo_pagamento) {
         this.tipo_pagamento = tipo_pagamento;
     }
+    
+    public float valorTotal(){
+        float val = 0f;
+        for(ProdutoPedido p:lista_produtos){
+            val+=p.getValor_total();
+        }
+        for(ServicoPedido s:lista_servicos){
+            val+=s.valorTotal();
+        }
+        return val;
+    }
+    
     
     
 }
