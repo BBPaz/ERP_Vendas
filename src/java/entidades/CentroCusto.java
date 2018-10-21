@@ -13,6 +13,11 @@ public class CentroCusto {
     private String cep = "03576160";
     private String fone = "948601713";
     private String ie = "123456789"; // inscricao estadual
+    
+    //https://www.contabilidadenobrasil.com.br/pis-e-cofins/
+    private double aPis = 1.65;
+    private double aCofins = 7.6;
+    private byte cstPisCofins = 01;
 
     public String getCNPJ1() {
         return CNPJ1;
@@ -102,5 +107,29 @@ public class CentroCusto {
         this.ie = ie;
     }
 
+    public double getaPis() {
+        return aPis;
+    }
+
+    public void setaPis(double aPis) {
+        this.aPis = aPis;
+    }
+
+    public double getaCofins() {
+        return aCofins;
+    }
+
+    public void setaCofins(double aCofins) {
+        this.aCofins = aCofins;
+    }
+
+    public byte getCstPisCofins() {
+        return cstPisCofins;
+    }
+
+    public void setCstPisCofins(byte cstPisCofins) {
+        this.cstPisCofins = cstPisCofins;
+    }
+    
     
 }

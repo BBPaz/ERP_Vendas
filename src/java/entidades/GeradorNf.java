@@ -287,7 +287,7 @@ try{
 //------------------------------------------------------------------------------
 if(pd.getLista_produtos().size()>0){
     Element det  = documentoXML.createElement("det");
-    Attr nItem = documentoXML.createAttribute("nItem" + 1);
+    Attr nItem = documentoXML.createAttribute("nItem");
     nItem.setValue(String.valueOf(pd.getLista_produtos().size()));
     det.setAttributeNode(nItem);
     root.appendChild(det);
@@ -502,11 +502,11 @@ if(pd.getLista_produtos().size()>0){
     ICMSTotal.appendChild(vDesc);
     
     Element vPIS = documentoXML.createElement("vPIS");
-    vPIS.appendChild(documentoXML.createTextNode("0"));
+    vPIS.appendChild(documentoXML.createTextNode(String.valueOf(ct.getaPis())));
     ICMSTotal.appendChild(vPIS);
     
     Element vCOFINSTotal = documentoXML.createElement("vCOFINS");
-    vCOFINSTotal.appendChild(documentoXML.createTextNode("0"));
+    vCOFINSTotal.appendChild(documentoXML.createTextNode(Double.String.valueOf(ct.getaCofins())));
     ICMSTotal.appendChild(vCOFINSTotal);
     
     Element vOutro = documentoXML.createElement("vOutro");
