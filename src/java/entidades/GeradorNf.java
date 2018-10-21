@@ -440,7 +440,7 @@ if(pd.getLista_produtos().size()>0){
     Element vBCAliq = documentoXML.createElement("vBC");
     vBCAliq.appendChild(documentoXML.createTextNode("2121"));
     PISAliq.appendChild(vBCAliq);
-    
+   /* 
     Element pPisAliq = documentoXML.createElement("pPisAliq");
     pPisAliq.appendChild(documentoXML.createTextNode("2121"));
     PISAliq.appendChild(pPisAliq);
@@ -448,6 +448,7 @@ if(pd.getLista_produtos().size()>0){
     Element vPisAliq = documentoXML.createElement("vPisAliq");
     vPisAliq.appendChild(documentoXML.createTextNode("2121"));
     PISAliq.appendChild(vPisAliq);
+    */
     
     Element COFINS = documentoXML.createElement("COFINS");
     root.appendChild(COFINS);
@@ -459,8 +460,18 @@ if(pd.getLista_produtos().size()>0){
     CSTCofins.appendChild(documentoXML.createTextNode("01"));
     COFINSAliq.appendChild(CSTCofins);
     
-
+   /* Element vBCConfins = documentoXML.createElement("vBC");
+    vBCConfins.appendChild(documentoXML.createTextNode("2121"));
+    COFINSAliq.appendChild(vBCConfins);
     
+     Element pCOFINS= documentoXML.createElement("pCOFINS");
+    pCOFINS.appendChild(documentoXML.createTextNode("2121"));
+    COFINSAliq.appendChild(pCOFINS);
+    
+    Element vCOFINS= documentoXML.createElement("vCOFINS");
+    vCOFINS.appendChild(documentoXML.createTextNode("2121"));
+    COFINSAliq.appendChild(vCOFINS);
+    */
         }
 }
     
