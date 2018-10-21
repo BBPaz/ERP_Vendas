@@ -414,7 +414,7 @@ if(pd.getLista_produtos().size()>0){
     ICMS00.appendChild(modBC);
     
     Element vBC = documentoXML.createElement("vBC");
-    vBC.appendChild(documentoXML.createTextNode("Valor de b calculo"));
+    vBC.appendChild(documentoXML.createTextNode(String.valueOf(nf.getValor_total())));
     ICMS00.appendChild(vBC);
     
     Element pICMS = documentoXML.createElement("pICMS");
@@ -431,8 +431,10 @@ if(pd.getLista_produtos().size()>0){
     Element PISAliq = documentoXML.createElement("PISAliq");
     PIS.appendChild(PISAliq);
     
+    
+     // 01 tributado integralmente
     Element CSTAliq = documentoXML.createElement("CST");
-    CSTAliq.appendChild(documentoXML.createTextNode("CST"));
+    CSTAliq.appendChild(documentoXML.createTextNode("01"));
     PISAliq.appendChild(CSTAliq);
     
     Element vBCAliq = documentoXML.createElement("vBC");
@@ -452,22 +454,12 @@ if(pd.getLista_produtos().size()>0){
     
     Element COFINSAliq = documentoXML.createElement("COFINSAliq");
     COFINS.appendChild(COFINSAliq);
-    
+    // 01 tributado integralmente
     Element CSTCofins = documentoXML.createElement("CST");
-    CSTCofins.appendChild(documentoXML.createTextNode("2121"));
+    CSTCofins.appendChild(documentoXML.createTextNode("01"));
     COFINSAliq.appendChild(CSTCofins);
     
-    Element vBCConfins = documentoXML.createElement("vBC");
-    vBCConfins.appendChild(documentoXML.createTextNode("2121"));
-    COFINSAliq.appendChild(vBCConfins);
-    
-     Element pCOFINS= documentoXML.createElement("pCOFINS");
-    pCOFINS.appendChild(documentoXML.createTextNode("2121"));
-    COFINSAliq.appendChild(pCOFINS);
-    
-    Element vCOFINS= documentoXML.createElement("vCOFINS");
-    vCOFINS.appendChild(documentoXML.createTextNode("2121"));
-    COFINSAliq.appendChild(vCOFINS);
+
     
         }
 }
