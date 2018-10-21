@@ -3,6 +3,8 @@ package entidades;
 
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.bind.ParseConversionEvent;
@@ -25,7 +27,7 @@ public class GeradorNf {
 public static void  main(String [] args){
 NotaFiscal nf = new NotaFiscal();
 CentroCusto ct = new CentroCusto();
-
+    SimpleDateFormat _date = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 Pedido pd = new Pedido();
 
 Produto pdt = new Produto();
@@ -75,7 +77,7 @@ try{
 //------------------------------------------------------------------------------    
     // tag estado
     Element cUF = documentoXML.createElement("cUF");
-    cUF.appendChild(documentoXML.createTextNode(nf.getEstado()));
+    cUF.appendChild(documentoXML.createTextNode(ct.getUf()));
     ide.appendChild(cUF);
     
     //tag cNF
@@ -112,16 +114,16 @@ try{
     
     //dEmiss
     Element dEmiss = documentoXML.createElement("dEmiss");
-    dEmiss.appendChild(documentoXML.createTextNode(nf.getData_emissao()));
+    dEmiss.appendChild(documentoXML.createTextNode(_date.format(new Date())));
     ide.appendChild(dEmiss);
     
     //dSaiEnt
       Element dSaiEnt = documentoXML.createElement("dSaiEnt");
-    dSaiEnt.appendChild(documentoXML.createTextNode(nf.getData_emissao()));
+    dSaiEnt.appendChild(documentoXML.createTextNode(_date.format(new Date())));
     ide.appendChild(dSaiEnt);
     
     
-    //tpNF
+    //tpNF fixo sempre sera um
       Element tpNF = documentoXML.createElement("tpNF");
     tpNF.appendChild(documentoXML.createTextNode("1"));
     ide.appendChild(tpNF);
@@ -286,12 +288,13 @@ try{
     entrega.appendChild(UFE);
 //------------------------------------------------------------------------------
 if(pd.getLista_produtos().size()>0){
+     for(ProdutoPedido p : pd.getLista_produtos()){
     Element det  = documentoXML.createElement("det");
     Attr nItem = documentoXML.createAttribute("nItem");
     nItem.setValue(String.valueOf(pd.getLista_produtos().size()));
-    det.setAttributeNode(nItem);
+    det.setAttributeNode(nItem );
     root.appendChild(det);
-    for(ProdutoPedido p : pd.getLista_produtos()){
+   
          Element prod = documentoXML.createElement("prod");
         det.appendChild(prod);
 
@@ -307,12 +310,19 @@ if(pd.getLista_produtos().size()>0){
         xProd.appendChild(documentoXML.createTextNode(String.valueOf(p.getProduto().getNome())));
         prod.appendChild(xProd);
 
+        if(nf.getEstado() == "SP"){
+        
         Element CFOP = documentoXML.createElement("CFOP");
-        CFOP.appendChild(documentoXML.createTextNode("CFOP"));
+        CFOP.appendChild(documentoXML.createTextNode("5100"));
         prod.appendChild(CFOP);
 
+        }else{
+            Element CFOP = documentoXML.createElement("CFOP");
+        CFOP.appendChild(documentoXML.createTextNode("6100"));
+        prod.appendChild(CFOP);
+    }
         Element uCom = documentoXML.createElement("uCom");
-        uCom.appendChild(documentoXML.createTextNode("Un"));
+        uCom.appendChild(documentoXML.createTextNode("UN"));
         prod.appendChild(uCom);
 
         Element qCom = documentoXML.createElement("qCom");
@@ -328,7 +338,7 @@ if(pd.getLista_produtos().size()>0){
         prod.appendChild(vProd);
 
         Element vEANTrib = documentoXML.createElement("vEANTrib");
-        vEANTrib.appendChild(documentoXML.createTextNode("Nao sri"));
+        vEANTrib.appendChild(documentoXML.createTextNode(String.valueOf(p.getProduto().getId())));
         prod.appendChild(vEANTrib);
         
 
@@ -506,7 +516,7 @@ if(pd.getLista_produtos().size()>0){
     ICMSTotal.appendChild(vPIS);
     
     Element vCOFINSTotal = documentoXML.createElement("vCOFINS");
-    vCOFINSTotal.appendChild(documentoXML.createTextNode(Double.String.valueOf(ct.getaCofins())));
+    vCOFINSTotal.appendChild(documentoXML.createTextNode(String.valueOf(ct.getaCofins())));
     ICMSTotal.appendChild(vCOFINSTotal);
     
     Element vOutro = documentoXML.createElement("vOutro");
