@@ -287,7 +287,7 @@ try{
 //------------------------------------------------------------------------------
 if(pd.getLista_produtos().size()>0){
     Element det  = documentoXML.createElement("det");
-    Attr nItem = documentoXML.createAttribute("nItem");
+    Attr nItem = documentoXML.createAttribute("nItem" + 1);
     nItem.setValue(String.valueOf(pd.getLista_produtos().size()));
     det.setAttributeNode(nItem);
     root.appendChild(det);
@@ -331,8 +331,7 @@ if(pd.getLista_produtos().size()>0){
         vEANTrib.appendChild(documentoXML.createTextNode("Nao sri"));
         prod.appendChild(vEANTrib);
         
-    }
-}
+
     /*Element prod = documentoXML.createElement("prod");
     det.appendChild(prod);
     
@@ -459,6 +458,9 @@ if(pd.getLista_produtos().size()>0){
     Element vCOFINS= documentoXML.createElement("vCOFINS");
     vCOFINS.appendChild(documentoXML.createTextNode("2121"));
     COFINSAliq.appendChild(vCOFINS);
+    
+        }
+}
     
     Element total = documentoXML.createElement("total");
     root.appendChild(total);
