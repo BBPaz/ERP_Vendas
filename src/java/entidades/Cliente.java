@@ -1,7 +1,7 @@
 
 package entidades;
 
-public abstract class Cliente{
+public class Cliente{
     //atributos
     int id_cliente;
     String email;
