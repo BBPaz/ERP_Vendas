@@ -31,16 +31,12 @@ public class Teste extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            out.print("BATATA");
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Teste</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Teste at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            
+            /*for(String s:request.getParameterValues("teste")){
+                out.print(s);
+            }*/
         }
     }
 
