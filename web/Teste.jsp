@@ -12,20 +12,30 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="Teste">
-        <select name="teste" size="3" multiple="multiple" tabindex="1">
-        <option value="11">eleven</option>
-        <option value="12">twelve</option>
-        <option value="13">thirette</option>
-        <option value="14">fourteen</option>
-        <option value="15">fifteen</option>
-        <option value="16">sixteen</option>
-        <option value="17">seventeen</option>
-        <option value="18">eighteen</option>
-        <option value="19">nineteen</option>
-        <option value="20">twenty</option>
-      </select>
+        <% int quant =  0;
+        if(request.getParameter("quant")!=null){
+            int oldQuant =  Integer.parseInt(request.getParameter("quant"));
+            quant+=oldQuant;
+        }
+        quant += Integer.parseInt(request.getParameter("add"));
+        %>
+        <form action="Teste.jsp" method="get">
+            batata
+            <input value="<%=quant%>" name="quant">
+            <input type="text" name="batata">
+            <table>
+            <%
+                for(int c = 1;c<=quant;c++){
+                    %><tr><td><input name="item" disabled="disabled" style="display: hidden;" value='item<%=c%>'>Item <%=c%></td></tr><%
+                }
+            %>
+            </table>
+       
             <input type="submit">
+            <input style="display: none;" value="1" name="add">
             </form>
+            
+               
+            
     </body>
 </html>
