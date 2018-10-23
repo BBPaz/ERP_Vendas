@@ -16,7 +16,7 @@
     <body>
          <nav>
         <ul>
-            <li><a href="">Venda</a></li>
+            <li><a href="venda.jsp">Venda</a></li>
             <li><a href="">Busca</a></li>
             <li><a href="">Relatório</a></li>
             <li class="some-pc"><a href="#"></a></li>

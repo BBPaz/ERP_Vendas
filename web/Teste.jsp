@@ -19,7 +19,7 @@
         }
         quant += Integer.parseInt(request.getParameter("add"));
         %>
-        <form action="Teste.jsp" method="get">
+        <form action="Teste" method="get">
             batata
             <input value="<%=quant%>" name="quant">
             <input type="text" name="batata">

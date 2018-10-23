@@ -4,6 +4,11 @@
     Author     : Bruno
 --%>
 
+<%@page import="Dao.ServicoDao"%>
+<%@page import="entidades.Servico"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="Dao.ProdutoDao"%>
+<%@page import="entidades.Produto"%>
 <%-- 
     Document   : dashboard-vendas
     Created on : 13/10/2018, 21:50:35
@@ -24,6 +29,27 @@
     <meta name="author" content="Grupo 6 - Vendas" />
 
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    
+    <script>
+            $(function(){
+                $("#selectProdutos").on("change",function(){
+                    var id = $("#selectProdutos").val();
+                    alert(id);
+                    /*$.ajax({
+                        url:"Remedios",
+                        type:"get",
+                        data:"pesq ="+remedio,
+                        success: function(data){
+                            $("#listamedicamentos").html(data);
+                        },
+                        error: function(er){
+                            $("#listamedicamentos").html(er.responseText);
+                        }
+                    });*/
+                });
+            });
+        </script>
 </head>
 
 <body>
@@ -60,7 +86,19 @@
             <div class="border-titulo">
                 
                 <form>
-                    <h2>Produtos</h2>
+                    <h2>Produtos</h2><br>
+                    <h2>Adicionar Produto</h2>
+                    <div class="col-md-5 form-group">
+                        <select class="form-control" id="selectProdutos" name="selectProdutos">   
+                        <%
+                            ProdutoDao pDao = new ProdutoDao();
+                            ArrayList<Produto> pList = pDao.getProdutos();
+                            for(Produto p:pList){
+                        %><option class="opcaoProduto" value="<%=p.getId()%>"><%=p.getId()%></option><%
+                            }
+                        %>
+                        </select>
+                    </div>
                    <div class="col-md-12 p-30 table-responsive">
 
                     <table class="table table-striped table-bordered">
@@ -72,13 +110,18 @@
                                 <th>Qtd.</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tbody_produtos">
+                            <%  //ProdutoDao pDao = new ProdutoDao();
+                                //ArrayList<Produto> pList = pDao.getProdutos(); 
+                            for(Produto p:pList){
+                            %>
                             <tr>
-                                <td>4123</td>
-                                <td>Panela Bonita</td>
-                                <td>R$18.67</td>
-                                <td><input type="number" class="form-control"></td>
+                                <td><%=p.getId()%></td>
+                                <td><%=p.getNome()%></td>
+                                <td>R$<%=p.getValor()%></td>
+                                <td><input type="number" class="form-control" name="qte<%=p.getId()%>"></td>
                             </tr>
+                            <%}%>
                         </tbody>
                     </table>
 
@@ -96,19 +139,24 @@
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>Ean</th>
+                                <th>Id</th>
                                 <th>Nome</th>
                                 <th>Valor Unitário</th>
-                                <th>Qtd.</th>
+                                <th>Duração(Meses)</th>
+                                <th>Valor total</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>132</td>
-                                <td>Garantia</td>
-                                <td>R$99.11</td>
-                                <td><input type="number" class="form-control"></td>
-                            </tr>
+                            <%  ServicoDao sDao = new ServicoDao();
+                                ArrayList<Servico> sList = sDao.getServicos(); 
+                            for(Servico s:sList){
+                                %><tr>
+                                    <td><%=s.getId()%></td>
+                                    <td><%=s.getNome()%></td>
+                                    <td>R$<%=s.getValor()%></td>
+                                    <td><input type="number" class="form-control" name="qte<%=s.getId()%>"></td>
+                                </tr>
+                            <%}%>
                         </tbody>
                     </table>
 

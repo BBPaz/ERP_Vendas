@@ -561,7 +561,7 @@ if(pd.getLista_produtos().size()>0){
    
     
     DOMSource DocumentoFonte = new DOMSource (documentoXML);
-    StreamResult documento = new StreamResult(new File("C:\\temp\\dados" + nf.getNumero() +".xml"));    
+    StreamResult documento = new StreamResult(new File("t:\\dados" + nf.getNumero() +".xml"));    
 
     transformer.transform(DocumentoFonte, documento);
         
