@@ -27,14 +27,16 @@ public class ProdutoDao {
         return(pList);
     }
     
-    public Produto getProduto(){
+    public Produto getProduto(String id){
         ArrayList<Produto> pList = new ArrayList();
         pList.add(p1);
         pList.add(p2);
         pList.add(p3);
         pList.add(p4);
         for(Produto p: pList){
-            
+            if(p.getId().equals(id)){
+                return(p);
+            }
         }
         return(null);
     }

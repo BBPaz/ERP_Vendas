@@ -4,6 +4,7 @@
     Author     : Bruno
 --%>
 
+<%@page import="Business.VendaTemp"%>
 <%@page import="Dao.ServicoDao"%>
 <%@page import="entidades.Servico"%>
 <%@page import="java.util.ArrayList"%>
@@ -18,7 +19,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-
+<%ProdutoDao pDao = new ProdutoDao();%>
 <head>
     <meta charset="utf-8">
     <title>Vendas</title>
@@ -33,8 +34,9 @@
     
     <script>
             $(function(){
-                $("#selectProdutos").on("change",function(){
+                $("#textProduto").on("click",function(){
                     var id = $("#selectProdutos").val();
+                    alert(<%=pDao.getProduto(VendaTemp.id)%>)
                     alert(id);
                     /*$.ajax({
                         url:"Remedios",
@@ -87,18 +89,12 @@
                 
                 <form>
                     <h2>Produtos</h2><br>
+                    <form>
                     <h2>Adicionar Produto</h2>
                     <div class="col-md-5 form-group">
-                        <select class="form-control" id="selectProdutos" name="selectProdutos">   
-                        <%
-                            ProdutoDao pDao = new ProdutoDao();
-                            ArrayList<Produto> pList = pDao.getProdutos();
-                            for(Produto p:pList){
-                        %><option class="opcaoProduto" value="<%=p.getId()%>"><%=p.getId()%></option><%
-                            }
-                        %>
-                        </select>
+                        <input type="text" id="textProduto" name="idProduto" class="col-md-5 form-group"> <input type="submit" value="Buscar Produto"> <input type="submit" value="Adicionar Produto">
                     </div>
+                    </form>
                    <div class="col-md-12 p-30 table-responsive">
 
                     <table class="table table-striped table-bordered">
@@ -113,7 +109,7 @@
                         <tbody id="tbody_produtos">
                             <%  //ProdutoDao pDao = new ProdutoDao();
                                 //ArrayList<Produto> pList = pDao.getProdutos(); 
-                            for(Produto p:pList){
+                            for(Produto p:VendaTemp.listaProdutos){
                             %>
                             <tr>
                                 <td><%=p.getId()%></td>
