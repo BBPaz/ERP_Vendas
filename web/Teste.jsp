@@ -10,32 +10,31 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <script src="js/jquery.min.js" type="text/javascript"></script>
+        <script>
+            $(function(){
+                $("#btn").on("click",function(){
+                    console.log("batata");
+                    $.ajax({
+                        url:"Teste",
+                        type:"get",
+                        data: "x=uso de droga&y="+$("#text").val(),
+                        success: function(data){
+                            console.log("sucesso: "+data);
+                        },
+                        error: function(er){
+                            console.log("erro");
+                        }
+                    });
+                });
+            });
+        </script>
+        
     </head>
     <body>
-        <% int quant =  0;
-        if(request.getParameter("quant")!=null){
-            int oldQuant =  Integer.parseInt(request.getParameter("quant"));
-            quant+=oldQuant;
-        }
-        quant += Integer.parseInt(request.getParameter("add"));
-        %>
-        <form action="Teste" method="get">
-            batata
-            <input value="<%=quant%>" name="quant">
-            <input type="text" name="batata">
-            <table>
-            <%
-                for(int c = 1;c<=quant;c++){
-                    %><tr><td><input name="item" disabled="disabled" style="display: hidden;" value='item<%=c%>'>Item <%=c%></td></tr><%
-                }
-            %>
-            </table>
-       
-            <input type="submit">
-            <input style="display: none;" value="1" name="add">
-            </form>
-            
-               
-            
+
+        <input type="text" id="text">
+        <input type="button" id="btn" value="Bora">
+        <div id="result"></div>
     </body>
 </html>

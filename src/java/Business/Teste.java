@@ -31,16 +31,11 @@ public class Teste extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            out.print("cenoura");
-            
-            String[] vals;
-            vals = request.getParameterValues("habits");
-            for(String s:vals){
-                out.print(s);
-            }
+            //out.print(request.getParameter("dado"));
             out.print("BATATA");
-            /* TODO output your page here. You may use following sample code. */
-            
+            out.print(request.getParameter("x"));
+            out.print(request.getParameter("y"));
+            out.flush();
         }
     }
 

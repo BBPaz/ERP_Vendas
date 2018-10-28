@@ -31,27 +31,13 @@
 
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
     <script src="js/jquery.min.js" type="text/javascript"></script>
-    
+    <script src="js/vendas.js" type="text/javascript"></script>
     <script>
-            $(function(){
-                $("#textProduto").on("click",function(){
-                    var id = $("#selectProdutos").val();
-                    alert(<%=pDao.getProduto(VendaTemp.id)%>)
-                    alert(id);
-                    /*$.ajax({
-                        url:"Remedios",
-                        type:"get",
-                        data:"pesq ="+remedio,
-                        success: function(data){
-                            $("#listamedicamentos").html(data);
-                        },
-                        error: function(er){
-                            $("#listamedicamentos").html(er.responseText);
-                        }
-                    });*/
-                });
-            });
-        </script>
+        $(function(){
+            
+        });
+    </script>
+
 </head>
 
 <body>
@@ -92,8 +78,9 @@
                     <form>
                     <h2>Adicionar Produto</h2>
                     <div class="col-md-5 form-group">
-                        <input type="text" id="textProduto" name="idProduto" class="col-md-5 form-group"> <input type="submit" value="Buscar Produto"> <input type="submit" value="Adicionar Produto">
+                        <input type="text" id="textProduto" name="idProduto" class="col-md-5 form-group"> <input type="Button" value="Buscar Produto" id="buscar"> <input type="submit" value="Adicionar Produto">
                     </div>
+                    <div id="prodPesquisado"></div>
                     </form>
                    <div class="col-md-12 p-30 table-responsive">
 

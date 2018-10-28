@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class VendaTemp {
     
-    public static String id = new String();
+    public static String id = "";
     public static ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
     public static ArrayList<Servico> listaServicos = new ArrayList<Servico>();
     

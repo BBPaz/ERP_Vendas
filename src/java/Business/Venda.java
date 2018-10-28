@@ -6,6 +6,7 @@
 package Business;
 
 import Dao.ProdutoDao;
+import entidades.Produto;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author logonaf
+ * @author Bruno
  */
 public class Venda extends HttpServlet {
 
@@ -32,11 +33,18 @@ public class Venda extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            if(request.getParameter("submit").equals("Adicionar Produto")){
-                ProdutoDao pDao = new ProdutoDao();
-                VendaTemp.id = request.getParameter("idProduto");
+            //out.print(request.getParameter("dado"));
+            ProdutoDao pdao = new ProdutoDao();
+            Produto prod = new Produto();
+            prod = pdao.getProduto(request.getParameter("textProduto"));
+            if(prod!=null){
+                out.print(prod.getNome()+"<br>");
+                out.print(prod.getDescricao()+"<br>");
+                out.print(prod.getValor()+"<br>");
+            }else{
+                out.print("Produto não encontrado");
             }
+            out.flush();
         }
     }
 
