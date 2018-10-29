@@ -11,14 +11,15 @@ public class Pedido {
     private String forma_pagamento;
     private ArrayList<ProdutoPedido> lista_produtos = new ArrayList<ProdutoPedido>();
     private ArrayList<ServicoPedido> lista_servicos = new ArrayList<ServicoPedido>();
-    private Vendedor vendedor;
+    private Funcionario vendedor;
     private Cliente cliente;
     private String tipo_pagamento;
+    private float valor_total;
 
     public Pedido() {
     }
 
-    public Pedido(String id, String rastreabilidade, String data_abertura, String data_fechamento, String forma_pagamento, Vendedor vendedor, Cliente cliente, String tipo_pagamento) {
+    public Pedido(String id, String rastreabilidade, String data_abertura, String data_fechamento, String forma_pagamento, Funcionario vendedor, Cliente cliente, String tipo_pagamento) {
         this.id = id;
         this.rastreabilidade = rastreabilidade;
         this.data_abertura = data_abertura;
@@ -85,11 +86,11 @@ public class Pedido {
         this.lista_servicos = lista_servicos;
     }
 
-    public Vendedor getVendedor() {
+    public Funcionario getVendedor() {
         return vendedor;
     }
 
-    public void setVendedor(Vendedor vendedor) {
+    public void setVendedor(Funcionario vendedor) {
         this.vendedor = vendedor;
     }
 
@@ -107,6 +108,14 @@ public class Pedido {
 
     public void setTipo_pagamento(String tipo_pagamento) {
         this.tipo_pagamento = tipo_pagamento;
+    }
+
+    public float getValor_total() {
+        return valor_total;
+    }
+
+    public void setValor_total(float valor_total) {
+        this.valor_total = valor_total;
     }
     
     public float valorTotal(){

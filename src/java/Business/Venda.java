@@ -35,18 +35,50 @@ public class Venda extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             //out.print(request.getParameter("dado"));
             ProdutoDao pdao = new ProdutoDao();
-            Produto prod = new Produto();
-            prod = pdao.getProduto(request.getParameter("textProduto"));
-            if(prod!=null){
-                out.print(prod.getNome()+"<br>");
-                out.print(prod.getDescricao()+"<br>");
-                out.print(prod.getValor()+"<br>");
-            }else{
-                out.print("Produto não encontrado");
+            String ret = "";
+            String op = request.getParameter("op");
+            if(op.equals("pesqProduto")){
+                Produto prod = new Produto();
+                prod = pdao.getProduto(request.getParameter("textProduto"));
+                if(prod!=null){
+                    ret+=(prod.getNome()+"<br>");
+                    ret+=(prod.getDescricao()+"<br>");
+                    ret+=(prod.getValor()+"<br>");
+                }else{
+                    ret+=("Produto não encontrado");
+                }
             }
+            else
+                if(op.equals("addProduto")){
+                Produto prod = new Produto();
+                prod = pdao.getProduto(request.getParameter("textProduto"));
+                boolean exist = false;
+                for(Produto p:VendaTemp.listaProdutos){
+                    if(prod.equals(p)){
+                        exist = true;
+                        break;
+                    }
+                }
+                if(!exist){
+                    VendaTemp.listaProdutos.add(prod);
+                }
+            }
+                else if(op.equals("attProdutos")){
+                    for(Produto p:VendaTemp.listaProdutos){
+                            out.print("<tr>");
+                                out.print("<td>"+p.getId()+"</td>");
+                                out.print("<td>"+p.getNome()+"</td>");
+                                out.print("<td>R$"+p.getValor()+"</td>");
+                                out.print("<td><input type='number' class='form-control' name='qte"+p.getId()+"'></td>");
+                                out.print("<td><button class='removeProd' value='"+p.getId()+"'>Remover</td>");
+                            out.print("</tr>");
+                    }
+                }
+            out.print(ret);
             out.flush();
+            }
         }
-    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

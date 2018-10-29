@@ -13,10 +13,10 @@ import java.util.ArrayList;
  * @author logonaf
  */
 public class ProdutoDao {
-    Produto p1 = new Produto("1234",10.00f, "Panela Sequencial", "Panela S", "a");
-    Produto p2 = new Produto("12231",544.00f, "Panela Centigrada", "Panela C", "a");
-    Produto p3 = new Produto("51125",512.00f, "Panela Periférica", "Panela P", "a");
-    Produto p4 = new Produto("71724",46.00f, "Panela Maxografa", "Panela M", "a");
+    Produto p1 = new Produto("1234",10.00f, "Panela Sequencial", "Panela S");
+    Produto p2 = new Produto("12231",544.00f, "Panela Centigrada", "Panela C");
+    Produto p3 = new Produto("51125",512.00f, "Panela Periférica", "Panela P");
+    Produto p4 = new Produto("71724",46.00f, "Panela Maxografa", "Panela M");
     
     public ArrayList<Produto> getProdutos(){
         ArrayList<Produto> pList = new ArrayList();

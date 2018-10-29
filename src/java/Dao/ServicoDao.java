@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * @author logonaf
  */
 public class ServicoDao {
-    Servico p1 = new Servico("1243612651", 15, "Anti-depressivo", "Viagra");
+    Servico p1 = new Servico("1243612651", 15, "Anti-depressivo", "Manutenção");
     Servico p2 = new Servico("551215612",600, "Uma noite no Iate", "Passeio");
     Servico p3 = new Servico("124151241212", 15, "Garantia Extendida para produto X", "Garantia extendida");
     Servico p4 = new Servico("995455192", 15, "Conserto de produto x", "Conserto");

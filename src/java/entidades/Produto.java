@@ -19,19 +19,17 @@ public class Produto {
     public Produto() {
     }
 
-    public Produto(String id, float valor, String descricao, String nome, String tipo) {
+    public Produto(String id, float valor, String descricao, String nome) {
         this.id = id;
         this.valor = valor;
         this.descricao = descricao;
         this.nome = nome;
-        this.tipo = tipo;
     }
     
     public Produto(Produto produto){
         this.setId(produto.getId()); 
         this.setValor(produto.getValor()); 
         this.setNome(produto.getNome()); 
-        this.setTipo(produto.getTipo()); 
         this.setDescricao(produto.getDescricao()); 
     }
 
@@ -65,20 +63,15 @@ public class Produto {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }    
+    
+    public boolean equals(Produto p){
+        boolean isEqual= false;
+
+        if (p != null && p instanceof Produto)
+        {
+            isEqual = (this.id == p.id);
+        }
+        return isEqual;
     }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    
-    
-
-    
-    
-    
 }

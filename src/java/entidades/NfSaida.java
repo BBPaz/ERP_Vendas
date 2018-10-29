@@ -9,7 +9,7 @@ package entidades;
  *
  * @author logonaf
  */
-public class NfSaida {
+public class NfSaida extends NotaFiscal{
     String especie;
     String serie;
     String insc_estadual;
@@ -18,13 +18,13 @@ public class NfSaida {
     String cod_contabil;
     float val_icms;
     float val_ipi;
-    String natureza_op;
     String emitente;
 
     public NfSaida() {
     }
 
-    public NfSaida(String especie, String serie, String insc_estadual, String cnpj, String procedencia, String cod_contabil, float val_icms, float val_ipi, String natureza_op, String emitente) {
+    public NfSaida(String especie, String serie, String insc_estadual, String cnpj, String procedencia, String cod_contabil, float val_icms, float val_ipi, String emitente, String data_emissao, boolean tipo_emit, String numero, int cfop, float valor_total, String dados_adicionais, String estado) {
+        super(data_emissao, tipo_emit, numero, cfop, valor_total, dados_adicionais, estado);
         this.especie = especie;
         this.serie = serie;
         this.insc_estadual = insc_estadual;
@@ -33,9 +33,10 @@ public class NfSaida {
         this.cod_contabil = cod_contabil;
         this.val_icms = val_icms;
         this.val_ipi = val_ipi;
-        this.natureza_op = natureza_op;
         this.emitente = emitente;
     }
+
+
       
     public String getEspecie() {
         return especie;
@@ -99,14 +100,6 @@ public class NfSaida {
 
     public void setVal_ipi(float val_ipi) {
         this.val_ipi = val_ipi;
-    }
-
-    public String getNatureza_op() {
-        return natureza_op;
-    }
-
-    public void setNatureza_op(String natureza_op) {
-        this.natureza_op = natureza_op;
     }
 
     public String getEmitente() {

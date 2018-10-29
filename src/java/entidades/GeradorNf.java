@@ -35,14 +35,12 @@ pdt.setId("124125");
 pdt.setValor(1.2f);
 pdt.setDescricao("Uma panela bem bonita.");
 pdt.setNome("Panela bonita");
-pdt.setTipo("Tipo 2");
 
 Produto pdt2 = new Produto();
 pdt2.setId("3");
 pdt2.setValor(1.8f);
 pdt2.setDescricao("Uma panela bem feia.");
 pdt2.setNome("Panela feia");
-pdt2.setTipo("Tipo 5");
 
 ProdutoPedido pdp = new ProdutoPedido();
 pdp.setProduto(pdt);

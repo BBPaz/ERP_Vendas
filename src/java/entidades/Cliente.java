@@ -3,14 +3,14 @@ package entidades;
 
 public class Cliente{
     //atributos
-    int id_cliente;
+    int id;
     String email;
     String telefone;
     Endereco endereco;
     boolean cad_valido;
 
     public Cliente(int id_cliente, String email, String telefone, Endereco endereco, boolean cad_valido) {
-        this.id_cliente = id_cliente;
+        this.id = id_cliente;
         this.email = email;
         this.telefone = telefone;
         this.endereco = endereco;
@@ -20,12 +20,12 @@ public class Cliente{
     public Cliente() {
     }
 
-    public int getId_cliente() {
-        return id_cliente;
+    public int getId() {
+        return id;
     }
 
-    public void setId_cliente(int id_cliente) {
-        this.id_cliente = id_cliente;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getEmail() {

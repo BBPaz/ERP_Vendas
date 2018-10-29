@@ -1,16 +1,16 @@
 
 package entidades;
 
-public class Vendedor {
+public class Funcionario {
     
     private String nome_vendedor;
     private int id_vendedor;
     
     //construtor vendedor
-    public Vendedor() {
+    public Funcionario() {
     }
     
-    public Vendedor(String nome_vendedor, int id_vendedor) {
+    public Funcionario(String nome_vendedor, int id_vendedor) {
         this.nome_vendedor = nome_vendedor;
         this.id_vendedor = id_vendedor;
     }

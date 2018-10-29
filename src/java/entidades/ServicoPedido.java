@@ -12,7 +12,7 @@ package entidades;
 public class ServicoPedido {
     private Pedido pedido;
     private Servico servico;
-    private int duracao;
+    private int meses_duracao;
 
     public ServicoPedido() {
     }
@@ -38,17 +38,17 @@ public class ServicoPedido {
         this.servico = servico;
     }
 
-    public int getDuracao() {
-        return duracao;
+    public int getMeses_duracao() {
+        return meses_duracao;
     }
 
-    public void setDuracao(int duracao) {
-        this.duracao = duracao;
+    public void setMeses_duracao(int meses_duracao) {
+        this.meses_duracao = meses_duracao;
     }
     
     public float valorTotal(){
         float val = 0f;
-        val = servico.getValor()*duracao;
+        val = servico.getValor()*meses_duracao;
         return val;
     }
 
