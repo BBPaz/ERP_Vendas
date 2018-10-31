@@ -1,6 +1,7 @@
 
 package entidades;
 
+import Dao.ProdutoDao;
 import java.util.ArrayList;
 
 public class Pedido {
@@ -17,6 +18,49 @@ public class Pedido {
     private float valor_total;
 
     public Pedido() {
+    }
+    
+    public Pedido exemplo (){
+        String id = "2";
+        String rastreabilidade = "Fechado";
+        String data_abertura = "02/03/1999";
+        String data_fechamento = "02/03/1999";
+        String forma_pagamento = "Vista";
+        Funcionario f1 = new Funcionario("Igor", 2);
+        Cliente c1 = new Cliente().exemplo();
+        String tipo_pagemento = "Dinheiro";
+        float valor_total = 10000.0f;
+        ProdutoDao d1 = new ProdutoDao();
+        
+        Produto pdt = new Produto();
+        pdt.setId("124125");
+        pdt.setValor(1.2f);
+        pdt.setDescricao("Uma panela bem bonita.");
+        pdt.setNome("Panela bonita");
+
+        Produto pdt2 = new Produto();
+        pdt2.setId("3");
+        pdt2.setValor(1.8f);
+        pdt2.setDescricao("Uma panela bem feia.");
+        pdt2.setNome("Panela feia");
+
+        ProdutoPedido pdp = new ProdutoPedido();
+        pdp.setProduto(pdt);
+        pdp.setPedido(this);
+        pdp.setDevolvido(false);
+        pdp.setQtd(3);
+
+        ProdutoPedido pdp2 = new ProdutoPedido();
+        pdp2.setProduto(pdt2);
+        pdp2.setPedido(this);
+        pdp2.setDevolvido(false);
+        pdp2.setQtd(3);
+        
+        lista_produtos.add(pdp);
+        lista_produtos.add(pdp2);
+        
+        
+        return this;
     }
 
     public Pedido(String id, String rastreabilidade, String data_abertura, String data_fechamento, String forma_pagamento, Funcionario vendedor, Cliente cliente, String tipo_pagamento) {

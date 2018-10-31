@@ -25,37 +25,18 @@ public class GeradorNf {
 
 
 public static void  main(String [] args){
+    GerarNfe();
+}
+
+public static void GerarNfe(){
 NotaFiscal nf = new NotaFiscal();
 CentroCusto ct = new CentroCusto();
     SimpleDateFormat _date = new SimpleDateFormat("dd/MM/yyyy hh:mm");
-Pedido pd = new Pedido();
+Pedido pd = new Pedido().exemplo();
 
-Produto pdt = new Produto();
-pdt.setId("124125");
-pdt.setValor(1.2f);
-pdt.setDescricao("Uma panela bem bonita.");
-pdt.setNome("Panela bonita");
 
-Produto pdt2 = new Produto();
-pdt2.setId("3");
-pdt2.setValor(1.8f);
-pdt2.setDescricao("Uma panela bem feia.");
-pdt2.setNome("Panela feia");
 
-ProdutoPedido pdp = new ProdutoPedido();
-pdp.setProduto(pdt);
-pdp.setPedido(pd);
-pdp.setDevolvido(false);
-pdp.setQtd(3);
 
-ProdutoPedido pdp2 = new ProdutoPedido();
-pdp2.setProduto(pdt2);
-pdp2.setPedido(pd);
-pdp2.setDevolvido(false);
-pdp2.setQtd(3);
-
-pd.getLista_produtos().add(pdp);
-pd.getLista_produtos().add(pdp2);
 
 try{
     DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -68,9 +49,7 @@ try{
     documentoXML.appendChild(root);
     
     Element ide = documentoXML.createElement("ide");
-    //Attr nome = documentoXML.createAttribute("nome");
-    //nome.setValue("Igor pauduro");
-    //ide.setAttributeNode(nome);
+
     root.appendChild(ide);
 //------------------------------------------------------------------------------    
     // tag estado
@@ -101,10 +80,11 @@ try{
     
     // tag serie
     
-        Element serie = documentoXML.createElement("serie");
+     /*   Element serie = documentoXML.createElement("serie");
     serie.appendChild(documentoXML.createTextNode("serie"));
     ide.appendChild(serie);
-    
+    */
+     
     // tag nNF
     Element nNF = documentoXML.createElement("nNF");
     nNF.appendChild(documentoXML.createTextNode(nf.getNumero()));

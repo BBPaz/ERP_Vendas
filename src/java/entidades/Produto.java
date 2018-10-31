@@ -18,7 +18,11 @@ public class Produto {
 
     public Produto() {
     }
-
+    
+    public Produto Exemplo(){
+        
+    return null;
+    }
     public Produto(String id, float valor, String descricao, String nome) {
         this.id = id;
         this.valor = valor;

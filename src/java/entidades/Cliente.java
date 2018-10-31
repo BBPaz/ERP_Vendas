@@ -19,6 +19,21 @@ public class Cliente{
 
     public Cliente() {
     }
+    
+    public Cliente exemplo(){
+        int id = 1;
+        String email = "igor@igor.com.br";
+        String telefone = "11948601713";
+        Endereco c1 = new Endereco("03576160", "Jd Elena", "igor@igor.com.br", 
+                "São Paulo", "Garuva", "97", "Casa");
+        boolean cad_valido = true;
+        
+        
+        
+        
+        
+        return null;
+    }
 
     public int getId() {
         return id;
