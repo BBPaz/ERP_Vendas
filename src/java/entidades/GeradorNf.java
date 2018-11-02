@@ -27,7 +27,7 @@ public class GeradorNf {
 
 
 public static void  main(String [] args){
-    GerarNfeProdutos();
+    //GerarNfeProdutos();
     gerarNFServico();
 }
 
@@ -36,6 +36,7 @@ NotaFiscal nf = new NotaFiscal();
 CentroCusto ct = new CentroCusto();
     SimpleDateFormat _date = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 Pedido pd = new Pedido().exemplo();
+//private ArrayList<ServicoPedido> lista_servicos = new ArrayList<ServicoPedido>();
 
 try{
     DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -557,8 +558,16 @@ if(pd.getLista_produtos().size()>0){
 
 
     public static void gerarNFServico() {
+/*NotaFiscal nf = new NotaFiscal();
+CentroCusto ct = new CentroCusto();
+    SimpleDateFormat _date = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+Pedido pd = new Pedido().exemplo();
+//private ArrayList<ServicoPedido> lista_servicos = new ArrayList<ServicoPedido>();
+*/ 
+   Pedido pd = new Pedido().exemplo();
+    Servico s = new Servico();
 
-        try {
+try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.newDocument();
@@ -651,9 +660,12 @@ if(pd.getLista_produtos().size()>0){
     Element ValorCSLL = doc.createElement("ValorCSLL");
     ValorCSLL.appendChild(doc.createTextNode("Valor CSLL"));
     ide.appendChild(ValorCSLL);
-    
-    Element DescricaoServico = doc.createElement("DescricaoServico");
-    DescricaoServico.appendChild(doc.createTextNode("Nome do servico"));
+  
+        if(pd.getLista_servicos().size()>0){
+            for(ServicoPedido sp : pd.getLista_servicos()){
+                
+                Element DescricaoServico = doc.createElement("DescricaoServico");
+    DescricaoServico.appendChild(doc.createTextNode(sp.getServico().getDescricao()));
     ide.appendChild(DescricaoServico);
     
     Element CodigoServico = doc.createElement("CodigoServico");
@@ -662,8 +674,9 @@ if(pd.getLista_produtos().size()>0){
     
     Element AliquotaServico = doc.createElement("AliquotaServico");
     AliquotaServico.appendChild(doc.createTextNode("AliquotaServico do servico"));
-    ide.appendChild(AliquotaServico);
-    
+    ide.appendChild(AliquotaServico);   
+           }        
+       }
     Element ISSRetido = doc.createElement("ISSRetido");
     ISSRetido.appendChild(doc.createTextNode("True"));
     ide.appendChild(ISSRetido);
@@ -696,21 +709,22 @@ if(pd.getLista_produtos().size()>0){
     NumeroEndereco.appendChild(doc.createTextNode("NumeroEndereco"));
     EnderecoTomador.appendChild(NumeroEndereco);
     
+     Element BairroTomador = doc.createElement("Bairro");
+    BairroTomador.appendChild(doc.createTextNode("BairroTomador"));
+    EnderecoTomador.appendChild(BairroTomador);
     
+    Element CidadaeTomador = doc.createElement("Cidadae");
+    CidadaeTomador.appendChild(doc.createTextNode("CidadaeTomador"));
+    EnderecoTomador.appendChild(CidadaeTomador);
     
+    Element UFTomador = doc.createElement("UF");
+    UFTomador.appendChild(doc.createTextNode("UFTomador"));
+    EnderecoTomador.appendChild(UFTomador);
     
-    
-    
-    
-    
-    
-    
+    Element CEPTomador = doc.createElement("CEP");
+    CEPTomador.appendChild(doc.createTextNode("CEPTomador"));
+    EnderecoTomador.appendChild(CEPTomador);
 
-            
-            
-            
-            
-            
             //Tags
             TransformerFactory trans = TransformerFactory.newInstance();
             Transformer transformer = trans.newTransformer();
@@ -727,4 +741,4 @@ if(pd.getLista_produtos().size()>0){
         }
 
     }
-}
+}   

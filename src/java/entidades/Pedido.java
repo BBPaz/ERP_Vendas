@@ -56,10 +56,25 @@ public class Pedido {
         pdp2.setDevolvido(false);
         pdp2.setQtd(3);
         
+        
+        
         lista_produtos.add(pdp);
         lista_produtos.add(pdp2);
         
+        Servico sp = new Servico();
+        sp.setId(String.valueOf(12));
+        sp.setValor(100);
+        sp.setDescricao("Dia bosta");
+        sp.setNome("Fogo nos nazistas");
         
+        ServicoPedido p1 = new ServicoPedido();
+        p1.setServico(sp);
+        p1.setPedido(this);
+        p1.setMeses_duracao(5);
+        
+ 
+        
+        lista_servicos.add(p1);
         return this;
     }
 
