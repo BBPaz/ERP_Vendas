@@ -13,6 +13,9 @@ public class EstoqueDao {
     
     public int quantidadeDisponivelProduto(String idProduto){
         //Não implementado
+        if(idProduto.equals("71724")){
+            return 0;
+        }
         return 2;
     }
     

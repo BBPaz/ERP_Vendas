@@ -33,17 +33,16 @@
         <link href="js/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
         
         <script src="js/jquery.min.js" type="text/javascript"></script>
-        <script src="js/jquery-ui-1.12.1/jquery-ui.min.js" type="text/javascript"></script>
-        <script src="js/vendas.js" type="text/javascript"></script>
         <script src="js/jquery.dataTables.min.js"></script>
         <script src="js/dataTables.bootstrap4.min.js"></script>
         <script src="js/scripts.js"></script>
-        
-        <script>
-            jQuery(function(){
+        <script src="js/jquery-ui-1.12.1/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="js/vendas_1.js" type="text/javascript"></script>
+        <!--script>
+            $(function(){
                 
             });
-        </script>
+        </script-->
 
     </head>
 
@@ -55,7 +54,7 @@
 
         <!--%@include file="menu.jsp" %-->
 
-        
+
         <div class="cont">
             <div class="col-md-3">
                 <div class="border-titulo">
@@ -63,8 +62,8 @@
                         <h2>Dados da Venda</h2>
                         <br>
                         <div class="col-md-6 form-group">
-                            <input type="button" class="btn btn-primary" value="Gerar Pedido">
-                            <input type="button" class="btn btn-danger" style="background: #e31" value="Cancelar Pedido"><br>
+                            <input type="button" class="btn btn-default" value="Gerar Pedido">
+                            <input type="button" class="btn btn-default" style="background: #e31" value="Cancelar Pedido"><br>
                             Valor total:<br>
                             <h3>R$ </h3>
                         </div>
@@ -80,6 +79,7 @@
                         <div class="col-md-6 form-group">
                             <input type="text" id="textProduto" class="form-control">
                             <input type="button" value="Buscar Produto" class="btn btn-primary" id="buscar">
+                            <input type="button" value="Adicionar Produto" class="btn btn-primary" id="addProduto">
                             <div id="prodPesquisado" title="Informações do produto"></div>
                         </div>
                     </form>
@@ -206,7 +206,6 @@
     <div id="popup"></div>
 
     
-
 </body>
 
 </html>

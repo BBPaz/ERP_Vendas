@@ -184,7 +184,7 @@ nav ul li a.active:hover{
 
 .cont{
     margin-top:150px;
-    margin-left:295px;
+    //margin-left:295px;
     margin-right:20px;
 }
 
@@ -450,7 +450,7 @@ ul.lista-notasfiscais li:hover{
     display: none;
 }
 
-.btn {
+/*.btn {
     background: #5aaad7;
     border: 1px solid #4284aa;
     color: white;
@@ -460,7 +460,7 @@ ul.lista-notasfiscais li:hover{
     letter-spacing: 0.3px;
     font-size: 16px;
     text-transform: uppercase;
-}
+}*/
 
 .btn:hover {
     background: #4893be;

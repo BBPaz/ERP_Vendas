@@ -14,7 +14,6 @@ public class Produto {
     private float valor;
     private String descricao;
     private String nome;
-    private String tipo;
 
     public Produto() {
     }

@@ -18,6 +18,13 @@ public class ProdutoPedido{
 
     public ProdutoPedido() {
     }
+    
+    public ProdutoPedido(Produto produto) {
+        qtd = 1;
+        this.produto = produto;
+        valor_total = this.calcValor();
+        devolvido = false;
+    }
 
     public ProdutoPedido(int qtd, Pedido pedido, Produto produto) {
         this.qtd = qtd;
@@ -33,15 +40,13 @@ public class ProdutoPedido{
 
     public void setQtd(int qtd) {
         this.qtd = qtd;
+        calcValor();
     }
 
     public float getValor_total() {
         return valor_total;
     }
 
-    public void setValor_total(float valor_total) {
-        this.valor_total = valor_total;
-    }
 
     public boolean isDevolvido() {
         return devolvido;

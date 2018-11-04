@@ -5,8 +5,12 @@
  */
 package Business;
 
+import Dao.EstoqueDao;
 import Dao.ProdutoDao;
 import entidades.Produto;
+import entidades.Servico;
+import entidades.ProdutoPedido;
+import entidades.ServicoPedido;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -36,23 +40,75 @@ public class Venda extends HttpServlet {
             //out.print(request.getParameter("dado"));
             ProdutoDao pdao = new ProdutoDao();
             String ret = "";
-            String op = request.getParameter("op");
-            if(op.equals("pesqProduto")){
-                Produto prod = new Produto();
-                prod = pdao.getProduto(request.getParameter("textProduto"));
-                if(prod!=null){
-                    ret+=(prod.getNome()+"<br>");
-                    ret+=(prod.getDescricao()+"<br>");
-                    ret+=(prod.getValor()+"<br>");
-                }else{
-                    ret+=("Produto não encontrado");
-                }
+            String op = "";
+            op = request.getParameter("op");
+            switch (op) {
+                case "pesqProduto":
+                    {
+                        Produto prod = new Produto();
+                        prod = pdao.getProduto(request.getParameter("textProduto"));
+                        out.print(buscarProduto(prod));
+                        break;
+                    }
+                case "addProduto":
+                    {
+                        Produto prod = new Produto();
+                        prod = pdao.getProduto(request.getParameter("textProduto"));
+                        addProd(prod);
+                        break;
+                    }
+                case "attProdutos":
+                    for(ProdutoPedido p:VendaTemp.listaProdutosPed){
+                        out.print("<tr id='"+p.getProduto().getId()+"'>");
+                        out.print("<td>"+p.getProduto().getId()+"</td>");
+                        out.print("<td>"+p.getProduto().getNome()+"</td>");
+                        out.print("<td>R$"+String.format("%.2f", p.getProduto().getValor())+"</td>");
+                        out.print("<td><input min='1' max='"+qteDisp(p.getProduto())+"' data-produto='"+p.getProduto().getId()+"' type='number' class='form-control' id='qte"+p.getProduto().getId()+"' value='"+p.getQtd()+"'></td>");
+                        out.print("<td id='valTotal"+p.getProduto().getId()+"''>R$"+String.format("%.2f", p.getValor_total())+"</td>");
+                        out.print("<td><button class='removeProd btn btn-danger' value='"+p.getProduto().getId()+"'>X</button></td>");
+                        out.print("</tr>");
+                    }
+                    break;
+                case "removeProduto":
+                    {
+                        String codProd = request.getParameter("textProduto");
+                        removeProd(codProd);
+                        break;
+                    }
+                case "verDisp":
+                    {
+                        String codProd = request.getParameter("textProduto");
+                        break;
+                    }
+                case "altQuantProduto":
+                    {
+                        String codProd = request.getParameter("textProduto");
+                        int qte = Integer.parseInt(request.getParameter("qte"));
+                        altQuant(codProd, qte);
+                        break;
+                    }
+                default:
+                    break;
             }
-            else
-                if(op.equals("addProduto")){
-                Produto prod = new Produto();
-                prod = pdao.getProduto(request.getParameter("textProduto"));
-                boolean exist = false;
+            out.print(ret);
+            out.flush();
+            }
+        }
+    
+    public void removeProd(String codProd){
+        int count = 0;
+        for(int c = 0; c<VendaTemp.listaProdutosPed.size();c++){
+            ProdutoPedido p = VendaTemp.listaProdutosPed.get(c);
+             if(p.getProduto().getId().equals(codProd)){
+                VendaTemp.listaProdutosPed.remove(count);
+                break;
+            }
+            count++;
+        }
+    }
+    
+    public void addProd(Produto prod){
+        boolean exist = false;
                 for(Produto p:VendaTemp.listaProdutos){
                     if(prod.equals(p)){
                         exist = true;
@@ -60,24 +116,77 @@ public class Venda extends HttpServlet {
                     }
                 }
                 if(!exist){
-                    VendaTemp.listaProdutos.add(prod);
+                    ProdutoPedido prodPed = new ProdutoPedido(prod);
+                    VendaTemp.listaProdutosPed.add(prodPed);
                 }
+    }
+    
+    public int qteDisp(Produto prod){
+        EstoqueDao estDao = new EstoqueDao();
+        int qte = 0;
+        qte = estDao.quantidadeDisponivelProduto(prod.getId());
+        return qte;
+    }
+    
+    public void altQuant(String codProd,int qte){
+        for(ProdutoPedido p: VendaTemp.listaProdutosPed){
+            if(p.getProduto().getId().equals(codProd)){
+                p.setQtd(qte);
             }
-                else if(op.equals("attProdutos")){
-                    for(Produto p:VendaTemp.listaProdutos){
-                            out.print("<tr>");
-                                out.print("<td>"+p.getId()+"</td>");
-                                out.print("<td>"+p.getNome()+"</td>");
-                                out.print("<td>R$"+p.getValor()+"</td>");
-                                out.print("<td><input type='number' class='form-control' name='qte"+p.getId()+"'></td>");
-                                out.print("<td><button class='removeProd' value='"+p.getId()+"'>Remover</td>");
-                            out.print("</tr>");
-                    }
-                }
-            out.print(ret);
-            out.flush();
-            }
+            
         }
+    }
+    
+    public String  buscarProduto(Produto prod){
+        String ret = "";
+                if(prod!=null){
+                    
+                    int qteEst = 0;
+                    
+                    qteEst = qteDisp(prod);
+                    ret+=("<table class='table table-bordered'>"    
+                            + "<tr>"
+                            + "<th>Código</th>"
+                            + "<td>");
+                    ret+=(prod.getId());
+                    ret+=("</td>"
+                            + "</tr>"
+                            + "<tr>"
+                            + "<th>Nome</th>"
+                            +"<td>"
+                            +prod.getNome()
+                            +"</td>"
+                            + "</tr>"
+                            + "<tr>"
+                            + "<th>Descrição</th>"
+                            +"<td>"
+                            +prod.getDescricao()
+                            +"</td>"
+                            + "</tr>"
+                            + "<tr>"
+                            + "<th>Valor</th>"
+                            +"<td>R$");
+                        ret+=String.format("%.2f", prod.getValor());
+                        ret+=("</td>"
+                            + "</tr>"
+                            + "<tr>"
+                            + "<th>Qte. Disponível no estoque</th>"
+                            +"<td>"
+                            +qteEst
+                            +"</td>"
+                            + "</tr>"
+                            +"</table>");
+                        if(qteEst<=0){
+                            ret+="<p>Produto Indisponível</p>";
+                        }
+                        else{
+                            ret+="<input type=\"button\" value=\"Adicionar Produto\" class=\"btn btn-primary\" id=\"addProduto\">";
+                        }
+                }else{
+                    ret+=("Produto não encontrado");
+                }
+                return ret;
+    }
     
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

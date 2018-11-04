@@ -1,20 +1,21 @@
 $(function(){
     debugger
     
-    $("#buscar").on("click",function(){
-        var codProduto = $("#textProduto").val();
-        var res = $("#prodPesquisado");
-        pesquisaProduto(codProduto,res);
-
+    $("#teste").on("click",function(){
+        $("#prodPesquisado").dialog();
     });
     
-    $("#prodPesquisado").on("click","#addProduto",function(){
+    $("#buscar").on("click",function(){
+        var codProduto = $("#textProduto").val();
+        pesquisaProduto(codProduto,$("#prodPesquisado"));
+    });
+    
+    $("#addProduto").on("click",function(){
         alert("Adicionar Produto");
         //$("#example").dialog();
         
         var codProduto = $("#textProduto").val();
-        adicionaProduto(codProduto);
-        $(this).closest('.ui-dialog-content').dialog('close'); 
+        adicionaProduto(codProduto);       
     });
     
     $("#tbody_produtos").on("click",".removeProd",function(){
@@ -26,18 +27,17 @@ $(function(){
     $("#tbody_produtos").on("change","input[type=number]",function(){
         alert("Alterar Qte");
         console.log($(this).val());
-        $.ajax({
+        /*$.ajax({
             url:"Venda",
             type:"get",
-            data:"qte="+$(this).val()+"&op=altQuantProduto&textProduto="+$(this).attr("data-produto"),
+            data:"op=removeProduto&textProduto="+$(this).val(),
             success: function(data){
                 exibirProdutos();
-                alert("Alterado");
             },
             error: function(er){
                 x = "Erro: "+er.responseText;
             }
-        });
+        });*/
         
     });
     
@@ -74,7 +74,7 @@ $(function(){
                 }
                 else{
                     elemResultado.html(x);
-                    elemResultado.dialog();
+                    //elemResultado.dialog();
                 }
             },
             error: function(er){
@@ -112,16 +112,6 @@ $(function(){
             error: function(er){
                 
             }
-        });
-    }
-    
-    function mudarQte(){
-        
-    }
-    
-    function verificaDisp(){
-        $ajax({
-            
         });
     }
 });
