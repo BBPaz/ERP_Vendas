@@ -3,6 +3,7 @@ package entidades;
 
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
@@ -20,23 +21,22 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
 
 public class GeradorNf {
 
 
 public static void  main(String [] args){
-    GerarNfe();
+    //GerarNfeProdutos();
+    gerarNFServico();
 }
 
-public static void GerarNfe(){
+public static void GerarNfeProdutos(){
 NotaFiscal nf = new NotaFiscal();
 CentroCusto ct = new CentroCusto();
     SimpleDateFormat _date = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 Pedido pd = new Pedido().exemplo();
-
-
-
-
+//private ArrayList<ServicoPedido> lista_servicos = new ArrayList<ServicoPedido>();
 
 try{
     DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -539,7 +539,7 @@ if(pd.getLista_produtos().size()>0){
    
     
     DOMSource DocumentoFonte = new DOMSource (documentoXML);
-    StreamResult documento = new StreamResult(new File("t:\\dados" + nf.getNumero() +".xml"));    
+    StreamResult documento = new StreamResult(new File("c:\\temp\\dados" + nf.getNumero() +".xml"));    
 
     transformer.transform(DocumentoFonte, documento);
         
@@ -555,4 +555,190 @@ if(pd.getLista_produtos().size()>0){
 }
     
 
-}
+
+
+    public static void gerarNFServico() {
+/*NotaFiscal nf = new NotaFiscal();
+CentroCusto ct = new CentroCusto();
+    SimpleDateFormat _date = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+Pedido pd = new Pedido().exemplo();
+//private ArrayList<ServicoPedido> lista_servicos = new ArrayList<ServicoPedido>();
+*/ 
+   Pedido pd = new Pedido().exemplo();
+    Servico s = new Servico();
+
+try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.newDocument();
+
+
+    Element root = doc.createElement("NFeS");
+    doc.appendChild(root);
+    
+    Element ide = doc.createElement("ide");
+    root.appendChild(ide);
+
+    Element CPFCNPJ = doc.createElement("CPFCPNJRemetente");
+    ide.appendChild(CPFCNPJ);
+    
+    Element CPFRemetente = doc.createElement("CPF");
+    CPFRemetente.appendChild(doc.createTextNode("12345678911"));
+    CPFCNPJ.appendChild(CPFRemetente);
+    
+    Element CNPJRemetente = doc.createElement("CNPJ");
+    CNPJRemetente.appendChild(doc.createTextNode("00000000000000"));
+    CPFCNPJ.appendChild(CNPJRemetente);
+    
+    Element dtInicio = doc.createElement("dtInicio");
+    dtInicio.appendChild(doc.createTextNode("DATA FIM"));
+    ide.appendChild(dtInicio);
+    
+    Element dtFim = doc.createElement("dtFim");
+    dtFim.appendChild(doc.createTextNode("DATA INICIO"));
+    ide.appendChild(dtFim);
+    
+    Element QtdRps = doc.createElement("QtdeRPS");
+    QtdRps.appendChild(doc.createTextNode("Numero do RPS"));
+    ide.appendChild(QtdRps);
+    
+    //----------
+    
+    Element ValorTotalServicos = doc.createElement("ValorTotalServicos");
+    ValorTotalServicos.appendChild(doc.createTextNode("Valor total do servicos"));
+    ide.appendChild(ValorTotalServicos);
+    
+    Element ValorTotalDeducoes = doc.createElement("ValorTotalDeducoes");
+    ValorTotalDeducoes.appendChild(doc.createTextNode("ValorTotalDeducoes"));
+    ide.appendChild(ValorTotalDeducoes);
+    
+    Element ChaveRPS = doc.createElement("ChaveRPS");
+    ide.appendChild(ChaveRPS);
+    
+    Element InscricaoPrestador = doc.createElement("InscricaoPrestador");
+    InscricaoPrestador.appendChild(doc.createTextNode("IE Da empresa PAELAS"));
+    ide.appendChild(InscricaoPrestador);
+    
+    Element NumeroRPS = doc.createElement("NumeroRPS");
+    NumeroRPS.appendChild(doc.createTextNode("Numero do RPS"));
+    
+    Element TipoRPS = doc.createElement("TipoRPS");
+    ide.appendChild(TipoRPS);
+    
+    Element DataEmissao = doc.createElement("DataEmissao");
+    DataEmissao.appendChild(doc.createTextNode("DATA EMISSAO"));
+    ide.appendChild(DataEmissao);
+    
+    Element TributacaoRPS = doc.createElement("TributacaoRPS");
+    TributacaoRPS.appendChild(doc.createTextNode("Se sera tributado T = true"));
+    ide.appendChild(TributacaoRPS);
+    
+    Element ValorServicos = doc.createElement("ValorServicos");
+    ValorServicos.appendChild(doc.createTextNode("Valor total nota"));
+    ide.appendChild(ValorServicos);
+    
+    Element ValorDeducoes = doc.createElement("ValorDeducoes");
+    ValorDeducoes.appendChild(doc.createTextNode("Valor total deduceosnota"));
+    ide.appendChild(ValorDeducoes);
+    
+    Element ValorPIS = doc.createElement("ValorPIS");
+    ValorPIS.appendChild(doc.createTextNode("Valor PIS"));
+    ide.appendChild(ValorPIS);
+    
+    Element ValorCOFINS = doc.createElement("ValorCOFIN");
+    ValorCOFINS.appendChild(doc.createTextNode("Valor cofins"));
+    ide.appendChild(ValorCOFINS);
+    
+    Element ValorINSS = doc.createElement("ValorINSS");
+    ValorINSS.appendChild(doc.createTextNode("Valor INSS"));
+    ide.appendChild(ValorINSS);
+    
+    Element ValorIR = doc.createElement("ValorIR");
+    ValorPIS.appendChild(doc.createTextNode("Valor IR"));
+    ide.appendChild(ValorIR);
+    
+    Element ValorCSLL = doc.createElement("ValorCSLL");
+    ValorCSLL.appendChild(doc.createTextNode("Valor CSLL"));
+    ide.appendChild(ValorCSLL);
+  
+        if(pd.getLista_servicos().size()>0){
+            for(ServicoPedido sp : pd.getLista_servicos()){
+                
+                Element DescricaoServico = doc.createElement("DescricaoServico");
+    DescricaoServico.appendChild(doc.createTextNode(sp.getServico().getDescricao()));
+    ide.appendChild(DescricaoServico);
+    
+    Element CodigoServico = doc.createElement("CodigoServico");
+    CodigoServico.appendChild(doc.createTextNode("Codigo do servico"));
+    ide.appendChild(CodigoServico);
+    
+    Element AliquotaServico = doc.createElement("AliquotaServico");
+    AliquotaServico.appendChild(doc.createTextNode("AliquotaServico do servico"));
+    ide.appendChild(AliquotaServico);   
+           }        
+       }
+    Element ISSRetido = doc.createElement("ISSRetido");
+    ISSRetido.appendChild(doc.createTextNode("True"));
+    ide.appendChild(ISSRetido);
+    
+    Element CPFCNPJTomador = doc.createElement("CPFCPNJTomador");
+    ide.appendChild(CPFCNPJTomador);
+    
+    Element CPFTomador = doc.createElement("CPF");
+    CPFTomador.appendChild(doc.createTextNode("12345678911"));
+    CPFCNPJTomador.appendChild(CPFTomador);
+    
+    Element CNPJTomador = doc.createElement("CNPJ");
+    CNPJTomador.appendChild(doc.createTextNode("00000000000000"));
+    CPFCNPJTomador.appendChild(CNPJTomador);
+    
+    Element RazaoSocialTomador = doc.createElement("RazaoSocialTomador");
+    RazaoSocialTomador.appendChild(doc.createTextNode("RazaoSocialTomador"));
+    ide.appendChild(RazaoSocialTomador);
+    
+    
+    Element EnderecoTomador = doc.createElement("EnderecoTomador");
+    ide.appendChild(EnderecoTomador);
+    
+    
+     Element TipoLongradouro = doc.createElement("TipoLongradouro");
+    TipoLongradouro.appendChild(doc.createTextNode("TipoLongradouro"));
+    EnderecoTomador.appendChild(TipoLongradouro);
+    
+    Element NumeroEndereco = doc.createElement("NumeroEndereco");
+    NumeroEndereco.appendChild(doc.createTextNode("NumeroEndereco"));
+    EnderecoTomador.appendChild(NumeroEndereco);
+    
+     Element BairroTomador = doc.createElement("Bairro");
+    BairroTomador.appendChild(doc.createTextNode("BairroTomador"));
+    EnderecoTomador.appendChild(BairroTomador);
+    
+    Element CidadaeTomador = doc.createElement("Cidadae");
+    CidadaeTomador.appendChild(doc.createTextNode("CidadaeTomador"));
+    EnderecoTomador.appendChild(CidadaeTomador);
+    
+    Element UFTomador = doc.createElement("UF");
+    UFTomador.appendChild(doc.createTextNode("UFTomador"));
+    EnderecoTomador.appendChild(UFTomador);
+    
+    Element CEPTomador = doc.createElement("CEP");
+    CEPTomador.appendChild(doc.createTextNode("CEPTomador"));
+    EnderecoTomador.appendChild(CEPTomador);
+
+            //Tags
+            TransformerFactory trans = TransformerFactory.newInstance();
+            Transformer transformer = trans.newTransformer();
+            DOMSource DocumentoFonte = new DOMSource(doc);
+            StreamResult documento = new StreamResult(new File("c:\\temp\\dados.xml"));
+            transformer.transform(DocumentoFonte, documento);
+
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(GeradorNf.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (TransformerConfigurationException ex) {
+            Logger.getLogger(GeradorNf.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (TransformerException ex) {
+            Logger.getLogger(GeradorNf.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+}   

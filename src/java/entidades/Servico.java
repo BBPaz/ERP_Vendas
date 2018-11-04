@@ -15,6 +15,11 @@ public class Servico {
     private String descricao;
     private String nome;
 
+    
+    public Servico exemplo(){
+        return null;
+    }
+    
     public Servico() {
     }
 
