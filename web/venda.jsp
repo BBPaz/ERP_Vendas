@@ -80,7 +80,7 @@
                         <div class="col-md-6 form-group">
                             <input type="text" id="textProduto" class="form-control">
                             <input type="button" value="Buscar Produto" class="btn btn-primary" id="buscar">
-                            <div id="prodPesquisado" title="Informações do produto"></div>
+                            <div id="prodPesquisado" title="Informações do produto" style="display: none;">STUFF HERE</div>
                         </div>
                     </form>
                     <div class="clearfix"></div>
@@ -92,9 +92,9 @@
                         <br>
                         <div class="col-md-6 form-group">
                             <input type="text" id="textServico" class="form-control">
-                            <input type="button" value="Buscar Produto" class="btn btn-primary" id="buscarServico">
+                            <input type="button" value="Buscar Servico" class="btn btn-primary" id="buscarServico">
                             <input type="button" value="Adicionar Produto" class="btn btn-primary" id="addServico">
-                            <div id="prodPesquisado" title="Informações do serviço"></div>
+                            <div id="servPesquisado" title="Informações do serviço" style="display: none;">STUFF HERE</div>
                         </div>
                     </form>
                     <div class="clearfix"></div>

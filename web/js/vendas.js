@@ -8,8 +8,16 @@ $(function(){
 
     });
     
-    $("#prodPesquisado").on("click","#addProduto",function(){
-        alert("Adicionar Produto");
+    
+    $("#buscarServico").on("click",function(){
+        var codServico = $("#textServico").val();
+        var res = $("#servPesquisado");
+        pesquisaServico(codServico,res);
+
+    });
+    
+    $("div#prodPesquisado").on("click","#addProduto",function(){
+        //alert("Adicionar Produto");
         //$("#example").dialog();
         
         var codProduto = $("#textProduto").val();
@@ -17,28 +25,38 @@ $(function(){
         $(this).closest('.ui-dialog-content').dialog('close'); 
     });
     
+    $("div#servPesquisado").on("click","#addServico",function(){
+        //alert("Adicionar Produto");
+        //$("#example").dialog();
+        
+        var codProduto = $("#textServico").val();
+        adicionaProduto(codProduto);
+        $(this).closest('.ui-dialog-content').dialog('close'); 
+    });
+    
     $("#tbody_produtos").on("click",".removeProd",function(){
-        alert("Remover Produto");
+        //alert("Remover Produto");
         var cod = $(this).val();
         removeProduto(cod);
     });
     
     $("#tbody_produtos").on("change","input[type=number]",function(){
-        alert("Alterar Qte");
+        //alert("Alterar Qte");
         console.log($(this).val());
-        $.ajax({
-            url:"Venda",
-            type:"get",
-            data:"qte="+$(this).val()+"&op=altQuantProduto&textProduto="+$(this).attr("data-produto"),
-            success: function(data){
-                exibirProdutos();
-                alert("Alterado");
-            },
-            error: function(er){
-                x = "Erro: "+er.responseText;
-            }
-        });
-        
+        mudarQte($(this).val(),$(this).attr("data-produto"));
+    });
+    
+    $("#tbody_produtos").on("keyup","input[type=number]",function(){
+        //alert("Alterar Qte");
+        console.log($(this).val());
+        mudarQte($(this).val(),$(this).attr("data-produto"));
+    });
+    
+    $('tbody#tbody_produtos').on('input','input', function () {
+        var value = $(this).val();
+        if ((value !== '') && (value.indexOf('.') === -1)) {    
+            $(this).val(Math.max(Math.min(value, $(this).attr("max")), $(this).attr("min")));
+        }
     });
     
     function adicionaProduto(codProduto){
@@ -59,7 +77,7 @@ $(function(){
     }
     
     function pesquisaProduto(codProduto,elemResultado){
-        alert("Pesquisar Produto");
+        //alert("Pesquisar Produto");
         console.log(codProduto);
         var x = "";
         $.ajax({
@@ -115,7 +133,44 @@ $(function(){
         });
     }
     
-    function mudarQte(){
+    function mudarQte(qte,prod){
+        $.ajax({
+            url:"Venda",
+            type:"get",
+            data:"qte="+qte+"&op=altQuantProduto&textProduto="+prod,
+            success: function(data){
+                exibirProdutos();
+                //alert("Alterado");
+            },
+            error: function(er){
+                x = "Erro: "+er.responseText;
+            }
+        });
+    }
+    
+    function pesquisaServico(codServico,elemResultado){
+        //alert("Pesquisar Produto");
+        console.log(codServico);
+        var x = "";
+        $.ajax({
+            url:"Venda",
+            type:"get",
+            data:"op=pesqServico&textServico="+codServico,
+            success: function(data){
+                x += data;
+                console.log(x);
+                if(x === "Serviço não encontrado"){
+                    alert(x);
+                }
+                else{
+                    elemResultado.html(x);
+                    elemResultado.dialog();
+                }
+            },
+            error: function(er){
+                x = er.responseText;
+            }
+        });
         
     }
     

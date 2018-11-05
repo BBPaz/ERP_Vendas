@@ -40,7 +40,7 @@ public class ProdutoPedido{
 
     public void setQtd(int qtd) {
         this.qtd = qtd;
-        calcValor();
+        this.valor_total = calcValor();
     }
 
     public float getValor_total() {

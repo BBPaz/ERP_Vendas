@@ -7,6 +7,7 @@ package Business;
 
 import Dao.EstoqueDao;
 import Dao.ProdutoDao;
+import Dao.ServicoDao;
 import entidades.Produto;
 import entidades.Servico;
 import entidades.ProdutoPedido;
@@ -39,6 +40,7 @@ public class Venda extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             //out.print(request.getParameter("dado"));
             ProdutoDao pdao = new ProdutoDao();
+            ServicoDao sdao = new ServicoDao();
             String ret = "";
             String op = "";
             op = request.getParameter("op");
@@ -87,6 +89,13 @@ public class Venda extends HttpServlet {
                         altQuant(codProd, qte);
                         break;
                     }
+                case "pesqServico":
+                {
+                    Servico serv = new Servico();
+                    serv = sdao.getServico(request.getParameter("textServico"));
+                    out.print(buscarServico(serv));
+                    break;
+                }
                 default:
                     break;
             }
@@ -132,6 +141,7 @@ public class Venda extends HttpServlet {
         for(ProdutoPedido p: VendaTemp.listaProdutosPed){
             if(p.getProduto().getId().equals(codProd)){
                 p.setQtd(qte);
+                p.calcValor();
             }
             
         }
@@ -188,6 +198,42 @@ public class Venda extends HttpServlet {
                 return ret;
     }
     
+    public String  buscarServico(Servico serv){
+        String ret = "";
+                if(serv!=null){
+
+                    ret+=("<table class='table table-bordered'>"    
+                            + "<tr>"
+                            + "<th>Código</th>"
+                            + "<td>");
+                    ret+=(serv.getId());
+                    ret+=("</td>"
+                            + "</tr>"
+                            + "<tr>"
+                            + "<th>Nome</th>"
+                            +"<td>"
+                            +serv.getNome()
+                            +"</td>"
+                            + "</tr>"
+                            + "<tr>"
+                            + "<th>Descrição</th>"
+                            +"<td>"
+                            +serv.getDescricao()
+                            +"</td>"
+                            + "</tr>"
+                            + "<tr>"
+                            + "<th>Valor</th>"
+                            +"<td>R$");
+                        ret+=String.format("%.2f", serv.getValor());
+                        ret+=("</td>"
+                            + "</tr>"
+                            +"</table>");
+                            ret+="<input type=\"button\" value=\"Adicionar Serviço\" class=\"btn btn-primary\" id=\"addServico\">";
+                }else{
+                    ret+=("Serviço não encontrado");
+                }
+                return ret;
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
