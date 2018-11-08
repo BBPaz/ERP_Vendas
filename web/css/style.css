@@ -184,7 +184,13 @@ nav ul li a.active:hover{
 
 .cont{
     margin-top:150px;
-    //margin-left:295px;
+    /*margin-left:295px;*/
+    margin-right:20px;
+}
+
+.cont-left{
+    margin-top:150px;
+    margin-left:295px;
     margin-right:20px;
 }
 

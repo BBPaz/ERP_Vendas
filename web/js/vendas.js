@@ -1,5 +1,14 @@
 $(function(){
-    debugger
+    var dash_vendas = "/ERP_Panelas/dashboard-vendas.jsp";
+    exibirProdutos();
+    exibirServicos();
+    valTot();
+    
+    $("#cancelarVenda").on("click",function(){
+        if(confirm("Deseja mesmo cancelar a venda?")){
+            window.location.replace(dash_vendas);
+        }
+    });
     
     $("#buscar").on("click",function(){
         var codProduto = $("#textProduto").val();
@@ -29,8 +38,8 @@ $(function(){
         //alert("Adicionar Produto");
         //$("#example").dialog();
         
-        var codProduto = $("#textServico").val();
-        adicionaProduto(codProduto);
+        var codServico = $("#textServico").val();
+        adicionaServico(codServico);
         $(this).closest('.ui-dialog-content').dialog('close'); 
     });
     
@@ -38,6 +47,12 @@ $(function(){
         //alert("Remover Produto");
         var cod = $(this).val();
         removeProduto(cod);
+    });
+    
+    $("#tbody_servicos").on("click",".removeServ",function(){
+        //alert("Remover Serviço");
+        var cod = $(this).val();
+        removeServico(cod);
     });
     
     $("#tbody_produtos").on("change","input[type=number]",function(){
@@ -50,12 +65,37 @@ $(function(){
         //alert("Alterar Qte");
         console.log($(this).val());
         mudarQte($(this).val(),$(this).attr("data-produto"));
+        if(numVazio($(this))){
+            mudarQte(1,$(this).attr("data-produto"));
+        }
+    });
+    
+    $("#tbody_servicos").on("change","input[type=number]",function(e){
+        //alert("Alterar Qte");
+        console.log($(this).val());
+        mudarDur($(this).val(),$(this).attr("data-servico"));
+    });
+    
+    $("#tbody_servicos").on("keyup","input[type=number]",function(e){
+        //alert("Alterar Qte");
+        console.log($(this).val());
+        mudarDur($(this).val(),$(this).attr("data-servico"));
+        if(numVazio($(this))){
+            mudarDur(1,$(this).attr("data-servico"));
+        }
     });
     
     $('tbody#tbody_produtos').on('input','input', function () {
         var value = $(this).val();
         if ((value !== '') && (value.indexOf('.') === -1)) {    
             $(this).val(Math.max(Math.min(value, $(this).attr("max")), $(this).attr("min")));
+        }
+    });
+    
+    $('tbody#tbody_servicos').on('input','input', function () {
+        var value = $(this).val();
+        if ((value !== '') && (value.indexOf('.') === -1)) {    
+            $(this).val(Math.max(Math.min(value, 24), 1));
         }
     });
     
@@ -126,6 +166,7 @@ $(function(){
                 x = data;
                 console.log(x);
                 $("#tbody_produtos").html(x);
+                valTot();
             },
             error: function(er){
                 
@@ -139,7 +180,8 @@ $(function(){
             type:"get",
             data:"qte="+qte+"&op=altQuantProduto&textProduto="+prod,
             success: function(data){
-                exibirProdutos();
+                $("#valTotalP"+prod).html(data);
+                valTot();
                 //alert("Alterado");
             },
             error: function(er){
@@ -174,10 +216,93 @@ $(function(){
         
     }
     
-    function verificaDisp(){
-        $ajax({
-            
+    function adicionaServico(codServico){
+        $.ajax({
+            url:"Venda",
+            type:"get",
+            data:"op=addServico&textServico="+codServico,
+            success: function(data){
+                exibirServicos();
+                var qte = $("#qte"+codServico);
+                console.log(qte.attr("id"));
+                //teste(codProduto);
+            },
+            error: function(er){
+                x = "Erro: "+er.responseText;
+            }
         });
     }
+    
+    function exibirServicos(){
+        $.ajax({
+            url:"Venda",
+            type:"get",
+            data:"op=attServicos",
+            success: function(data){
+                x = data;
+                console.log(x);
+                $("#tbody_servicos").html(x);
+                valTot();
+            },
+            error: function(er){
+                
+            }
+        });
+    }
+    
+    function removeServico(codServico){
+        $.ajax({
+            url:"Venda",
+            type:"get",
+            data:"op=removeServico&textServico="+codServico,
+            success: function(data){
+                exibirServicos();
+            },
+            error: function(er){
+                x = "Erro: "+er.responseText;
+            }
+        });
+        
+    }
+    
+    function mudarDur(dur,serv){
+        $.ajax({
+            url:"Venda",
+            type:"get",
+            data:"dur="+dur+"&op=altDurServico&textServico="+serv,
+            success: function(data){
+                $("#valTotalS"+serv).html(data);
+                valTot();
+                //alert("Alterado");
+            },
+            error: function(er){
+                x = "Erro: "+er.responseText;
+            }
+        });
+    }
+    
+    function numVazio(elem){
+        if(elem.val()===""){
+            elem.val(1);
+            valTot();
+            return true;
+        }
+        return false;
+    }
+    
+    function valTot(){
+        $.ajax({
+            url:"Venda",
+            type:"get",
+            data:"op=valTot",
+            success: function(data){
+                $("#valorTotalPed").html(data);
+            },
+            error: function(er){
+                x = "Erro: "+er.responseText;
+            }
+        });
+    }
+    
 });
 

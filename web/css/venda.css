@@ -1,0 +1,20 @@
+@import 'bootstrap-table.min.css';
+@import 'bootstrap.css';
+@import 'p-m.css';
+@import 'animate.css';
+@import 'style.css';
+@import 'stylemob.css';
+
+.table-responsive{
+    padding:5px !important;
+    margin: 5px !important;
+}
+
+.border-titulo{
+    padding: 5px !important;
+}
+
+.table-responsive{
+    height: 200px;
+    overflow-y: auto;
+}

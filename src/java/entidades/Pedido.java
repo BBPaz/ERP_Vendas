@@ -6,9 +6,8 @@ import java.util.ArrayList;
 
 public class Pedido {
     private String id;
-    private String rastreabilidade;
-    private String data_abertura;
-    private String data_fechamento;
+    private String status;
+    private String data;
     private String forma_pagamento;
     private ArrayList<ProdutoPedido> lista_produtos = new ArrayList<ProdutoPedido>();
     private ArrayList<ServicoPedido> lista_servicos = new ArrayList<ServicoPedido>();
@@ -16,15 +15,11 @@ public class Pedido {
     private Cliente cliente;
     private String tipo_pagamento;
     private float valor_total;
-
-    public Pedido() {
-    }
     
     public Pedido exemplo (){
         String id = "2";
-        String rastreabilidade = "Fechado";
-        String data_abertura = "02/03/1999";
-        String data_fechamento = "02/03/1999";
+        String status = "Fechado";
+        String data = "02/03/1999";
         String forma_pagamento = "Vista";
         Funcionario f1 = new Funcionario("Igor", 2);
         Cliente c1 = new Cliente().exemplo();
@@ -77,12 +72,14 @@ public class Pedido {
         lista_servicos.add(p1);
         return this;
     }
-
-    public Pedido(String id, String rastreabilidade, String data_abertura, String data_fechamento, String forma_pagamento, Funcionario vendedor, Cliente cliente, String tipo_pagamento) {
+    
+    public Pedido() {
+        valorTotal();
+    }
+    
+    public Pedido(String id, String data_abertura, String forma_pagamento, Funcionario vendedor, Cliente cliente, String tipo_pagamento) {
         this.id = id;
-        this.rastreabilidade = rastreabilidade;
-        this.data_abertura = data_abertura;
-        this.data_fechamento = data_fechamento;
+        this.data = data_abertura;
         this.forma_pagamento = forma_pagamento;
         this.vendedor = vendedor;
         this.cliente = cliente;
@@ -97,28 +94,20 @@ public class Pedido {
         this.id = id;
     }
 
-    public String getRastreabilidade() {
-        return rastreabilidade;
+    public String getStatus() {
+        return status;
     }
 
-    public void setRastreabilidade(String rastreabilidade) {
-        this.rastreabilidade = rastreabilidade;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getData_abertura() {
-        return data_abertura;
+    public String getData() {
+        return data;
     }
 
-    public void setData_abertura(String data_abertura) {
-        this.data_abertura = data_abertura;
-    }
-
-    public String getData_fechamento() {
-        return data_fechamento;
-    }
-
-    public void setData_fechamento(String data_fechamento) {
-        this.data_fechamento = data_fechamento;
+    public void setData(String data) {
+        this.data = data;
     }
 
     public String getForma_pagamento() {
@@ -177,7 +166,7 @@ public class Pedido {
         this.valor_total = valor_total;
     }
     
-    public float valorTotal(){
+    public void valorTotal(){
         float val = 0f;
         for(ProdutoPedido p:lista_produtos){
             val+=p.getValor_total();
@@ -185,7 +174,7 @@ public class Pedido {
         for(ServicoPedido s:lista_servicos){
             val+=s.valorTotal();
         }
-        return val;
+        valor_total = val;
     }
     
     

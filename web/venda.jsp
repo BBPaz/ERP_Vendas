@@ -4,12 +4,6 @@
     Author     : Bruno
     --%>
 
-    <%@page import="Business.VendaTemp"%>
-    <%@page import="Dao.ServicoDao"%>
-    <%@page import="entidades.Servico"%>
-    <%@page import="java.util.ArrayList"%>
-    <%@page import="Dao.ProdutoDao"%>
-    <%@page import="entidades.Produto"%>
 <%-- 
     Document   : dashboard-vendas
     Created on : 13/10/2018, 21:50:35
@@ -19,18 +13,18 @@
     <%@page contentType="text/html" pageEncoding="UTF-8"%>
     <!DOCTYPE html>
     <html>
-    <%ProdutoDao pDao = new ProdutoDao();%>
+
     <head>
         <meta charset="utf-8">
         <title>Vendas</title>
 
-        <link rel="stylesheet" href="css/all.css">
+        
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="Grupo 6 - Vendas" />
 
         <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-        <link href="js/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+        
         
         <script src="js/jquery.min.js" type="text/javascript"></script>
         <script src="js/jquery-ui-1.12.1/jquery-ui.min.js" type="text/javascript"></script>
@@ -64,9 +58,9 @@
                         <br>
                         <div class="col-md-6 form-group">
                             <input type="button" class="btn btn-primary" value="Gerar Pedido">
-                            <input type="button" class="btn btn-danger" style="background: #e31" value="Cancelar Pedido"><br>
+                            <input type="button" class="btn btn-danger" style="background: #e31" value="Cancelar Pedido" id="cancelarVenda"><br>
                             Valor total:<br>
-                            <h3>R$ </h3>
+                            <h3>R$<span id="valorTotalPed"></span> </h3>
                         </div>
                     </form>
                     <div class="clearfix"></div>
@@ -93,7 +87,6 @@
                         <div class="col-md-6 form-group">
                             <input type="text" id="textServico" class="form-control">
                             <input type="button" value="Buscar Servico" class="btn btn-primary" id="buscarServico">
-                            <input type="button" value="Adicionar Produto" class="btn btn-primary" id="addServico">
                             <div id="servPesquisado" title="Informações do serviço" style="display: none;">STUFF HERE</div>
                         </div>
                     </form>
@@ -124,7 +117,7 @@
                 <br>
                 <div class="border-titulo">
 
-                        <h2>Produtos</h2><br>
+                        <h2>Produtos</h2>
                         
                         <div class="col-md-12 p-30 table-responsive">
 
@@ -143,14 +136,11 @@
 
                                 </tbody>
                             </table>
-                            <button id="teste">TESTE</button>
                         </div>
                     <div class="clearfix"></div>
                 </div>
                 <br>
                 <div class="border-titulo">
-                    
-                    <form>
                         <h2>Serviços</h2>
                         <div class="col-md-12 p-30 table-responsive">
 
@@ -159,30 +149,17 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Nome</th>
-                                        <th>Valor Unitário</th>
+                                        <th>Valor(Mês)</th>
                                         <th>Duração(Meses)</th>
                                         <th>Valor total</th>
                                         <th></th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <%  ServicoDao sDao = new ServicoDao();
-                                    ArrayList<Servico> sList = sDao.getServicos(); 
-                                    for(Servico s:sList){
-                                    %><tr>
-                                        <td><%=s.getId()%></td>
-                                        <td><%=s.getNome()%></td>
-                                        <td>R$<%=s.getValor()%></td>
-                                        <td><input type="number" class="form-control" name="qte<%=s.getId()%>"></td>
-                                        <td></td>
-                                        <td><input type="button" value="Remover"></td>
-                                    </tr>
-                                    <%}%>
+                                <tbody id="tbody_servicos">
                                 </tbody>
                             </table>
 
                         </div>
-                    </form>
                     <div class="clearfix"></div>
                 </div>
                 
@@ -204,7 +181,9 @@
     </div>
     
     <div id="popup"></div>
-
+    <link href="js/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet" href="css/venda.css">
     
 
 </body>

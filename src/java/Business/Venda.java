@@ -38,6 +38,7 @@ public class Venda extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            VendaTemp.apontar();
             //out.print(request.getParameter("dado"));
             ProdutoDao pdao = new ProdutoDao();
             ServicoDao sdao = new ServicoDao();
@@ -66,7 +67,7 @@ public class Venda extends HttpServlet {
                         out.print("<td>"+p.getProduto().getNome()+"</td>");
                         out.print("<td>R$"+String.format("%.2f", p.getProduto().getValor())+"</td>");
                         out.print("<td><input min='1' max='"+qteDisp(p.getProduto())+"' data-produto='"+p.getProduto().getId()+"' type='number' class='form-control' id='qte"+p.getProduto().getId()+"' value='"+p.getQtd()+"'></td>");
-                        out.print("<td id='valTotal"+p.getProduto().getId()+"''>R$"+String.format("%.2f", p.getValor_total())+"</td>");
+                        out.print("<td id='valTotalP"+p.getProduto().getId()+"''>R$"+String.format("%.2f", p.getValor_total())+"</td>");
                         out.print("<td><button class='removeProd btn btn-danger' value='"+p.getProduto().getId()+"'>X</button></td>");
                         out.print("</tr>");
                     }
@@ -78,22 +79,66 @@ public class Venda extends HttpServlet {
                         break;
                     }
                 case "verDisp":
-                    {
-                        String codProd = request.getParameter("textProduto");
-                        break;
-                    }
+                {
+                    String codProd = request.getParameter("textProduto");
+                    break;
+                }
                 case "altQuantProduto":
-                    {
-                        String codProd = request.getParameter("textProduto");
-                        int qte = Integer.parseInt(request.getParameter("qte"));
-                        altQuant(codProd, qte);
-                        break;
+                {
+                    String codProd = request.getParameter("textProduto");
+                    int qte = Integer.parseInt(request.getParameter("qte"));
+                    float val = altQuant(codProd, qte);
+                    if(val!=0){
+                        out.print("R$"+String.format("%.2f",val));
                     }
+                    break;
+                }
                 case "pesqServico":
                 {
                     Servico serv = new Servico();
                     serv = sdao.getServico(request.getParameter("textServico"));
                     out.print(buscarServico(serv));
+                    break;
+                }
+                case "addServico":
+                {
+                    Servico serv = new Servico();
+                    serv = sdao.getServico(request.getParameter("textServico"));
+                    addServ(serv);
+                    break;
+                }
+                case "attServicos":
+                    for(ServicoPedido s:VendaTemp.listaServicosPed){
+                        out.print("<tr id='"+s.getServico().getId()+"'>");
+                        out.print("<td>"+s.getServico().getId()+"</td>");
+                        out.print("<td>"+s.getServico().getNome()+"</td>");
+                        out.print("<td>R$"+String.format("%.2f", s.getServico().getValor())+"</td>");
+                        out.print("<td><input data-servico='"+s.getServico().getId()+"' type='number' class='form-control' id='dur"+s.getServico().getId()+"' value='"+s.getMeses_duracao()+"'></td>");
+                        out.print("<td id='valTotalS"+s.getServico().getId()+"''>R$"+String.format("%.2f", s.getValor_total())+"</td>");
+                        out.print("<td><button class='removeServ btn btn-danger' value='"+s.getServico().getId()+"'>X</button></td>");
+                        out.print("</tr>");
+                    }
+                    break;
+                case "removeServico":
+                {
+                    String codServ = request.getParameter("textServico");
+                    removeServ(codServ);
+                    break;
+                }
+                case "altDurServico":
+                {
+                    String codServ = request.getParameter("textServico");
+                    int dur = Integer.parseInt(request.getParameter("dur"));
+                    float val = altDur(codServ, dur);
+                    if(val!=0){
+                        out.print("R$"+String.format("%.2f",val));
+                    }
+                    break;
+                }
+                case "valTot":
+                {
+                    VendaTemp.pedido.valorTotal();
+                    out.print(String.format("%.2f", VendaTemp.pedido.getValor_total()));
                     break;
                 }
                 default:
@@ -118,8 +163,8 @@ public class Venda extends HttpServlet {
     
     public void addProd(Produto prod){
         boolean exist = false;
-                for(Produto p:VendaTemp.listaProdutos){
-                    if(prod.equals(p)){
+                for(ProdutoPedido p:VendaTemp.listaProdutosPed){
+                    if(prod.equals(p.getProduto())){
                         exist = true;
                         break;
                     }
@@ -137,14 +182,16 @@ public class Venda extends HttpServlet {
         return qte;
     }
     
-    public void altQuant(String codProd,int qte){
+    public float altQuant(String codProd,int qte){
         for(ProdutoPedido p: VendaTemp.listaProdutosPed){
             if(p.getProduto().getId().equals(codProd)){
                 p.setQtd(qte);
                 p.calcValor();
+                return p.getValor_total();
             }
             
         }
+        return 0;
     }
     
     public String  buscarProduto(Produto prod){
@@ -233,6 +280,44 @@ public class Venda extends HttpServlet {
                     ret+=("Serviço não encontrado");
                 }
                 return ret;
+    }
+    
+    public void addServ(Servico serv){
+        boolean exist = false;
+                for(ServicoPedido s:VendaTemp.listaServicosPed){
+                    if(serv.getId().equals(s.getServico().getId())){
+                        exist = true;
+                        break;
+                    }
+                }
+                if(!exist){
+                    ServicoPedido servPed = new ServicoPedido(serv);
+                    VendaTemp.listaServicosPed.add(servPed);
+                }
+    }
+    
+    public void removeServ(String codProd){
+        int count = 0;
+        for(int c = 0; c<VendaTemp.listaServicosPed.size();c++){
+            ServicoPedido s = VendaTemp.listaServicosPed.get(c);
+             if(s.getServico().getId().equals(codProd)){
+                VendaTemp.listaServicosPed.remove(count);
+                break;
+            }
+            count++;
+        }
+    }
+    
+    public float altDur(String codServ,int dur){
+        for(ServicoPedido s: VendaTemp.listaServicosPed){
+            if(s.getServico().getId().equals(codServ)){
+                s.setMeses_duracao(dur);
+                s.valorTotal();
+                return s.valorTotal();
+            }
+            
+        }
+        return 0;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

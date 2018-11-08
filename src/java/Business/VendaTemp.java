@@ -5,10 +5,7 @@
  */
 package Business;
 
-import entidades.Produto;
-import entidades.Servico;
-import entidades.ProdutoPedido;
-import entidades.ServicoPedido;
+import entidades.*;
 import java.util.ArrayList;
 
 /**
@@ -22,8 +19,14 @@ public class VendaTemp {
     public static ArrayList<Servico> listaServicos = new ArrayList<Servico>();
     public static ArrayList<ProdutoPedido> listaProdutosPed = new ArrayList<ProdutoPedido>();
     public static ArrayList<ServicoPedido> listaServicosPed = new ArrayList<ServicoPedido>();
+    public static Pedido pedido = new Pedido();
     
-    public void limpaVenda(){
+    public static void limpaVenda(){
         
+    }
+    
+    public static void apontar(){
+        pedido.setLista_produtos(listaProdutosPed);
+        pedido.setLista_servicos(listaServicosPed);
     }
 }
