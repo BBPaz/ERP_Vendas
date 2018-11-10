@@ -184,13 +184,13 @@ nav ul li a.active:hover{
 
 .cont{
     margin-top:150px;
-    /*margin-left:295px;*/
+    margin-left:295px;
     margin-right:20px;
 }
 
 .cont-left{
     margin-top:150px;
-    margin-left:295px;
+    /*margin-left:295px;*/
     margin-right:20px;
 }
 
@@ -633,4 +633,9 @@ div.dataTables_wrapper div.dataTables_paginate {
 #frm tr:hover{
     background: #ddd;
     color: #000;
+}
+
+
+.cont-mid{
+    margin-top: 110px !important;
 }

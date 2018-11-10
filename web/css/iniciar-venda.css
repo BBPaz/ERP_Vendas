@@ -11,19 +11,20 @@
 }
 
 .border-titulo{
-    padding: 5px !important;
+    padding: 15px !important;
 }
 
-.table-responsive{
-    height: 200px;
-    overflow-y: auto;
-}
-
-.cont-left{
-    margin-top: 110px !important;
-}
 
 td{
     vertical-align: middle !important;
     text-align: center !important;
+}
+
+input {
+    margin-top:10px;
+} 
+
+#aviso{
+    text-align: center;
+    display: none;
 }
