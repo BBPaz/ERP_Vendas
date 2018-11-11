@@ -6,6 +6,7 @@
 package Dao;
 
 import entidades.PessoaFisica;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,8 +14,28 @@ import entidades.PessoaFisica;
  */
 public class PessoaFisicaDao {
     
+
+    
     public boolean insertPessoaFisica(PessoaFisica cliente){
         //NÃO IMPLEMENTADO
         return(true);
+    }
+
+    public void getPessoas(){
+        ArrayList<PessoaFisica> pessoas = new ArrayList<>();
+        pessoas.add(new PessoaFisica().exemplo());
+        pessoas.add(new PessoaFisica().exemplo2());
+    }
+    
+    public PessoaFisica getPessoa(String id){
+        ArrayList<PessoaFisica> pessoas = new ArrayList<>();
+        pessoas.add(new PessoaFisica().exemplo());
+        pessoas.add(new PessoaFisica().exemplo2());
+        for(PessoaFisica p: pessoas){
+            if(p.getCpf().equals(id)){
+                return(p);
+            }
+        }
+        return(null);
     }
 }

@@ -27,11 +27,7 @@ public class Cliente{
         Endereco c1 = new Endereco("03576160", "Jd Elena", "igor@igor.com.br", 
                 "São Paulo", "Garuva", "97", "Casa");
         boolean cad_valido = true;
-        
-        
-        
-        
-        
+
         return null;
     }
 

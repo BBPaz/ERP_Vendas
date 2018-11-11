@@ -12,7 +12,6 @@ $(function(){
     });
     
     
-    
     function verificarCad(){
         var num = $("#numCadastro").val();
         if(numValido(num)){
@@ -20,10 +19,19 @@ $(function(){
                 case 11:
                     $("#aviso").html("CPF");
                     $("#aviso").dialog();
+                    var exist = buscaPf(num);
+                    if(exist){
+                        alert("Cliente encontrado");
+                        //window.location.replace("/ERP_Panelas/verificar-cliente-venda.jsp?idCliente="+num);                       
+                    }
+                    else{
+                        alert("Cliente não encontrado");
+                    }
                     break;
                 case 12:
                     $("#aviso").html("CNPJ");
                     $("#aviso").dialog();
+                    buscaPj(num);
                     break;
                 default:
                     $("#aviso").html("Digite um CPF ou CNPJ");
@@ -62,6 +70,53 @@ $(function(){
                 else{
                     elemResultado.html(x);
                     //elemResultado.dialog();
+                }
+            },
+            error: function(er){
+                x = er.responseText;
+            }
+        });
+        
+    }
+    
+    function buscaPf(idCliente){
+        alert("Pesquisar Produto");
+        console.log(idCliente);
+        var x = "";
+        $.ajax({
+            url:"IniciarVenda",
+            type:"get",
+            data:"op=BuscaPf&idCliente="+idCliente,
+            success: function(data){
+                x += data;
+                console.log(x);
+                if(x === "true"){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            },
+            error: function(er){
+                x = er.responseText;
+            }
+        });
+        
+    }
+    
+    function buscaPj(idCliente){
+        alert("Pesquisar Produto");
+        console.log(idCliente);
+        var x = "";
+        $.ajax({
+            url:"IniciarVenda",
+            type:"get",
+            data:"op=BuscaPj&idCliente="+idCliente,
+            success: function(data){
+                x += data;
+                console.log(x);
+                if(x === "false"){
+                    alert(x);
                 }
             },
             error: function(er){

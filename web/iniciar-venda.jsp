@@ -43,7 +43,7 @@
         <!--%@include file="menu.jsp" %-->
 
         <div class="cont-mid row">
-                <div class="col-md-5 col-md-offset-5">
+                <div class="col-md-4 col-md-offset-4">
                     <div class="border-titulo text-center">
                             <h2>Iniciar Venda</h2>
                             <br>

@@ -4,6 +4,7 @@
     Author     : Bruno
     --%>
 
+<%@page import="Dao.PessoaFisicaDao"%>
 <%-- 
     Document   : dashboard-vendas
     Created on : 13/10/2018, 21:50:35
@@ -40,19 +41,22 @@
                 
             });
         </script>
-
+        <%
+            PessoaFisicaDao pfdao = new PessoaFisicaDao();
+            PessoaFisicaDao pdao = new PessoaFisicaDao();
+        %>
     </head>
 
     <body>
 
         <%@include file="nav.jsp" %>
-
+        
         <div id="btnMenu"><img src="img/btn-menu.png"></div>
-
+        
         <!--%@include file="menu.jsp" %-->
         <div class="col-md-8">
             <div class="cont-mid row">
-
+                
                 <div class="col-md-8 col-md-offset-3">
 
                     <div class="border-titulo text-center">
@@ -80,7 +84,7 @@
             </div>
         </div>
         
-
+        
     
     
 
