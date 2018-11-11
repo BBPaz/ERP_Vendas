@@ -25,7 +25,7 @@ public class Conecta {
         Connection con = null;
         //Configura servidor de Banco de Dados e nome do Banco
         String serverName = "localhost:3306";
-        String mydatabase = "alunos";
+        String mydatabase = "erp_vendas";
 
         //Login e senha do banco
         String username = "root";

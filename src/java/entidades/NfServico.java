@@ -18,16 +18,7 @@ public class NfServico extends NotaFiscal{
     String cnpj_tomador;
     float val_iss;
 
-    public NfServico(String codigo_servico, String nome_servico, String nome_prestador, String cnpj_prestador, String nome_tomador, String cnpj_tomador, float val_iss, String data_emissao, boolean tipo_emit, String numero, int cfop, float valor_total, String dados_adicionais, String estado) {
-        super(data_emissao, tipo_emit, numero, cfop, valor_total, dados_adicionais, estado);
-        this.codigo_servico = codigo_servico;
-        this.nome_servico = nome_servico;
-        this.nome_prestador = nome_prestador;
-        this.cnpj_prestador = cnpj_prestador;
-        this.nome_tomador = nome_tomador;
-        this.cnpj_tomador = cnpj_tomador;
-        this.val_iss = val_iss;
-    }
+
 
     public NfServico() {
     }
