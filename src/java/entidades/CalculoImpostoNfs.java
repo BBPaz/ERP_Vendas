@@ -55,12 +55,5 @@ public class CalculoImpostoNfs {
     public void setValor_nfse(float valor_nfse) {
         this.valor_nfse = valor_nfse;
     }
-    
-    public void calcCofins(){
-        
-    }
-    
-    public void calcIpi(){
-        
-    }
+
 }

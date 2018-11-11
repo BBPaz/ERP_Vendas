@@ -10,14 +10,6 @@ public class PessoaFisica extends Cliente {
     public PessoaFisica() {
     }
 
-    public PessoaFisica(String cpf, String data_nasc, String nome, char sexo, int id_cliente, String email, String telefone, Endereco endereco, boolean cad_valido) {
-        super(id_cliente, email, telefone, endereco, cad_valido);
-        this.cpf = cpf;
-        this.data_nasc = data_nasc;
-        this.nome = nome;
-        this.sexo = sexo;
-    }
-
     public String getCpf() {
         return cpf;
     }

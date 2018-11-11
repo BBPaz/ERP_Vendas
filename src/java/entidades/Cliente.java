@@ -9,27 +9,11 @@ public class Cliente{
     Endereco endereco;
     boolean cad_valido;
 
-    public Cliente(int id_cliente, String email, String telefone, Endereco endereco, boolean cad_valido) {
-        this.id = id_cliente;
-        this.email = email;
-        this.telefone = telefone;
-        this.endereco = endereco;
-        this.cad_valido = cad_valido;
-    }
+ 
 
     public Cliente() {
     }
     
-    public Cliente exemplo(){
-        int id = 1;
-        String email = "igor@igor.com.br";
-        String telefone = "11948601713";
-        Endereco c1 = new Endereco("03576160", "Jd Elena", "igor@igor.com.br", 
-                "São Paulo", "Garuva", "97", "Casa");
-        boolean cad_valido = true;
-
-        return null;
-    }
 
     public int getId() {
         return id;
