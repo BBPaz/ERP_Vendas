@@ -12,6 +12,10 @@
         <servlet-name>Venda</servlet-name>
         <servlet-class>Business.Venda</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>IniciarVenda</servlet-name>
+        <servlet-class>Business.IniciarVenda</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CadastroCliente</servlet-name>
         <url-pattern>/CadastroCliente</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>Venda</servlet-name>
         <url-pattern>/Venda</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IniciarVenda</servlet-name>
+        <url-pattern>/IniciarVenda</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
