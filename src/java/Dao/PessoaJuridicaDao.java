@@ -66,7 +66,7 @@ public class PessoaJuridicaDao {
             rs.setString(1, p.getCnpj());
             rs.setString(2, p.getInscricao_estadual());
             rs.setBoolean(3, p.isCad_valido());
-            rs.setString(4, p.razao_social());
+            rs.setString(4, p.getRazao_social());
             rs.setString(5, p.getCnpj());
             rs.setString(6, p.getEmail());
             rs.setString(7, p.getTelefone());

@@ -38,6 +38,10 @@ $(function(){
 
     });
     
+    $("div#finalVenda").on("click","#finalizaVenda",function(){
+       FinalizarVenda();
+    });
+    
     $("div#prodPesquisado").on("click","#addProduto",function(){
         //alert("Adicionar Produto");
         //$("#example").dialog();
@@ -365,6 +369,21 @@ $(function(){
             url:"Venda",
             type:"get",
             data:"op=setPagamento&tipo="+$("#tipoPagamento").val()+"&forma="+$("#formaPagamento").val(),
+            success: function(data){
+                
+            },
+            error: function(er){
+                var x = er.responseText;
+                console.log(x);
+            }
+        });
+    }
+    
+    function  FinalizarVenda(){
+        $.ajax({
+            url:"Venda",
+            type:"get",
+            data:"op=FinalizarVenda",
             success: function(data){
                 
             },

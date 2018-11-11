@@ -7,7 +7,9 @@ package Business;
 
 import Dao.PedidoDao;
 import entidades.*;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -33,9 +35,14 @@ public class VendaTemp {
     public static void apontar(){
         pedido.setLista_produtos(listaProdutosPed);
         pedido.setLista_servicos(listaServicosPed);
+        pedido.setCliente(cliente);
     }
     
     public static void finalizarVenda(){
+        ZonedDateTime data = ZonedDateTime.now();
+        pedido.setData(String.valueOf(data.getYear())+"-"+String.valueOf(data.getMonthValue())+"-"+String.valueOf(data.getDayOfMonth()));
+        pedido.setStatus("Aberto");
+        pedido.setVendedor(new Funcionario("André Marques",1));
         PedidoDao pddao = new PedidoDao();
         pddao.insertPedido(pedido);
     }

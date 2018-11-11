@@ -9,6 +9,7 @@ import Dao.EstoqueDao;
 import Dao.ProdutoDao;
 import Dao.ServicoDao;
 import entidades.PessoaFisica;
+import entidades.PessoaJuridica;
 import entidades.Produto;
 import entidades.Servico;
 import entidades.ProdutoPedido;
@@ -78,8 +79,9 @@ public class Venda extends HttpServlet {
                     {
                         String codProd = request.getParameter("textProduto");
                         removeProd(codProd);
-                        break;
+                        
                     }
+                    break;
                 case "verDisp":
                 {
                     String codProd = request.getParameter("textProduto");
@@ -149,8 +151,9 @@ public class Venda extends HttpServlet {
                         PessoaFisica pf = (PessoaFisica)VendaTemp.cliente;
                         ret+="$(\"#nomeCliente\").val(\""+pf.getNome()+"\");$(\"#idCliente\").val(\""+pf.getCpf()+"\")";
                     }
-                    else{
-                        
+                    else if(VendaTemp.cliente instanceof PessoaJuridica){
+                        PessoaJuridica pj = (PessoaJuridica)VendaTemp.cliente;
+                        ret+="$(\"#nomeCliente\").val(\""+pj.getRazao_social()+"\");$(\"#idCliente\").val(\""+pj.getCnpj()+"\")";
                     }
                 }
                 break;
@@ -159,8 +162,8 @@ public class Venda extends HttpServlet {
                     if(VendaTemp.cliente instanceof PessoaFisica){
                         ret = confirmaVendaPf();
                     }
-                    else{
-                        
+                    else if(VendaTemp.cliente instanceof PessoaFisica){
+                        ret = confirmaVendaPj();
                     }
                     
                 }
@@ -387,7 +390,47 @@ public class Venda extends HttpServlet {
             + "<td>"+
             VendaTemp.pedido.getForma_pagamento()+
             "</td></tr>");
+        
         ret+=("</table>");
+        ret+="<input type=\"button\" value=\"Finalizar Venda\" class=\"btn btn-primary\" id=\"finalizaVenda\">";
+        return ret;
+    }
+    
+    public String confirmaVendaPj(){
+        String ret = "";
+        if(VendaTemp.listaProdutosPed.isEmpty()&&VendaTemp.listaServicosPed.isEmpty()){
+            return("Insira itens antes de prosseguir");
+        }
+        PessoaJuridica pj = (PessoaJuridica)VendaTemp.cliente;
+        ret+=("<table class='table'>");
+        ret+=("<tr>"
+            + "<th>CPF:</th>"
+            + "<td>"+
+            pj.getCnpj()+
+            "</td></tr>");
+        ret+=("<tr>"
+            + "<th>Nome:</th>"
+            + "<td>"+
+            pj.getRazao_social()+
+            "</td></tr>");
+        ret+=("<tr>"
+            + "<th>Valor total:</th>"
+            + "<td>"+
+            "R$"+String.format("%.2f", VendaTemp.pedido.getValor_total())+
+            "</td></tr>");
+        ret+=("<tr>"
+            + "<th>Tipo de pagamento:</th>"
+            + "<td>"+
+            VendaTemp.pedido.getTipo_pagamento()+
+            "</td></tr>");
+        ret+=("<tr>"
+            + "<th>Forma de pagamento:</th>"
+            + "<td>"+
+            VendaTemp.pedido.getForma_pagamento()+
+            "</td></tr>");
+        
+        ret+=("</table>");
+        ret+="<input type=\"button\" value=\"Finalizar Venda\" class=\"btn btn-primary\" id=\"finalizaVenda\">";
         return ret;
     }
 

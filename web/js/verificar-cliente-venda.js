@@ -19,6 +19,10 @@ $(function(){
                 x += data;
                 console.log(x);
                 eval(data);
+                if(tipo==="juridica"){
+                    $("#dados-pf").hide();
+                    $("#dados-pj").show();
+                }
             },
             error: function(er){
                 x = er.responseText;
