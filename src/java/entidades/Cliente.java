@@ -8,6 +8,7 @@ public class Cliente{
     String telefone;
     Endereco endereco;
     boolean cad_valido;
+    String estado;
 
  
 
