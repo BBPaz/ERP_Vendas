@@ -8,6 +8,7 @@ $(function(){
     }
     else{
         tipo="juridica";
+        
     }
     var x;
     $.ajax({

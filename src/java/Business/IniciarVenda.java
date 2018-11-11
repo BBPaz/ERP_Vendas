@@ -51,8 +51,19 @@ public class IniciarVenda extends HttpServlet {
                         }
                         else
                         out.print("false");
-                        break;
                     }
+                    break;
+                case "BuscaPj":
+                {
+                    PessoaJuridica pj = new PessoaJuridica();
+                    pj = pjdao.getPessoa(request.getParameter("idCliente"));
+                    if(pj!=null){
+                        out.print("true");    
+                    }
+                    else
+                    out.print("false");
+                }
+                break;
                 case "PopularCliente":
                 {
                     String tipo = request.getParameter("tipo");
@@ -72,11 +83,29 @@ public class IniciarVenda extends HttpServlet {
                         ret+="$(\"#estado\").val(\""+pf.getEndereco().getUf()+"\");";
                         out.print(ret);
                     }
+                    else if(tipo.equals("juridica")){//MUDAR PARA PESSOA JURIDICA
+                        PessoaFisica pf = new PessoaFisica();
+                        pf = pfdao.getPessoa(request.getParameter("idCliente"));
+                        ret+="$(\"#nomeCliente\").val(\""+pf.getNome()+"\");";
+                        ret+="$(\"#cpfCliente\").val(\""+pf.getCpf()+"\");";
+                        ret+="$(\"#dataNascCliente\").val(\""+pf.getData_nasc()+"\");";
+                        ret+="$(\"#emailCliente\").val(\""+pf.getEmail()+"\");";
+                        ret+="$(\"#numeroCliente\").val(\""+pf.getTelefone()+"\");";
+                        ret+="$(\"#log\").val(\""+pf.getEndereco().getEndereco()+"\");";
+                        ret+="$(\"#numeroEndereco\").val(\""+pf.getEndereco().getNumero()+"\");";
+                        ret+="$(\"#bairro\").val(\""+pf.getEndereco().getBairro()+"\");";
+                        ret+="$(\"#cidade\").val(\""+pf.getEndereco().getCidade()+"\");";
+                        ret+="$(\"#cep\").val(\""+pf.getEndereco().getCep()+"\");";
+                        ret+="$(\"#estado\").val(\""+pf.getEndereco().getUf()+"\");";
+                        out.print(ret);
+                    }
                 }
-                case "VendaTemp":
+                break;
+                case "IniciarVenda":
                 {
                     VendaTemp.cliente = pfdao.getPessoa(request.getParameter("idCliente"));
                 }
+                break;
             }
         }
     }

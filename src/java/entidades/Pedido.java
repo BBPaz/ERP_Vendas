@@ -22,9 +22,9 @@ public class Pedido {
         valorTotal();
     }
     
-    public Pedido(String id, String data_abertura, String forma_pagamento, Funcionario vendedor, Cliente cliente, String tipo_pagamento) {
+    public Pedido(String id, String data, String forma_pagamento, Funcionario vendedor, Cliente cliente, String tipo_pagamento) {
         this.id = id;
-        this.data = data_abertura;
+        this.data = data;
         this.forma_pagamento = forma_pagamento;
         this.vendedor = vendedor;
         this.cliente = cliente;

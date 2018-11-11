@@ -15,7 +15,7 @@ $(function(){
                 case 11:
                     buscaPf(num);
                     break;
-                case 12:
+                case 14:
                     buscaPj(num);
                     break;
                 default:
@@ -72,8 +72,11 @@ $(function(){
             success: function(data){
                 x += data;
                 console.log(x);
-                if(x === "false"){
-                    alert(x);
+                if(x === "true"){
+                    clienteEncontrado(idCliente);
+                }
+                else{
+                    clienteInexistente();
                 }
             },
             error: function(er){

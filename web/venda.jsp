@@ -59,13 +59,26 @@
 
                         <h2>Dados da Venda</h2>
                         <br>
-                        <div class="col-md-6 form-group">
-                            <input type="button" class="btn btn-primary" value="Gerar Pedido">
+                        <div class="col-md-12 form-group">
+                            <select class="form-control" id="tipoPagamento">
+                                <option>Dinheiro</option>
+                                <option>Cartão de Crédito</option>
+                                <option>Cartão de Débito</option>
+                              </select>
+                            <select class="form-control" id="formaPagamento">
+                                <option>1X</option>
+                                <option>2X</option>
+                                <option>3X</option>
+                                <option>4X</option>
+                                <option>5X</option>
+                                <option>6X</option>
+                              </select>
+                            <input type="button" class="btn btn-primary" value="Gerar Pedido" id="confirmaFimVenda">
                             <input type="button" class="btn btn-danger" style="background: #e31" value="Cancelar Pedido" id="cancelarVenda"><br>
                             Valor total:<br>
                             <h3>R$<span id="valorTotalPed"></span> </h3>
                         </div>
-
+                        <div id="finalVenda" title="Confirmar conclusão da venda" style="display: none;">STUFF HERE</div>
                     <div class="clearfix"></div>
                 </div>
                 
@@ -74,7 +87,7 @@
 
                         <h2>Adicionar Produto</h2>
                         <br>
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-12 form-group">
                             <input type="text" id="textProduto" class="form-control">
                             <input type="button" value="Buscar Produto" class="btn btn-primary" id="buscar">
                             <div id="prodPesquisado" title="Informações do produto" style="display: none;">STUFF HERE</div>
@@ -87,7 +100,7 @@
 
                         <h2>Adicionar Servico</h2>
                         <br>
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-12 form-group">
                             <input type="text" id="textServico" class="form-control">
                             <input type="button" value="Buscar Servico" class="btn btn-primary" id="buscarServico">
                             <div id="servPesquisado" title="Informações do serviço" style="display: none;">STUFF HERE</div>
@@ -101,15 +114,11 @@
                     <form>
                         <h2>Dados do Cliente</h2>
                         <br>
-                        <div class="col-md-3 form-group">
-                            <label>ID</label>
-                            <input type="text" class="form-control" disabled="true">
-                        </div>
-                        <div class="col-md-5 form-group">
+                        <div class="col-md-6 form-group">
                             <label>Nome</label>
                             <input type="text" class="form-control" id="nomeCliente" disabled="true">
                         </div>
-                        <div class="col-md-4 form-group">
+                        <div class="col-md-6 form-group">
                             <label>CPF/CNPJ</label>
                             <input type="text" class="form-control" id="idCliente" disabled="true">
                         </div>

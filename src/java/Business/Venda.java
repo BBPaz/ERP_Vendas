@@ -41,6 +41,7 @@ public class Venda extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             VendaTemp.apontar();
             //out.print(request.getParameter("dado"));
+            VendaTemp vt = new VendaTemp();
             ProdutoDao pdao = new ProdutoDao();
             ServicoDao sdao = new ServicoDao();
             String ret = "";
@@ -153,6 +154,28 @@ public class Venda extends HttpServlet {
                     }
                 }
                 break;
+                case "ConfirmarFimVenda":
+                {
+                    if(VendaTemp.cliente instanceof PessoaFisica){
+                        ret = confirmaVendaPf();
+                    }
+                    else{
+                        
+                    }
+                    
+                }
+                break;
+                case "setPagamento":
+                {
+                    VendaTemp.pedido.setTipo_pagamento(request.getParameter("tipo"));
+                    VendaTemp.pedido.setForma_pagamento(request.getParameter("forma"));
+                }
+                break;
+                case "FinalizarVenda":
+                {
+                    VendaTemp.finalizarVenda();
+                }
+                    break;
                 default:
                     break;
             }
@@ -330,6 +353,42 @@ public class Venda extends HttpServlet {
             
         }
         return 0;
+    }
+    
+    public String confirmaVendaPf(){
+        String ret = "";
+        if(VendaTemp.listaProdutosPed.isEmpty()&&VendaTemp.listaServicosPed.isEmpty()){
+            return("Insira itens antes de prosseguir");
+        }
+        PessoaFisica pf = (PessoaFisica)VendaTemp.cliente;
+        ret+=("<table class='table'>");
+        ret+=("<tr>"
+            + "<th>CPF:</th>"
+            + "<td>"+
+            pf.getCpf()+
+            "</td></tr>");
+        ret+=("<tr>"
+            + "<th>Nome:</th>"
+            + "<td>"+
+            pf.getNome()+
+            "</td></tr>");
+        ret+=("<tr>"
+            + "<th>Valor total:</th>"
+            + "<td>"+
+            "R$"+String.format("%.2f", VendaTemp.pedido.getValor_total())+
+            "</td></tr>");
+        ret+=("<tr>"
+            + "<th>Tipo de pagamento:</th>"
+            + "<td>"+
+            VendaTemp.pedido.getTipo_pagamento()+
+            "</td></tr>");
+        ret+=("<tr>"
+            + "<th>Forma de pagamento:</th>"
+            + "<td>"+
+            VendaTemp.pedido.getForma_pagamento()+
+            "</td></tr>");
+        ret+=("</table>");
+        return ret;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
