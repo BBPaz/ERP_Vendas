@@ -15,6 +15,7 @@ public class Pedido {
     private Cliente cliente;
     private String tipo_pagamento;
     private float valor_total;
+    private boolean pago;
     
   
     
@@ -29,8 +30,17 @@ public class Pedido {
         this.vendedor = vendedor;
         this.cliente = cliente;
         this.tipo_pagamento = tipo_pagamento;
+        this.pago = false;
     }
 
+    public boolean isPago() {
+        return pago;
+    }
+
+    public void setPago(boolean pago) {
+        this.pago = pago;
+    }
+    
     public String getId() {
         return id;
     }
@@ -110,6 +120,8 @@ public class Pedido {
     public void setValor_total(float valor_total) {
         this.valor_total = valor_total;
     }
+    
+    
     
     public void valorTotal(){
         float val = 0f;

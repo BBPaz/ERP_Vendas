@@ -48,10 +48,6 @@
                     <div class="text-center">
                                 <h2>Dados do Cliente</h2>
                                 <br>
-                                <div class="col-md-12 form-group">
-                                    <label>ID</label>
-                                    <input type="text" class="form-control"  id="idCliente" disabled>
-                                </div>
                                 <div id="dados-pf">
                                     <div class="col-md-12 form-group">
                                     <label>Nome completo</label>
@@ -73,7 +69,7 @@
                                 </div>
                                 <div class="col-md-4 form-group">
                                     <label>CNPJ</label>
-                                    <input type="text" class="form-control" id="logradouro" disabled>
+                                    <input type="text" class="form-control" id="cnpjCliente" disabled>
                                 </div>
                                 
                                 <div class="col-md-4 form-group">

@@ -2,26 +2,13 @@
 package entidades;
 
 public class Cliente{
-    //atributos
-    int id;
     String email;
     String telefone;
     Endereco endereco;
     boolean cad_valido;
     String estado;
 
- 
-
     public Cliente() {
-    }
-    
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getEmail() {
