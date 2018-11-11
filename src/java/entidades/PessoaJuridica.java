@@ -16,13 +16,6 @@ public class PessoaJuridica extends Cliente {
 
     public PessoaJuridica() {
     }
-    
-    public PessoaJuridica(String cnpj, String razao_social, String inscricao_municipal, int id_cliente, String email, String telefone, Endereco endereco, boolean cad_valido) {
-        super(id_cliente, email, telefone, endereco, cad_valido);
-        this.cnpj = cnpj;
-        this.razao_social = razao_social;
-        this.inscricao_municipal = inscricao_municipal;
-    }
 
     public String getCnpj() {
         return cnpj;
