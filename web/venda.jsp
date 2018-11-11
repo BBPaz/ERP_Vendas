@@ -24,7 +24,9 @@
         <meta name="author" content="Grupo 6 - Vendas" />
 
         <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-        
+        <link href="js/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="css/all.css">
+        <link rel="stylesheet" href="css/venda.css">
         
         <script src="js/jquery.min.js" type="text/javascript"></script>
         <script src="js/jquery-ui-1.12.1/jquery-ui.min.js" type="text/javascript"></script>
@@ -50,10 +52,10 @@
         <!--%@include file="menu.jsp" %-->
 
         
-        <div class="cont">
+        <div class="cont-left">
             <div class="col-md-3">
                 <div class="border-titulo">
-                    <form>
+
                         <h2>Dados da Venda</h2>
                         <br>
                         <div class="col-md-6 form-group">
@@ -62,13 +64,13 @@
                             Valor total:<br>
                             <h3>R$<span id="valorTotalPed"></span> </h3>
                         </div>
-                    </form>
+
                     <div class="clearfix"></div>
                 </div>
                 
                 <br>
                 <div class="border-titulo">
-                    <form>
+
                         <h2>Adicionar Produto</h2>
                         <br>
                         <div class="col-md-6 form-group">
@@ -76,12 +78,12 @@
                             <input type="button" value="Buscar Produto" class="btn btn-primary" id="buscar">
                             <div id="prodPesquisado" title="Informações do produto" style="display: none;">STUFF HERE</div>
                         </div>
-                    </form>
+
                     <div class="clearfix"></div>
                 </div>
                 <br>
                 <div class="border-titulo">
-                    <form>
+
                         <h2>Adicionar Servico</h2>
                         <br>
                         <div class="col-md-6 form-group">
@@ -89,7 +91,7 @@
                             <input type="button" value="Buscar Servico" class="btn btn-primary" id="buscarServico">
                             <div id="servPesquisado" title="Informações do serviço" style="display: none;">STUFF HERE</div>
                         </div>
-                    </form>
+
                     <div class="clearfix"></div>
                 </div>
             </div>
@@ -181,9 +183,7 @@
     </div>
     
     <div id="popup"></div>
-    <link href="js/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="css/all.css">
-    <link rel="stylesheet" href="css/venda.css">
+    
     
 
 </body>
