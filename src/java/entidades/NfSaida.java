@@ -23,18 +23,7 @@ public class NfSaida extends NotaFiscal{
     public NfSaida() {
     }
 
-    public NfSaida(String especie, String serie, String insc_estadual, String cnpj, String procedencia, String cod_contabil, float val_icms, float val_ipi, String emitente, String data_emissao, boolean tipo_emit, String numero, int cfop, float valor_total, String dados_adicionais, String estado) {
-        super(data_emissao, tipo_emit, numero, cfop, valor_total, dados_adicionais, estado);
-        this.especie = especie;
-        this.serie = serie;
-        this.insc_estadual = insc_estadual;
-        this.cnpj = cnpj;
-        this.procedencia = procedencia;
-        this.cod_contabil = cod_contabil;
-        this.val_icms = val_icms;
-        this.val_ipi = val_ipi;
-        this.emitente = emitente;
-    }
+  
 
 
       

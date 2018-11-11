@@ -1,30 +1,43 @@
 
 package entidades;
 
-public class NotaFiscal {
+import java.util.Random;
 
+public class NotaFiscal {
+    String chave_autorizacao;
     String data_emissao;
-    boolean tipo_emit;
+    String tipo_emit;
     String numero;
+
+    public String getChave_autorizacao() {
+        return chave_autorizacao;
+    }
+
+    public void setChave_autorizacao(String chave_autorizacao) {
+        this.chave_autorizacao = chave_autorizacao;
+    }
     int cfop;
     float valor_total;
     String dados_adicionais;
     String estado;
 
-    public NotaFiscal(String data_emissao, boolean tipo_emit, String numero, int cfop, float valor_total, String dados_adicionais, String estado) {
-        this.data_emissao = data_emissao;
-        this.tipo_emit = tipo_emit;
-        this.numero = numero;
-        this.cfop = cfop;
-        this.valor_total = valor_total;
-        this.dados_adicionais = dados_adicionais;
-        this.estado = estado;
-    }
+ 
 
     public NotaFiscal() {
-        estado = "uf";
-        data_emissao =  "13/10/2018";
-        numero = "123";
+        chave_autorizacao = gerar();
+    }
+    
+    public String gerar(){
+         Random random = new Random();
+            String chave ="NFe" +  "";
+            for (int c = 0; c < 45; c++) {
+                int r = random.nextInt(10);
+                chave += r;
+        
+        
+        
+    }
+        return numero;    
     }
 
     public String getData_emissao() {
@@ -35,11 +48,11 @@ public class NotaFiscal {
         this.data_emissao = data_emissao;
     }
 
-    public boolean isTipo_emit() {
+    public String isTipo_emit() {
         return tipo_emit;
     }
 
-    public void setTipo_emit(boolean tipo_emit) {
+    public void setTipo_emit(String tipo_emit) {
         this.tipo_emit = tipo_emit;
     }
 
