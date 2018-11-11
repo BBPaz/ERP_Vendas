@@ -13,7 +13,7 @@ public class ProdutoNota {
 
 
     
-        private String nome;
+    private String nome;
     private int qtd_item;
     private float valor_total;
     private float valor_unitario;
@@ -22,6 +22,16 @@ public class ProdutoNota {
     private float valor_ipi;
 
     public ProdutoNota() {
+    }
+    
+    public ProdutoNota(ProdutoPedido p) {
+        //this.id_produto = p.getProduto().getId();
+        this.nome = p.getProduto().getNome();
+        this.qtd_item = p.getQtd();
+        //MEU CELULAR REINICIOU<<<<<<<<<<<<<<<<
+        this.valor_total = p.getValor_total();
+        this.valor_unitario = p.getProduto().getValor();
+        //tendeu?
     }
     
     public String getNome() {

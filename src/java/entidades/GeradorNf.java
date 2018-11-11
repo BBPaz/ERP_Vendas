@@ -388,8 +388,9 @@ if(cl instanceof PessoaFisica){
     }
 
     public static void gerarNFServico() {
-
-
+        Cliente cl = new Cliente();
+        PessoaFisica cf = new PessoaFisica();
+        PessoaJuridica cj = new PessoaJuridica();
         Servico s = new Servico();
 
         try {
@@ -405,15 +406,18 @@ if(cl instanceof PessoaFisica){
 
             Element CPFCNPJ = doc.createElement("CPFCPNJRemetente");
             ide.appendChild(CPFCNPJ);
-
+           
+            
+            if(cl instanceof PessoaFisica){
             Element CPFRemetente = doc.createElement("CPF");
-            CPFRemetente.appendChild(doc.createTextNode("12345678911"));
+            CPFRemetente.appendChild(doc.createTextNode(cf.getCpf()));
             CPFCNPJ.appendChild(CPFRemetente);
-
+            }else if(cl instanceof PessoaJuridica){
             Element CNPJRemetente = doc.createElement("CNPJ");
             CNPJRemetente.appendChild(doc.createTextNode("00000000000000"));
             CPFCNPJ.appendChild(CNPJRemetente);
-
+            }
+            
             Element dtInicio = doc.createElement("dtInicio");
             dtInicio.appendChild(doc.createTextNode("DATA FIM"));
             ide.appendChild(dtInicio);
@@ -422,9 +426,9 @@ if(cl instanceof PessoaFisica){
             dtFim.appendChild(doc.createTextNode("DATA INICIO"));
             ide.appendChild(dtFim);
 
-            Element QtdRps = doc.createElement("QtdeRPS");
-            QtdRps.appendChild(doc.createTextNode("Numero do RPS"));
-            ide.appendChild(QtdRps);
+           // Element QtdRps = doc.createElement("QtdeRPS");
+           // QtdRps.appendChild(doc.createTextNode("Numero do RPS"));
+           //ide.appendChild(QtdRps);
 
             //----------
             Element ValorTotalServicos = doc.createElement("ValorTotalServicos");
@@ -507,18 +511,21 @@ if(cl instanceof PessoaFisica){
             Element CPFCNPJTomador = doc.createElement("CPFCPNJTomador");
             ide.appendChild(CPFCNPJTomador);
 
+            if (cl instanceof PessoaFisica){
+            
             Element CPFTomador = doc.createElement("CPF");
-            CPFTomador.appendChild(doc.createTextNode("12345678911"));
+            CPFTomador.appendChild(doc.createTextNode(cf.getCpf()));
             CPFCNPJTomador.appendChild(CPFTomador);
 
+            }else if (cl instanceof PessoaJuridica){
             Element CNPJTomador = doc.createElement("CNPJ");
-            CNPJTomador.appendChild(doc.createTextNode("00000000000000"));
+            CNPJTomador.appendChild(doc.createTextNode(cj.getCnpj()));
             CPFCNPJTomador.appendChild(CNPJTomador);
-
+            
             Element RazaoSocialTomador = doc.createElement("RazaoSocialTomador");
-            RazaoSocialTomador.appendChild(doc.createTextNode("RazaoSocialTomador"));
+            RazaoSocialTomador.appendChild(doc.createTextNode(cj.getRazao_social()));
             ide.appendChild(RazaoSocialTomador);
-
+        }
             Element EnderecoTomador = doc.createElement("EnderecoTomador");
             ide.appendChild(EnderecoTomador);
 

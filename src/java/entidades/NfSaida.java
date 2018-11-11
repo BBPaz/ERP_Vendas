@@ -5,6 +5,8 @@
  */
 package entidades;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author logonaf
@@ -16,6 +18,7 @@ public class NfSaida extends NotaFiscal{
     String cnpj;
     String procedencia;
     String cod_contabil;
+    ArrayList<ProdutoNota> produtos;
     float val_icms;
     float val_ipi;
     String emitente;
@@ -23,7 +26,23 @@ public class NfSaida extends NotaFiscal{
     public NfSaida() {
     }
 
-  
+    public NfSaida(Pedido ped){
+        this.estado = ped.getCliente().getEndereco().getUf();
+        if(ped.getCliente() instanceof PessoaFisica){
+            PessoaFisica pf = (PessoaFisica)ped.getCliente();
+            this.cnpj = pf.getCpf();
+        }
+        else if(ped.getCliente() instanceof PessoaJuridica){
+            PessoaJuridica pf = (PessoaJuridica)ped.getCliente();
+            this.cnpj = pf.getCnpj();
+        }
+        for(ProdutoPedido p:ped.getLista_produtos()){
+            ProdutoNota pnota = new ProdutoNota(p);
+            produtos.add(pnota);
+        }
+        //continua
+        
+    }
 
 
       
