@@ -19,6 +19,11 @@ import javax.xml.transform.Result;
  * @author igors
  */
 public class NotaProdutosDao {
+    public static void main(String[]args){
+        NotaProdutosDao n = new NotaProdutosDao();
+        n.buscaPorId("12345");
+    }
+    
      public NotaFiscal buscaPorId(String numero ) {
         NotaFiscal n1 = new NfSaida();
         try {

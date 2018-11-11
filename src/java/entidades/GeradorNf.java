@@ -26,12 +26,11 @@ import org.xml.sax.SAXException;
 public class GeradorNf {
 
     public static void main(String[] args) {
-         NotaProdutosDao  n1 = new NotaProdutosDao(); 
-  
+        NotaProdutosDao n1 = new NotaProdutosDao();
+
         GerarNfeProdutos();
         gerarNFServico();
-       
-      
+
     }
 
     public static void GerarNfeProdutos() {
@@ -39,16 +38,13 @@ public class GeradorNf {
         CentroCusto ct = new CentroCusto();
         SimpleDateFormat _date = new SimpleDateFormat("dd/MM/yyyy");
 
-
         try {
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
             // criando o docmu XML
             Document documentoXML = documentBuilder.newDocument();
 
-    
-         
-             Element root = documentoXML.createElement("NFe");
+            Element root = documentoXML.createElement("NFe");
             documentoXML.appendChild(root);
             Element ide = documentoXML.createElement("ide");
             root.appendChild(ide);
@@ -57,7 +53,7 @@ public class GeradorNf {
             Element cUF = documentoXML.createElement("cUF");
             cUF.appendChild(documentoXML.createTextNode(ct.getUf()));
             ide.appendChild(cUF);
-            NotaFiscal n1 =  new NotaFiscal();
+            NotaFiscal n1 = new NotaFiscal();
 //tag natureza e operacao
             Element natOp = documentoXML.createElement("natOP");
             natOp.appendChild(documentoXML.createTextNode("Venda"));
@@ -178,7 +174,7 @@ public class GeradorNf {
             nroD.appendChild(documentoXML.createTextNode(String.valueOf("Numero destinatrio")));
             enderDest.appendChild(nroD);
 
- //bairro
+            //bairro
             Element bairroD = documentoXML.createElement("bairro");
             bairroD.appendChild(documentoXML.createTextNode("bairro desti"));
             enderDest.appendChild(bairroD);
@@ -271,7 +267,6 @@ public class GeradorNf {
                     Element vProd = documentoXML.createElement("vProd");
                     vProd.appendChild(documentoXML.createTextNode(String.valueOf(p.getProduto().getValor())));
                     prod.appendChild(vProd);
-
 
                     Element ICMS = documentoXML.createElement("ICMS");
                     root.appendChild(ICMS);
