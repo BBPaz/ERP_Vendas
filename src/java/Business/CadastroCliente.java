@@ -49,7 +49,7 @@ public class CadastroCliente extends HttpServlet {
                 end.setCep(request.getParameter("cep"));
                 end.setBairro(request.getParameter("bairro"));
                 end.setCidade(request.getParameter("cidade"));
-                end.setEndereco(request.getParameter("logradouro"));
+                end.setRua(request.getParameter("logradouro"));
                 end.setNumero(request.getParameter("numeroEndereco"));
                 end.setComplemento(request.getParameter("complemento"));
                 
@@ -77,7 +77,7 @@ public class CadastroCliente extends HttpServlet {
                 end.setCep(request.getParameter("cep"));
                 end.setBairro(request.getParameter("bairro"));
                 end.setCidade(request.getParameter("cidade"));
-                end.setEndereco(request.getParameter("logradouro"));
+                end.setRua(request.getParameter("logradouro"));
                 end.setNumero(request.getParameter("numeroEndereco"));
                 end.setComplemento(request.getParameter("complemento"));
                 

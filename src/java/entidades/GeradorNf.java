@@ -29,16 +29,20 @@ public class GeradorNf {
         NotaProdutosDao n1 = new NotaProdutosDao();
 
         GerarNfeProdutos();
-        //gerarNFServico();
+        gerarNFServico();
 
     }
 
     public static void GerarNfeProdutos() {
         NotaFiscal nf = new NotaFiscal();
         CentroCusto ct = new CentroCusto();
-        SimpleDateFormat _date = new SimpleDateFormat("dd/MM/yyyy");
+        PessoaJuridica cj = new PessoaJuridica();
+        PessoaFisica cf = new PessoaFisica();
+        Cliente cl = new Cliente();
+        Endereco ed = new Endereco();
 
-       /* try {
+
+try {
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
             // criando o docmu XML
@@ -71,12 +75,12 @@ public class GeradorNf {
 
 //dEmiss
             Element dEmiss = documentoXML.createElement("dEmiss");
-            dEmiss.appendChild(documentoXML.createTextNode(_date.format(new Date())));
+            dEmiss.appendChild(documentoXML.createTextNode(nf.getData_emissao()));
             ide.appendChild(dEmiss);
 
 //dSaiEnt
             Element dSaiEnt = documentoXML.createElement("dSaiEnt");
-            dSaiEnt.appendChild(documentoXML.createTextNode(_date.format(new Date())));
+            dSaiEnt.appendChild(documentoXML.createTextNode(nf.getData_emissao()));
             ide.appendChild(dSaiEnt);
 
 //tpNF fixo sempre sera 1
@@ -90,12 +94,12 @@ public class GeradorNf {
 
 //CNPJ
             Element CNPJ = documentoXML.createElement("CNPJ");
-            CNPJ.appendChild(documentoXML.createTextNode(ct.getCNPJ1()));
+            CNPJ.appendChild(documentoXML.createTextNode(ct.getCnpj()));
             emit.appendChild(CNPJ);
 
 //xNome
             Element xNome = documentoXML.createElement("xNome");
-            xNome.appendChild(documentoXML.createTextNode(ct.getrSocial()));
+            xNome.appendChild(documentoXML.createTextNode(ct.getRazao_social()));
             emit.appendChild(xNome);
 
 //xFant
@@ -105,7 +109,7 @@ public class GeradorNf {
 
 //Ie
             Element IE = documentoXML.createElement("IE");
-            IE.appendChild(documentoXML.createTextNode(ct.getIe()));
+            IE.appendChild(documentoXML.createTextNode(ct.getInscricao_estadual()));
             emit.appendChild(IE);
 //------------------------------------------------------------------------------        
 //enderEmit
@@ -144,7 +148,7 @@ public class GeradorNf {
 
 //fone
             Element fone = documentoXML.createElement("fone");
-            fone.appendChild(documentoXML.createTextNode("948601713"));
+            fone.appendChild(documentoXML.createTextNode(ct.getTelefone()));
             enderEmit.appendChild(fone);
 //------------------------------------------------------------------------------        
 // node dest
@@ -152,10 +156,18 @@ public class GeradorNf {
             root.appendChild(dest);
 
 // cnpj/cpf pessoa
-            Element CNPJD = documentoXML.createElement("CNPJ");
-            CNPJD.appendChild(documentoXML.createTextNode("CNPJ CLIENTE"));
-            dest.appendChild(CNPJD);
 
+if(cl instanceof PessoaFisica){
+    
+            Element CNPJD = documentoXML.createElement("CNPJ");
+            CNPJD.appendChild(documentoXML.createTextNode(cf.getCpf()));
+             dest.appendChild(CNPJD);
+
+}else if (cl instanceof PessoaJuridica){ 
+     Element CPFD = documentoXML.createElement("CPF");
+            CPFD.appendChild(documentoXML.createTextNode(cj.getCnpj()));
+             dest.appendChild(CPFD);
+}
             Element xNomeD = documentoXML.createElement("xNome");
             xNomeD.appendChild(documentoXML.createTextNode("Nome destinatrio"));
             dest.appendChild(xNomeD);
@@ -166,34 +178,40 @@ public class GeradorNf {
 
 //Lgr
             Element xLgrD = documentoXML.createElement("xLgr");
-            xLgrD.appendChild(documentoXML.createTextNode("Longradouro cliente"));
+            xLgrD.appendChild(documentoXML.createTextNode(ed.getRua()));
             enderDest.appendChild(xLgr);
 
 //nro
             Element nroD = documentoXML.createElement("nro");
-            nroD.appendChild(documentoXML.createTextNode(String.valueOf("Numero destinatrio")));
+            nroD.appendChild(documentoXML.createTextNode(String.valueOf(ed.getNumero())));
             enderDest.appendChild(nroD);
 
             //bairro
             Element bairroD = documentoXML.createElement("bairro");
-            bairroD.appendChild(documentoXML.createTextNode("bairro desti"));
+            bairroD.appendChild(documentoXML.createTextNode(ed.getBairro()));
             enderDest.appendChild(bairroD);
 
 //UF
             Element UFD = documentoXML.createElement("UF");
-            UFD.appendChild(documentoXML.createTextNode("UF desti"));
+            UFD.appendChild(documentoXML.createTextNode(ed.getUf()));
             enderDest.appendChild(UFD);
 
 //cep
             Element cepD = documentoXML.createElement("CEP");
-            cepD.appendChild(documentoXML.createTextNode("000000"));
+            cepD.appendChild(documentoXML.createTextNode(ed.getCep()));
             enderDest.appendChild(cepD);
 
 //fone
+if(cl instanceof PessoaFisica){
             Element foneD = documentoXML.createElement("fone");
-            foneD.appendChild(documentoXML.createTextNode("948601713"));
+            foneD.appendChild(documentoXML.createTextNode(cf.getTelefone()));
             enderDest.appendChild(foneD);
 
+}else if (cl instanceof PessoaJuridica){
+     Element foneD = documentoXML.createElement("fone");
+            foneD.appendChild(documentoXML.createTextNode(cj.getTelefone()));
+            enderDest.appendChild(foneD);
+}
 //------------------------------------------------------------------------------ 
             Element entrega = documentoXML.createElement("entrega");
             root.appendChild(entrega);
@@ -203,23 +221,23 @@ public class GeradorNf {
             entrega.appendChild(CNPJE);
 
             Element xLgrE = documentoXML.createElement("xLgr");
-            xLgrE.appendChild(documentoXML.createTextNode("Longradouro cliente"));
+            xLgrE.appendChild(documentoXML.createTextNode(ed.getRua()));
             entrega.appendChild(xLgrE);
 
             Element nroE = documentoXML.createElement("nro");
-            nroE.appendChild(documentoXML.createTextNode(String.valueOf("Numero destinatrio")));
+            nroE.appendChild(documentoXML.createTextNode(String.valueOf(ed.getNumero())));
             entrega.appendChild(nroE);
 
             Element xCpl = documentoXML.createElement("xCpl");
-            xCpl.appendChild(documentoXML.createTextNode("COMPLEMENTO"));
+            xCpl.appendChild(documentoXML.createTextNode(ed.getCep()));
             entrega.appendChild(xCpl);
 
             Element bairroE = documentoXML.createElement("bairro");
-            bairroE.appendChild(documentoXML.createTextNode("bairro entrega"));
+            bairroE.appendChild(documentoXML.createTextNode(ed.getBairro()));
             entrega.appendChild(bairroE);
 //UF
             Element UFE = documentoXML.createElement("UF");
-            UFE.appendChild(documentoXML.createTextNode("UF entrega"));
+            UFE.appendChild(documentoXML.createTextNode(cl.getEndereco().getUf()));
             entrega.appendChild(UFE);
 //------------------------------------------------------------------------------
             if (pd.getLista_produtos().size() > 0) {
@@ -371,7 +389,7 @@ public class GeradorNf {
 
     public static void gerarNFServico() {
 
-        Pedido pd = new Pedido().exemplo();
+
         Servico s = new Servico();
 
         try {
@@ -541,7 +559,7 @@ public class GeradorNf {
             Logger.getLogger(GeradorNf.class.getName()).log(Level.SEVERE, null, ex);
         } catch (TransformerException ex) {
             Logger.getLogger(GeradorNf.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        }
 
     }
 }

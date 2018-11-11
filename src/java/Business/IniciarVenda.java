@@ -75,7 +75,7 @@ public class IniciarVenda extends HttpServlet {
                         ret+="$(\"#dataNascCliente\").val(\""+pf.getData_nasc()+"\");";
                         ret+="$(\"#emailCliente\").val(\""+pf.getEmail()+"\");";
                         ret+="$(\"#numeroCliente\").val(\""+pf.getTelefone()+"\");";
-                        ret+="$(\"#log\").val(\""+pf.getEndereco().getEndereco()+"\");";
+                        ret+="$(\"#log\").val(\""+pf.getEndereco().getRua()+"\");";
                         ret+="$(\"#numeroEndereco\").val(\""+pf.getEndereco().getNumero()+"\");";
                         ret+="$(\"#bairro\").val(\""+pf.getEndereco().getBairro()+"\");";
                         ret+="$(\"#cidade\").val(\""+pf.getEndereco().getCidade()+"\");";

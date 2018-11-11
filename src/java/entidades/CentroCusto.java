@@ -2,34 +2,32 @@
 package entidades;
 
 public class CentroCusto {
-    private String CNPJ1 = "99999999999999"; // cnpj
-    private String rSocial = "ADS PANELAS"; //razao social
-    private String fantasia = "ADS";
-    private String longradouro = "Av. Reg. Feijó";
-    private int nro = 1295;
-    private String bairro = "Jardim Analia Franco";
-    private String municipio = "Sao paulo";
-    private String uf = "SP";
-    private String cep = "03576160";
-    private String fone = "948601713";
-    private String ie = "123456789"; // inscricao estadual
-    
-    //https://www.contabilidadenobrasil.com.br/pis-e-cofins/
+        private String cnpj; 
+    private String razao_social; 
+    private String fantasia;
+    private String longradouro;
+    private int nro;
+    private String bairro;
+    private String municipio;
+    private String uf;
+    private String cep;
+    private String telefone ;
+    private String inscricao_estadual;
 
-    public String getCNPJ1() {
-        return CNPJ1;
+    public String getCnpj() {
+        return cnpj;
     }
 
-    public void setCNPJ1(String CNPJ1) {
-        this.CNPJ1 = CNPJ1;
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
     }
 
-    public String getrSocial() {
-        return rSocial;
+    public String getRazao_social() {
+        return razao_social;
     }
 
-    public void setrSocial(String rSocial) {
-        this.rSocial = rSocial;
+    public void setRazao_social(String razao_social) {
+        this.razao_social = razao_social;
     }
 
     public String getFantasia() {
@@ -88,22 +86,23 @@ public class CentroCusto {
         this.cep = cep;
     }
 
-    public String getFone() {
-        return fone;
+    public String getTelefone() {
+        return telefone;
     }
 
-    public void setFone(String fone) {
-        this.fone = fone;
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
-    public String getIe() {
-        return ie;
+    public String getInscricao_estadual() {
+        return inscricao_estadual;
     }
 
-    public void setIe(String ie) {
-        this.ie = ie;
+    public void setInscricao_estadual(String inscricao_estadual) {
+        this.inscricao_estadual = inscricao_estadual;
     }
 
-    
-    
+    public CentroCusto() {
+    }
+
 }
