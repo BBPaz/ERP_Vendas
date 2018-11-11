@@ -8,6 +8,7 @@ package Business;
 import Dao.EstoqueDao;
 import Dao.ProdutoDao;
 import Dao.ServicoDao;
+import entidades.PessoaFisica;
 import entidades.Produto;
 import entidades.Servico;
 import entidades.ProdutoPedido;
@@ -139,8 +140,19 @@ public class Venda extends HttpServlet {
                 {
                     VendaTemp.pedido.valorTotal();
                     out.print(String.format("%.2f", VendaTemp.pedido.getValor_total()));
-                    break;
                 }
+                break;
+                case "exibirCliente":
+                {
+                    if(VendaTemp.cliente instanceof PessoaFisica){
+                        PessoaFisica pf = (PessoaFisica)VendaTemp.cliente;
+                        ret+="$(\"#nomeCliente\").val(\""+pf.getNome()+"\");$(\"#idCliente\").val(\""+pf.getCpf()+"\")";
+                    }
+                    else{
+                        
+                    }
+                }
+                break;
                 default:
                     break;
             }

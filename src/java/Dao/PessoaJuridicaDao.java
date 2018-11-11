@@ -31,8 +31,8 @@ public class PessoaJuridicaDao {
                 p.setCnpj(rs.getString("cnpj"));
                 p.setEmail(rs.getString("email"));
                 p.setTelefone(rs.getString("telefone"));
-                p.set(rs.getString("estado"));
-                p.setCep(rs.getFloat("valor_total"));
+                //p.set(rs.getString("estado"));
+               // p.setCep(rs.getFloat("valor_total"));
                 //(rs.getString("rodizioVeiculo"));
                 
 

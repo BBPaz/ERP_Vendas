@@ -2,6 +2,7 @@ $(function(){
     var dash_vendas = "/ERP_Panelas/dashboard-vendas.jsp";
     exibirProdutos();
     exibirServicos();
+    exibirCliente();
     valTot();
     
     $("#cancelarVenda").on("click",function(){
@@ -300,6 +301,20 @@ $(function(){
             },
             error: function(er){
                 x = "Erro: "+er.responseText;
+            }
+        });
+    }
+    
+    function exibirCliente(){
+        $.ajax({
+            url:"Venda",
+            type:"get",
+            data:"op=exibirCliente",
+            success: function(data){
+                eval(data);
+            },
+            error: function(er){
+                x = er.responseText;
             }
         });
     }

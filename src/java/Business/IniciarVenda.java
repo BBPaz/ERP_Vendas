@@ -53,6 +53,30 @@ public class IniciarVenda extends HttpServlet {
                         out.print("false");
                         break;
                     }
+                case "PopularCliente":
+                {
+                    String tipo = request.getParameter("tipo");
+                    if(tipo.equals("fisica")){
+                        PessoaFisica pf = new PessoaFisica();
+                        pf = pfdao.getPessoa(request.getParameter("idCliente"));
+                        ret+="$(\"#nomeCliente\").val(\""+pf.getNome()+"\");";
+                        ret+="$(\"#cpfCliente\").val(\""+pf.getCpf()+"\");";
+                        ret+="$(\"#dataNascCliente\").val(\""+pf.getData_nasc()+"\");";
+                        ret+="$(\"#emailCliente\").val(\""+pf.getEmail()+"\");";
+                        ret+="$(\"#numeroCliente\").val(\""+pf.getTelefone()+"\");";
+                        ret+="$(\"#log\").val(\""+pf.getEndereco().getEndereco()+"\");";
+                        ret+="$(\"#numeroEndereco\").val(\""+pf.getEndereco().getNumero()+"\");";
+                        ret+="$(\"#bairro\").val(\""+pf.getEndereco().getBairro()+"\");";
+                        ret+="$(\"#cidade\").val(\""+pf.getEndereco().getCidade()+"\");";
+                        ret+="$(\"#cep\").val(\""+pf.getEndereco().getCep()+"\");";
+                        ret+="$(\"#estado\").val(\""+pf.getEndereco().getUf()+"\");";
+                        out.print(ret);
+                    }
+                }
+                case "VendaTemp":
+                {
+                    VendaTemp.cliente = pfdao.getPessoa(request.getParameter("idCliente"));
+                }
             }
         }
     }

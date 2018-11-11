@@ -27,11 +27,10 @@
         <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
         <link href="js/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="css/all.css">
-        <link rel="stylesheet" href="css/venda.css">
         
         <script src="js/jquery.min.js" type="text/javascript"></script>
         <script src="js/jquery-ui-1.12.1/jquery-ui.min.js" type="text/javascript"></script>
-        <script src="js/vendas.js" type="text/javascript"></script>
+        <script src="js/verificar-cliente-venda.js" type="text/javascript"></script>
         <script src="js/jquery.dataTables.min.js"></script>
         <script src="js/dataTables.bootstrap4.min.js"></script>
         <script src="js/scripts.js"></script>
@@ -41,10 +40,7 @@
                 
             });
         </script>
-        <%
-            PessoaFisicaDao pfdao = new PessoaFisicaDao();
-            PessoaFisicaDao pdao = new PessoaFisicaDao();
-        %>
+
     </head>
 
     <body>
@@ -54,8 +50,9 @@
         <div id="btnMenu"><img src="img/btn-menu.png"></div>
         
         <!--%@include file="menu.jsp" %-->
+        <div class="cont-mid">
         <div class="col-md-8">
-            <div class="cont-mid row">
+            <div class="row">
                 
                 <div class="col-md-8 col-md-offset-3">
 
@@ -74,14 +71,15 @@
             </div>
         </div>
         <div class="col-md-2">
-            <div class="cont-mid row">
+            <div class="row">
                 <div class="border-titulo text-center">
                     <h2>Confirmar Cliente</h2>
-                    <input type="button" class="btn btn-primary" value="Prosseguir para venda">
-                    <input type="button" class="btn btn-danger"  value="Cancelar" id="cancelarConfirmacao">
+                    <input type="button" class="btn btn-primary" value="Prosseguir para venda" id="prosseguirVenda">
+                    <input type="button" class="btn btn-danger"  value="Cancelar" id="cancelarVenda">
                     <div class="clearfix"></div>
                 </div>
             </div>
+        </div>
         </div>
         
         

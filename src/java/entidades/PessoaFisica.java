@@ -45,7 +45,7 @@ public class PessoaFisica extends Cliente {
     public PessoaFisica exemplo(){
         PessoaFisica pf = new PessoaFisica();
         
-        pf.setEmail("igor@igor.com.br");
+        pf.setEmail("igor@gmail.com.br");
         pf.setTelefone("11948601713");
         pf.setEndereco(new Endereco("SP","03576160", "Jd Elena", "São Paulo","Garuva", "97", "Casa"));
         pf.setNome("Igor Alves");
@@ -59,10 +59,10 @@ public class PessoaFisica extends Cliente {
     public PessoaFisica exemplo2(){
         PessoaFisica pf = new PessoaFisica();
         
-        pf.setEmail("bruno@igor.com.br");
+        pf.setEmail("bruno@gmail.com.br");
         pf.setTelefone("124812840912");
         pf.setEndereco(new Endereco("SP","08310520", "Pq. São Rafael", "São Paulo", "Rua Redução de guarambaré", "330", "Casa 2"));
-        pf.setNome("Igor Alves");
+        pf.setNome("Bruno Batista");
         pf.setCpf("44197291809");
         pf.setData_nasc("18/02/2000");
         boolean cad_valido = true;

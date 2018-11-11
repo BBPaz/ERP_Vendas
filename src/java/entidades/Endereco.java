@@ -11,7 +11,17 @@ public class Endereco {
     String numero;
     String complemento;
 
+    public Endereco(String uf, String cep, String bairro, String cidade, String endereco, String numero, String complemento) {
+        this.uf = uf;
+        this.cep = cep;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.endereco = endereco;
+        this.numero = numero;
+        this.complemento = complemento;
+    }
 
+    
 
     public Endereco() {
     }

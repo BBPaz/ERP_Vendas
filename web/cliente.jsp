@@ -50,49 +50,49 @@
                                 <br>
                                 <div class="col-md-12 form-group">
                                     <label>ID</label>
-                                    <input type="text" class="form-control" disabled="true">
+                                    <input type="text" class="form-control"  id="idCliente" disabled>
                                 </div>
                                 <div id="dados-pf">
                                     <div class="col-md-12 form-group">
                                     <label>Nome completo</label>
-                                    <input type="text" class="form-control" disabled="true">
+                                    <input type="text" class="form-control"  id="nomeCliente" disabled>
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label>CPF</label>
-                                    <input type="text" class="form-control" disabled="true">
+                                    <input type="text" class="form-control"  id="cpfCliente" disabled>
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label>Data de nascimento</label>
-                                    <input type="text" class="form-control" disabled="true">
+                                    <input type="text" class="form-control"  id="dataNascCliente" disabled>
                                 </div>
                                 </div>
                                 <div id="dados-pj" style="display:none;">
                                 <div class="col-md-12 form-group">
                                     <label>Razão Social</label>
-                                    <input type="text" class="form-control" disabled="true">
+                                    <input type="text" class="form-control" id="razaoSocialCliente" disabled>
                                 </div>
                                 <div class="col-md-4 form-group">
                                     <label>CNPJ</label>
-                                    <input type="text" class="form-control" disabled="true">
+                                    <input type="text" class="form-control" id="logradouro" disabled>
                                 </div>
                                 
                                 <div class="col-md-4 form-group">
                                     <label>Inscrição municipal</label>
-                                    <input type="text" class="form-control" disabled="true">
+                                    <input type="text" class="form-control" id="inscMunicCliente" disabled>
                                 </div>
                                 <div class="col-md-4 form-group">
                                     <label>Inscrição Estadual</label>
-                                    <input type="text" class="form-control" disabled="true">
+                                    <input type="text" class="form-control" id="inscEstCliente" disabled>
                                 </div>
                                 </div>
                                 
                                 <div class="col-md-6 form-group">
                                     <label>E-mail</label>
-                                    <input type="text" class="form-control" disabled="true">
+                                    <input type="text" class="form-control" id="emailCliente" disabled>
                                 </div>
                                  <div class="col-md-6 form-group">
-                                    <label>Telefone</label>
-                                    <input type="text" class="form-control" disabled="true">
+                                    <label>Número de telefone</label>
+                                    <input type="text" class="form-control" id="numeroCliente" disabled>
                                 </div>
                                 
                                 
@@ -103,23 +103,31 @@
                         <h2>Endereço</h2>
                         <div class="col-md-10 form-group">
                             <label>Logradouro</label>
-                            <input type="text" class="form-control" disabled="true">
+                            <input type="text" class="form-control" id="log" disabled>
                         </div>
                         <div class="col-md-2 form-group">
-                            <label>Num</label>
-                            <input type="text" class="form-control" disabled="true">
+                            <label>Número</label>
+                            <input type="text" class="form-control"  id="numeroEndereco" disabled>
                         </div>                   
+                        <div class="col-md-12 form-group">
+                            <label>Complemento</label>
+                            <input type="text" class="form-control"  id="complemento" disabled>
+                        </div>
                         <div class="col-md-6 form-group">
                             <label>Bairro</label>
-                            <input type="text" class="form-control" disabled="true">
+                            <input type="text" class="form-control"  id="bairro" disabled>
                         </div>
                         <div class="col-md-6 form-group">
                             <label>Cidade</label>
-                            <input type="text" class="form-control" disabled="true">
+                            <input type="text" class="form-control"  id="cidade" disabled>
                         </div>
-                        <div class="col-md-12 form-group">
+                        <div class="col-md-10 form-group">
                             <label>CEP</label>
-                            <input type="text" class="form-control" disabled="true">
+                            <input type="text" class="form-control"  id="cep" disabled>
+                        </div>     
+                        <div class="col-md-2 form-group">
+                            <label>UF</label>
+                            <input type="text" class="form-control"  id="estado" disabled>
                         </div>     
                         <div class="clearfix"></div>
                     </div>

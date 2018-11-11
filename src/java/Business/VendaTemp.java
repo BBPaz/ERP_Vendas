@@ -20,6 +20,7 @@ public class VendaTemp {
     public static ArrayList<ProdutoPedido> listaProdutosPed = new ArrayList<ProdutoPedido>();
     public static ArrayList<ServicoPedido> listaServicosPed = new ArrayList<ServicoPedido>();
     public static Pedido pedido = new Pedido();
+    public static Cliente cliente = new Cliente();
     
     public static void limpaVenda(){
         

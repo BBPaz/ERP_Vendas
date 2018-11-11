@@ -4,6 +4,7 @@
     Author     : Bruno
     --%>
 
+<%@page import="Business.VendaTemp"%>
 <%-- 
     Document   : dashboard-vendas
     Created on : 13/10/2018, 21:50:35
@@ -106,11 +107,11 @@
                         </div>
                         <div class="col-md-5 form-group">
                             <label>Nome</label>
-                            <input type="text" class="form-control" disabled="true">
+                            <input type="text" class="form-control" id="nomeCliente" disabled="true">
                         </div>
                         <div class="col-md-4 form-group">
                             <label>CPF/CNPJ</label>
-                            <input type="text" class="form-control" disabled="true">
+                            <input type="text" class="form-control" id="idCliente" disabled="true">
                         </div>
                     </form>
                     <div class="clearfix"></div>

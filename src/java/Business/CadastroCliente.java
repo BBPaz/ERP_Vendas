@@ -40,16 +40,16 @@ public class CadastroCliente extends HttpServlet {
                 PessoaFisica cliente = new PessoaFisica();
                
                 cliente.setEmail(request.getParameter("emailCliente"));
-                cliente.setTelefone(request.getParameter("dddNumeroCliente")+request.getParameter("numeroCliente"));
+                cliente.setTelefone(request.getParameter("numeroCliente"));
                 cliente.setCad_valido(true);
                 
                 Endereco end = new Endereco();
                 
                 end.setUf(request.getParameter("estado"));
-                end.setCep(request.getParameter("Cep"));
+                end.setCep(request.getParameter("cep"));
                 end.setBairro(request.getParameter("bairro"));
                 end.setCidade(request.getParameter("cidade"));
-                end.setEndereco((request.getParameter("tipoLogradouro").equals("")?"":request.getParameter("dddNumeroCliente")+"")+request.getParameter("endereco"));
+                end.setEndereco(request.getParameter("logradouro"));
                 end.setNumero(request.getParameter("numeroEndereco"));
                 end.setComplemento(request.getParameter("complemento"));
                 
@@ -68,16 +68,16 @@ public class CadastroCliente extends HttpServlet {
                 PessoaJuridica cliente = new PessoaJuridica();
                
                 cliente.setEmail(request.getParameter("emailCliente"));
-                cliente.setTelefone(request.getParameter("dddNumeroCliente")+request.getParameter("numeroCliente"));
+                cliente.setTelefone(request.getParameter("numeroCliente"));
                 cliente.setCad_valido(true);
                 
                 Endereco end = new Endereco();
                 
                 end.setUf(request.getParameter("estado"));
-                end.setCep(request.getParameter("Cep"));
+                end.setCep(request.getParameter("cep"));
                 end.setBairro(request.getParameter("bairro"));
                 end.setCidade(request.getParameter("cidade"));
-                end.setEndereco((request.getParameter("tipoLogradouro").equals("")?"":request.getParameter("dddNumeroCliente")+"")+request.getParameter("endereco"));
+                end.setEndereco(request.getParameter("logradouro"));
                 end.setNumero(request.getParameter("numeroEndereco"));
                 end.setComplemento(request.getParameter("complemento"));
                 
@@ -86,6 +86,7 @@ public class CadastroCliente extends HttpServlet {
                 cliente.setCnpj(request.getParameter("cnpjCliente"));
                 cliente.setRazao_social(request.getParameter("razaoSocialCliente"));
                 cliente.setInscricao_municipal(request.getParameter("inscMunicCliente"));
+                cliente.setInscricao_estadual(request.getParameter("inscEstCliente"));
                 
                 PessoaJuridicaDao pjdao = new PessoaJuridicaDao();
                 pjdao.insertPessoaJuridica(cliente);

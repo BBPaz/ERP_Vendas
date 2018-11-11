@@ -29,7 +29,7 @@ public class GeradorNf {
         NotaProdutosDao n1 = new NotaProdutosDao();
 
         GerarNfeProdutos();
-        gerarNFServico();
+        //gerarNFServico();
 
     }
 
@@ -38,7 +38,7 @@ public class GeradorNf {
         CentroCusto ct = new CentroCusto();
         SimpleDateFormat _date = new SimpleDateFormat("dd/MM/yyyy");
 
-        try {
+       /* try {
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
             // criando o docmu XML
@@ -541,7 +541,7 @@ public class GeradorNf {
             Logger.getLogger(GeradorNf.class.getName()).log(Level.SEVERE, null, ex);
         } catch (TransformerException ex) {
             Logger.getLogger(GeradorNf.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
 
     }
 }
