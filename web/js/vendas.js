@@ -3,6 +3,7 @@ $(function(){
     exibirProdutos();
     exibirServicos();
     exibirCliente();
+    setPagamento();
     valTot();
     
     $("#cancelarVenda").on("click",function(){
@@ -18,6 +19,17 @@ $(function(){
 
     });
     
+    $("#confirmaFimVenda").on("click",function(){
+        confirmarFimVenda();
+    });
+    
+    $("#tipoPagamento").on("change",function(){
+       setPagamento(); 
+    });
+    
+    $("#formaPagamento").on("change",function(){
+       setPagamento(); 
+    });
     
     $("#buscarServico").on("click",function(){
         var codServico = $("#textServico").val();
@@ -112,7 +124,8 @@ $(function(){
                 //teste(codProduto);
             },
             error: function(er){
-                x = "Erro: "+er.responseText;
+                var x = er.responseText;
+                console.log(x);
             }
         });
     }
@@ -137,7 +150,8 @@ $(function(){
                 }
             },
             error: function(er){
-                x = er.responseText;
+                var x = er.responseText;
+                console.log(x);
             }
         });
         
@@ -152,7 +166,8 @@ $(function(){
                 exibirProdutos();
             },
             error: function(er){
-                x = "Erro: "+er.responseText;
+                var x = er.responseText;
+                console.log(x);
             }
         });
         
@@ -170,7 +185,8 @@ $(function(){
                 valTot();
             },
             error: function(er){
-                
+                var x = er.responseText;
+                console.log(x);
             }
         });
     }
@@ -186,7 +202,8 @@ $(function(){
                 //alert("Alterado");
             },
             error: function(er){
-                x = "Erro: "+er.responseText;
+                var x = er.responseText;
+                console.log(x);
             }
         });
     }
@@ -211,7 +228,8 @@ $(function(){
                 }
             },
             error: function(er){
-                x = er.responseText;
+                var x = er.responseText;
+                console.log(x);
             }
         });
         
@@ -229,7 +247,8 @@ $(function(){
                 //teste(codProduto);
             },
             error: function(er){
-                x = "Erro: "+er.responseText;
+                var x = er.responseText;
+                console.log(x);
             }
         });
     }
@@ -246,7 +265,8 @@ $(function(){
                 valTot();
             },
             error: function(er){
-                
+                var x = er.responseText;
+                console.log(x);
             }
         });
     }
@@ -260,7 +280,8 @@ $(function(){
                 exibirServicos();
             },
             error: function(er){
-                x = "Erro: "+er.responseText;
+                var x = er.responseText;
+                console.log(x);
             }
         });
         
@@ -277,7 +298,8 @@ $(function(){
                 //alert("Alterado");
             },
             error: function(er){
-                x = "Erro: "+er.responseText;
+                var x = er.responseText;
+                console.log(x);
             }
         });
     }
@@ -300,7 +322,8 @@ $(function(){
                 $("#valorTotalPed").html(data);
             },
             error: function(er){
-                x = "Erro: "+er.responseText;
+                var x = er.responseText;
+                console.log(x);
             }
         });
     }
@@ -314,7 +337,40 @@ $(function(){
                 eval(data);
             },
             error: function(er){
-                x = er.responseText;
+                var x = er.responseText;
+                console.log(x);
+            }
+        });
+    }
+    
+    function confirmarFimVenda(){
+        $.ajax({
+            url:"Venda",
+            type:"get",
+            data:"op=ConfirmarFimVenda",
+            success: function(data){
+                $("#finalVenda").html(data);
+                $("#finalVenda").dialog();
+                
+            },
+            error: function(er){
+                var x = er.responseText;
+                console.log(x);
+            }
+        });
+    }
+    
+    function setPagamento(){
+        $.ajax({
+            url:"Venda",
+            type:"get",
+            data:"op=setPagamento&tipo="+$("#tipoPagamento").val()+"&forma="+$("#formaPagamento").val(),
+            success: function(data){
+                
+            },
+            error: function(er){
+                var x = er.responseText;
+                console.log(x);
             }
         });
     }
