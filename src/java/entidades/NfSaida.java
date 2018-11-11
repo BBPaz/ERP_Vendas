@@ -40,7 +40,8 @@ public class NfSaida extends NotaFiscal{
             ProdutoNota pnota = new ProdutoNota(p);
             produtos.add(pnota);
         }
-        //continua
+
+        
         
     }
 

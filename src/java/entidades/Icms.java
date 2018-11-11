@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Defaut;
+package entidades;
 
 public class Icms {
     //tabela att 2018 icms aliquota
