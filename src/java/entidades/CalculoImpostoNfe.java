@@ -1,7 +1,5 @@
 package entidades;
 
-import Defaut.Icms;
-
 public class CalculoImpostoNfe {
 
     float valor_icms;

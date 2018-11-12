@@ -28,10 +28,8 @@ public class ProdutoNota {
         //this.id_produto = p.getProduto().getId();
         this.nome = p.getProduto().getNome();
         this.qtd_item = p.getQtd();
-        //MEU CELULAR REINICIOU<<<<<<<<<<<<<<<<
         this.valor_total = p.getValor_total();
         this.valor_unitario = p.getProduto().getValor();
-        //tendeu?
     }
     
     public String getNome() {

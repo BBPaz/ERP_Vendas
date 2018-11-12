@@ -1,4 +1,4 @@
-package entidades;
+        package entidades;
 
 import Dao.NotaProdutosDao;
 import java.io.File;
@@ -40,6 +40,7 @@ public class GeradorNf {/*
         PessoaFisica cf = new PessoaFisica();
         Cliente cl = new Cliente();
         Endereco ed = new Endereco();
+        ProdutoNota pn = new ProdutoNota();
 
 
 try {
@@ -157,20 +158,26 @@ try {
 
 // cnpj/cpf pessoa
 
-if(cl instanceof PessoaFisica){
+if(cl instanceof PessoaJuridica){
     
             Element CNPJD = documentoXML.createElement("CNPJ");
-            CNPJD.appendChild(documentoXML.createTextNode(cf.getCpf()));
+            CNPJD.appendChild(documentoXML.createTextNode(cj.getCnpj()));
              dest.appendChild(CNPJD);
-
-}else if (cl instanceof PessoaJuridica){ 
-     Element CPFD = documentoXML.createElement("CPF");
-            CPFD.appendChild(documentoXML.createTextNode(cj.getCnpj()));
-             dest.appendChild(CPFD);
-}
+             
+             
             Element xNomeD = documentoXML.createElement("xNome");
-            xNomeD.appendChild(documentoXML.createTextNode("Nome destinatrio"));
+            xNomeD.appendChild(documentoXML.createTextNode(cj.getRazao_social()));
             dest.appendChild(xNomeD);
+
+}else if (cl instanceof PessoaFisica){ 
+     Element CPFD = documentoXML.createElement("CPF");
+            CPFD.appendChild(documentoXML.createTextNode(cf.getCpf()));
+             dest.appendChild(CPFD);
+             
+            Element xNomeD = documentoXML.createElement("xNome");
+            xNomeD.appendChild(documentoXML.createTextNode(cf.getNome()));
+            dest.appendChild(xNomeD);
+}
 //------------------------------------------------------------------------------        
 
             Element enderDest = documentoXML.createElement("enderDest");
@@ -285,7 +292,7 @@ if(cl instanceof PessoaFisica){
                     Element vProd = documentoXML.createElement("vProd");
                     vProd.appendChild(documentoXML.createTextNode(String.valueOf(p.getProduto().getValor())));
                     prod.appendChild(vProd);
-
+//---------------------------------
                     Element ICMS = documentoXML.createElement("ICMS");
                     root.appendChild(ICMS);
 
@@ -302,31 +309,9 @@ if(cl instanceof PessoaFisica){
                     ICMS00.appendChild(CST);
 
                     Element vBC = documentoXML.createElement("vBC");
-                    vBC.appendChild(documentoXML.createTextNode(String.valueOf(nf.getValor_total())));
-                    ICMS00.appendChild(vBC);
-
-                    Element pICMS = documentoXML.createElement("pICMS");
-                    pICMS.appendChild(documentoXML.createTextNode("00"));
-                    ICMS00.appendChild(pICMS);
-
-                    Element vICMS = documentoXML.createElement("vICMS");
-                    vICMS.appendChild(documentoXML.createTextNode("00"));
-                    ICMS00.appendChild(vICMS);
-
-                    Element PIS = documentoXML.createElement("PIS");
-                    root.appendChild(PIS);
-
-                    Element PISAliq = documentoXML.createElement("PISAliq");
-                    PIS.appendChild(PISAliq);
-
-                    // 0 tributado integralmente
-                    Element CSTAliq = documentoXML.createElement("CST");
-                    CSTAliq.appendChild(documentoXML.createTextNode("00"));
-                    PISAliq.appendChild(CSTAliq);
-
-                    Element vBCAliq = documentoXML.createElement("vBC");
-                    vBCAliq.appendChild(documentoXML.createTextNode("2121"));
-                    PISAliq.appendChild(vBCAliq);
+                    vBC.appendChild(documentoXML.createTextNode(String.valueOf(pn.getValor_total())));
+                    ICMS00.appendChild(vBC);          
+//---------------------------------
                 }
             }
 
@@ -337,35 +322,31 @@ if(cl instanceof PessoaFisica){
             total.appendChild(ICMSTotal);
 
             Element vBCTotal = documentoXML.createElement("vBC");
-            vBCTotal.appendChild(documentoXML.createTextNode("Valor de base total"));
+            vBCTotal.appendChild(documentoXML.createTextNode(String.valueOf(nf.getValor_total())));
             ICMSTotal.appendChild(vBCTotal);
+            
+            Element AliqIcms = documentoXML.createElement("aliqIcms");
+            AliqIcms.appendChild(documentoXML.createTextNode("18"));
+            ICMSTotal.appendChild(AliqIcms);
 
             Element vICMSTotal = documentoXML.createElement("vICMSTotal");
-            vICMSTotal.appendChild(documentoXML.createTextNode("Valor"));
+            vICMSTotal.appendChild(documentoXML.createTextNode(String.valueOf(nf.getValor_total()/18)));
             ICMSTotal.appendChild(vICMSTotal);
 
             Element vProdTotal = documentoXML.createElement("vProd");
-            vProdTotal.appendChild(documentoXML.createTextNode("0"));
+            vProdTotal.appendChild(documentoXML.createTextNode(String.valueOf(nf.getValor_total())));
             ICMSTotal.appendChild(vProdTotal);
 
             Element vFrete = documentoXML.createElement("vFrete");
             vFrete.appendChild(documentoXML.createTextNode("0"));
             ICMSTotal.appendChild(vFrete);
 
-            Element vSeg = documentoXML.createElement("vSeg");
-            vSeg.appendChild(documentoXML.createTextNode("0"));
-            ICMSTotal.appendChild(vFrete);
-
-            Element vDesc = documentoXML.createElement("vDesc");
-            vDesc.appendChild(documentoXML.createTextNode("0"));
-            ICMSTotal.appendChild(vDesc);
-
             Element vOutro = documentoXML.createElement("vOutro");
             vOutro.appendChild(documentoXML.createTextNode("0"));
             ICMSTotal.appendChild(vOutro);
 
             Element vNF = documentoXML.createElement("vNF");
-            vNF.appendChild(documentoXML.createTextNode("0"));
+            vNF.appendChild(documentoXML.createTextNode(String.valueOf(nf.getValor_total())));
             ICMSTotal.appendChild(vNF);
 
             TransformerFactory trans = TransformerFactory.newInstance();
@@ -373,7 +354,7 @@ if(cl instanceof PessoaFisica){
             Transformer transformer = trans.newTransformer();
 
             DOMSource DocumentoFonte = new DOMSource(documentoXML);
-            StreamResult documento = new StreamResult(new File("c:\\temp\\dados" + nf.getNumero() + ".xml"));
+            StreamResult documento = new StreamResult(new File("c:\\temp\\NFe" + nf.getNumero() + ".xml"));
 
             transformer.transform(DocumentoFonte, documento);
 
@@ -392,6 +373,9 @@ if(cl instanceof PessoaFisica){
         PessoaFisica cf = new PessoaFisica();
         PessoaJuridica cj = new PessoaJuridica();
         Servico s = new Servico();
+        Endereco end = new Endereco();
+        NfSaida ns = new NfSaida();
+        CentroCusto cc = new CentroCusto();
 
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -406,44 +390,34 @@ if(cl instanceof PessoaFisica){
 
             Element CPFCNPJ = doc.createElement("CPFCPNJRemetente");
             ide.appendChild(CPFCNPJ);
-           
-            
-            if(cl instanceof PessoaFisica){
-            Element CPFRemetente = doc.createElement("CPF");
-            CPFRemetente.appendChild(doc.createTextNode(cf.getCpf()));
-            CPFCNPJ.appendChild(CPFRemetente);
-            }else if(cl instanceof PessoaJuridica){
+
+
             Element CNPJRemetente = doc.createElement("CNPJ");
-            CNPJRemetente.appendChild(doc.createTextNode("00000000000000"));
+            CNPJRemetente.appendChild(doc.createTextNode(cc.getCnpj()));
             CPFCNPJ.appendChild(CNPJRemetente);
-            }
+            
             
             Element dtInicio = doc.createElement("dtInicio");
-            dtInicio.appendChild(doc.createTextNode("DATA FIM"));
+            dtInicio.appendChild(doc.createTextNode(ns.getData_emissao()));
             ide.appendChild(dtInicio);
 
             Element dtFim = doc.createElement("dtFim");
-            dtFim.appendChild(doc.createTextNode("DATA INICIO"));
+            dtFim.appendChild(doc.createTextNode(ns.getData_emissao()));
             ide.appendChild(dtFim);
-
-           // Element QtdRps = doc.createElement("QtdeRPS");
-           // QtdRps.appendChild(doc.createTextNode("Numero do RPS"));
-           //ide.appendChild(QtdRps);
-
             //----------
             Element ValorTotalServicos = doc.createElement("ValorTotalServicos");
-            ValorTotalServicos.appendChild(doc.createTextNode("Valor total do servicos"));
+            ValorTotalServicos.appendChild(doc.createTextNode(String.valueOf(ns.getValor_total())));
             ide.appendChild(ValorTotalServicos);
 
             Element ValorTotalDeducoes = doc.createElement("ValorTotalDeducoes");
-            ValorTotalDeducoes.appendChild(doc.createTextNode("ValorTotalDeducoes"));
+            ValorTotalDeducoes.appendChild(doc.createTextNode("0"));
             ide.appendChild(ValorTotalDeducoes);
 
             Element ChaveRPS = doc.createElement("ChaveRPS");
             ide.appendChild(ChaveRPS);
 
             Element InscricaoPrestador = doc.createElement("InscricaoPrestador");
-            InscricaoPrestador.appendChild(doc.createTextNode("IE Da empresa PAELAS"));
+            InscricaoPrestador.appendChild(doc.createTextNode(cc.getMunicipio()));
             ide.appendChild(InscricaoPrestador);
 
             Element NumeroRPS = doc.createElement("NumeroRPS");
@@ -457,35 +431,35 @@ if(cl instanceof PessoaFisica){
             ide.appendChild(DataEmissao);
 
             Element TributacaoRPS = doc.createElement("TributacaoRPS");
-            TributacaoRPS.appendChild(doc.createTextNode("Se sera tributado T = true"));
+            TributacaoRPS.appendChild(doc.createTextNode("True"));
             ide.appendChild(TributacaoRPS);
 
             Element ValorServicos = doc.createElement("ValorServicos");
-            ValorServicos.appendChild(doc.createTextNode("Valor total nota"));
+            ValorServicos.appendChild(doc.createTextNode(String.valueOf(ns.getValor_total())));
             ide.appendChild(ValorServicos);
 
             Element ValorDeducoes = doc.createElement("ValorDeducoes");
-            ValorDeducoes.appendChild(doc.createTextNode("Valor total deduceosnota"));
+            ValorDeducoes.appendChild(doc.createTextNode("0"));
             ide.appendChild(ValorDeducoes);
 
             Element ValorPIS = doc.createElement("ValorPIS");
-            ValorPIS.appendChild(doc.createTextNode("Valor PIS"));
+            ValorPIS.appendChild(doc.createTextNode("0"));
             ide.appendChild(ValorPIS);
 
             Element ValorCOFINS = doc.createElement("ValorCOFIN");
-            ValorCOFINS.appendChild(doc.createTextNode("Valor cofins"));
+            ValorCOFINS.appendChild(doc.createTextNode("0"));
             ide.appendChild(ValorCOFINS);
 
             Element ValorINSS = doc.createElement("ValorINSS");
-            ValorINSS.appendChild(doc.createTextNode("Valor INSS"));
+            ValorINSS.appendChild(doc.createTextNode("0"));
             ide.appendChild(ValorINSS);
 
             Element ValorIR = doc.createElement("ValorIR");
-            ValorPIS.appendChild(doc.createTextNode("Valor IR"));
+            ValorPIS.appendChild(doc.createTextNode("0"));
             ide.appendChild(ValorIR);
 
             Element ValorCSLL = doc.createElement("ValorCSLL");
-            ValorCSLL.appendChild(doc.createTextNode("Valor CSLL"));
+            ValorCSLL.appendChild(doc.createTextNode("0"));
             ide.appendChild(ValorCSLL);
 
             if (pd.getLista_servicos().size() > 0) {
@@ -494,14 +468,6 @@ if(cl instanceof PessoaFisica){
                     Element DescricaoServico = doc.createElement("DescricaoServico");
                     DescricaoServico.appendChild(doc.createTextNode(sp.getServico().getDescricao()));
                     ide.appendChild(DescricaoServico);
-
-                    Element CodigoServico = doc.createElement("CodigoServico");
-                    CodigoServico.appendChild(doc.createTextNode("Codigo do servico"));
-                    ide.appendChild(CodigoServico);
-
-                    Element AliquotaServico = doc.createElement("AliquotaServico");
-                    AliquotaServico.appendChild(doc.createTextNode("AliquotaServico do servico"));
-                    ide.appendChild(AliquotaServico);
                 }
             }
             Element ISSRetido = doc.createElement("ISSRetido");
@@ -516,6 +482,11 @@ if(cl instanceof PessoaFisica){
             Element CPFTomador = doc.createElement("CPF");
             CPFTomador.appendChild(doc.createTextNode(cf.getCpf()));
             CPFCNPJTomador.appendChild(CPFTomador);
+            
+            
+            Element RazaoSocialTomador = doc.createElement("RazaoSocialTomador");
+            RazaoSocialTomador.appendChild(doc.createTextNode(cf.getNome()));
+            ide.appendChild(RazaoSocialTomador);
 
             }else if (cl instanceof PessoaJuridica){
             Element CNPJTomador = doc.createElement("CNPJ");
@@ -530,27 +501,27 @@ if(cl instanceof PessoaFisica){
             ide.appendChild(EnderecoTomador);
 
             Element TipoLongradouro = doc.createElement("TipoLongradouro");
-            TipoLongradouro.appendChild(doc.createTextNode("TipoLongradouro"));
+            TipoLongradouro.appendChild(doc.createTextNode(end.getRua()));
             EnderecoTomador.appendChild(TipoLongradouro);
 
             Element NumeroEndereco = doc.createElement("NumeroEndereco");
-            NumeroEndereco.appendChild(doc.createTextNode("NumeroEndereco"));
+            NumeroEndereco.appendChild(doc.createTextNode(end.getNumero()));
             EnderecoTomador.appendChild(NumeroEndereco);
 
             Element BairroTomador = doc.createElement("Bairro");
-            BairroTomador.appendChild(doc.createTextNode("BairroTomador"));
+            BairroTomador.appendChild(doc.createTextNode(end.getBairro()));
             EnderecoTomador.appendChild(BairroTomador);
 
             Element CidadaeTomador = doc.createElement("Cidadae");
-            CidadaeTomador.appendChild(doc.createTextNode("CidadaeTomador"));
+            CidadaeTomador.appendChild(doc.createTextNode(end.getCidade()));
             EnderecoTomador.appendChild(CidadaeTomador);
 
             Element UFTomador = doc.createElement("UF");
-            UFTomador.appendChild(doc.createTextNode("UFTomador"));
+            UFTomador.appendChild(doc.createTextNode(end.getUf()));
             EnderecoTomador.appendChild(UFTomador);
 
             Element CEPTomador = doc.createElement("CEP");
-            CEPTomador.appendChild(doc.createTextNode("CEPTomador"));
+            CEPTomador.appendChild(doc.createTextNode(end.getCep()));
             EnderecoTomador.appendChild(CEPTomador);
 
             //Tags
