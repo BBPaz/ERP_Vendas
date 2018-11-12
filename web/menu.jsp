@@ -17,6 +17,7 @@
          <nav>
         <ul>
             <li><a href="iniciar-venda.jsp">Venda</a></li>
+            <li><a href="gerenciar-cliente.jsp">Gerenciar Cliente</a></li>
             <li><a href="">Busca</a></li>
             <li><a href="">Relatório</a></li>
             <li class="some-pc"><a href="#"></a></li>

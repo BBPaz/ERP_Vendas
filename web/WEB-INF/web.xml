@@ -16,6 +16,10 @@
         <servlet-name>IniciarVenda</servlet-name>
         <servlet-class>Business.IniciarVenda</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GerenciarCliente</servlet-name>
+        <servlet-class>Business.GerenciarCliente</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CadastroCliente</servlet-name>
         <url-pattern>/CadastroCliente</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>IniciarVenda</servlet-name>
         <url-pattern>/IniciarVenda</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GerenciarCliente</servlet-name>
+        <url-pattern>/GerenciarCliente</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

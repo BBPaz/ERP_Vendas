@@ -23,7 +23,7 @@
         
         <script src="js/jquery.min.js" type="text/javascript"></script>
         <script src="js/jquery-ui-1.12.1/jquery-ui.min.js" type="text/javascript"></script>
-        <script src="js/iniciar-venda.js" type="text/javascript"></script>
+        <script src="js/gerenciar-cliente.js" type="text/javascript"></script>
         <script src="js/jquery.dataTables.min.js"></script>
         <script src="js/dataTables.bootstrap4.min.js"></script>
         <script src="js/scripts.js"></script>

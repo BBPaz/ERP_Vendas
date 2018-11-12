@@ -23,7 +23,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
-public class GeradorNf {
+public class GeradorNf {/*
 
     public static void main(String[] args) {
         NotaProdutosDao n1 = new NotaProdutosDao();
@@ -569,4 +569,4 @@ if(cl instanceof PessoaFisica){
         }
 
     }
-}
+*/}
