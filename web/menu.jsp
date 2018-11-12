@@ -18,7 +18,7 @@
         <ul>
             <li><a href="iniciar-venda.jsp">Venda</a></li>
             <li><a href="gerenciar-cliente.jsp">Gerenciar Cliente</a></li>
-            <li><a href="busca-vendas">Busca</a></li>
+            <li><a href="busca-vendas.jsp">Busca</a></li>
             <li><a href="relatorio-vendas.jsp">Relatório</a></li>
             <li class="some-pc"><a href="#"></a></li>
             <li class="some-pc"><a href="perfil.html">Meu Perfil</a></li>

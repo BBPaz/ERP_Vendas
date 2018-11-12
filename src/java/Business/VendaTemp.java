@@ -46,6 +46,7 @@ public class VendaTemp {
         pedido.setVendedor(new Funcionario("André Marques",1));
         PedidoDao pddao = new PedidoDao();
         pddao.inserirPedido(pedido);
+        limpaVenda();
         }
         catch(Exception e){
             

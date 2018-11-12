@@ -29,7 +29,7 @@ public class Conecta {
 
         //Login e senha do banco
         String username = "root";
-        String password = "root";
+        String password = "";
 
         //Carregando o JDBC Driver
         String driverName = "com.mysql.cj.jdbc.Driver";

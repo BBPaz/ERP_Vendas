@@ -40,9 +40,9 @@
 
         <div id="btnMenu"><img src="img/btn-menu.png"></div>
 
-        <!--%@include file="menu.jsp" %-->
+        <%@include file="menu.jsp" %>
 
-        <div class="cont-mid row">
+        <div class="cont cont-mid row">
                 <div class="col-md-4 col-md-offset-4">
                     <div class="border-titulo text-center">
                             <h2>Iniciar Venda</h2>

@@ -1,10 +1,6 @@
 $(function(){
     var dash_vendas = "/ERP_Panelas/dashboard-vendas.jsp";
-    exibirProdutos();
-    exibirServicos();
-    exibirCliente();
-    setPagamento();
-    valTot();
+    exibirVendas();
     
     $("#cancelarVenda").on("click",function(){
         if(confirm("Deseja mesmo cancelar a venda?")){
@@ -18,113 +14,16 @@ $(function(){
         pesquisaProduto(codProduto,res);
 
     });
-    
-    $("#confirmaFimVenda").on("click",function(){
-        confirmarFimVenda();
-    });
-    
-    $("#tipoPagamento").on("change",function(){
-       setPagamento(); 
-    });
-    
-    $("#formaPagamento").on("change",function(){
-       setPagamento(); 
-    });
-    
-    $("#buscarServico").on("click",function(){
-        var codServico = $("#textServico").val();
-        var res = $("#servPesquisado");
-        pesquisaServico(codServico,res);
 
-    });
-    
-    $("div#finalVenda").on("click","#finalizaVenda",function(){
-       FinalizarVenda();
-    });
-    
-    $("div#prodPesquisado").on("click","#addProduto",function(){
-        //alert("Adicionar Produto");
-        //$("#example").dialog();
-        
-        var codProduto = $("#textProduto").val();
-        adicionaProduto(codProduto);
-        $(this).closest('.ui-dialog-content').dialog('close'); 
-    });
-    
-    $("div#servPesquisado").on("click","#addServico",function(){
-        //alert("Adicionar Produto");
-        //$("#example").dialog();
-        
-        var codServico = $("#textServico").val();
-        adicionaServico(codServico);
-        $(this).closest('.ui-dialog-content').dialog('close'); 
-    });
-    
-    $("#tbody_produtos").on("click",".removeProd",function(){
-        //alert("Remover Produto");
-        var cod = $(this).val();
-        removeProduto(cod);
-    });
-    
-    $("#tbody_servicos").on("click",".removeServ",function(){
-        //alert("Remover Serviço");
-        var cod = $(this).val();
-        removeServico(cod);
-    });
-    
-    $("#tbody_produtos").on("change","input[type=number]",function(){
-        //alert("Alterar Qte");
-        console.log($(this).val());
-        mudarQte($(this).val(),$(this).attr("data-produto"));
-    });
-    
-    $("#tbody_produtos").on("keyup","input[type=number]",function(){
-        //alert("Alterar Qte");
-        console.log($(this).val());
-        mudarQte($(this).val(),$(this).attr("data-produto"));
-        if(numVazio($(this))){
-            mudarQte(1,$(this).attr("data-produto"));
-        }
-    });
-    
-    $("#tbody_servicos").on("change","input[type=number]",function(e){
-        //alert("Alterar Qte");
-        console.log($(this).val());
-        mudarDur($(this).val(),$(this).attr("data-servico"));
-    });
-    
-    $("#tbody_servicos").on("keyup","input[type=number]",function(e){
-        //alert("Alterar Qte");
-        console.log($(this).val());
-        mudarDur($(this).val(),$(this).attr("data-servico"));
-        if(numVazio($(this))){
-            mudarDur(1,$(this).attr("data-servico"));
-        }
-    });
-    
-    $('tbody#tbody_produtos').on('input','input', function () {
-        var value = $(this).val();
-        if ((value !== '') && (value.indexOf('.') === -1)) {    
-            $(this).val(Math.max(Math.min(value, $(this).attr("max")), $(this).attr("min")));
-        }
-    });
-    
-    $('tbody#tbody_servicos').on('input','input', function () {
-        var value = $(this).val();
-        if ((value !== '') && (value.indexOf('.') === -1)) {    
-            $(this).val(Math.max(Math.min(value, 24), 1));
-        }
-    });
-    
-    function adicionaProduto(codProduto){
+    function exibirVendas(){
         $.ajax({
-            url:"Venda",
+            url:"BuscarVendas",
             type:"get",
-            data:"op=addProduto&textProduto="+codProduto,
+            data:"op=exibirVendas",
             success: function(data){
                 exibirProdutos();
-                var qte = $("#qte"+codProduto);
-                console.log(qte.attr("id"));
+                console.log(data);
+                $("#form tbody").html(data);
                 //teste(codProduto);
             },
             error: function(er){

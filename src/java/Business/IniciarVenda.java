@@ -105,6 +105,7 @@ public class IniciarVenda extends HttpServlet {
                 case "IniciarVenda":
                 {
                     String tipo = request.getParameter("tipo");
+                    VendaTemp.limpaVenda();
                      if(tipo.equals("fisica")){
                         VendaTemp.cliente = pfdao.getPessoa(request.getParameter("idCliente"));
                      }

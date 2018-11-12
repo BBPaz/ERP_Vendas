@@ -14,6 +14,7 @@ import entidades.PessoaJuridica;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 /**
  *
@@ -92,6 +93,38 @@ public class PedidoDao {
             p = null;
         }
 
+        return p;
+    }
+      
+    public ArrayList<Pedido> listaPedidos(){
+        ArrayList<Pedido> p = new ArrayList<Pedido>();
+        VendedorDao f = new VendedorDao();
+        try {
+            
+            Connection con = Conecta.getConexao();
+            String sql = "SELECT * FROM tb_pedido";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Pedido pd = new Pedido();
+                pd.setId(rs.getString("id"));
+                pd.setStatus(rs.getString("_status"));
+                pd.setData(rs.getString("_data"));
+                pd.setForma_pagamento(rs.getString("forma_pagamento"));
+                pd.setTipo_pagamento(rs.getString("tipo_pagamento"));
+                pd.setPago(rs.getBoolean("pago"));
+                int id_ven = rs.getInt("id_vendedor");
+                pd.setVendedor(f.getFuncionario(id_ven));
+                p.add(pd);
+            }
+
+            rs.close();
+            ps.close();
+            con.close();
+        } catch (Exception e) {
+            p = null;
+        }
         return p;
     }
 
