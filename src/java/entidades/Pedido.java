@@ -5,7 +5,7 @@ import Dao.ProdutoDao;
 import java.util.ArrayList;
 
 public class Pedido {
-    private String id;
+    private int id;
     private String status;
     private String data;
     private String forma_pagamento;
@@ -23,8 +23,7 @@ public class Pedido {
         valorTotal();
     }
     
-    public Pedido(String id, String data, String forma_pagamento, Funcionario vendedor, Cliente cliente, String tipo_pagamento) {
-        this.id = id;
+    public Pedido(String data, String forma_pagamento, Funcionario vendedor, Cliente cliente, String tipo_pagamento) {
         this.data = data;
         this.forma_pagamento = forma_pagamento;
         this.vendedor = vendedor;
@@ -41,11 +40,11 @@ public class Pedido {
         this.pago = pago;
     }
     
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -46,7 +46,7 @@ public class BuscaVendas extends HttpServlet {
                     {
                         ArrayList<Pedido> ped = pdao.listaPedidos();
                         for(Pedido p : ped){
-                            out.print("<tr id='"+p.getId()+"'>");
+                            out.print("<tr class='linhaPedido' value='"+p.getId()+"'>");
                             Cliente c = p.getCliente();
                             out.print("<td>"+p.getId()+"</td>"); 
                             if(c instanceof PessoaFisica){
@@ -61,7 +61,7 @@ public class BuscaVendas extends HttpServlet {
                             else if(c instanceof PessoaJuridica){
                                out.print("<td>"+((PessoaJuridica) c).getRazao_social()+"</td>"); 
                             }
-                            out.print("<td>"+String.format("%.2f", p.getValor_total())+"</td>");
+                            out.print("<td>R$"+String.format("%.2f", p.getValor_total())+"</td>");
                             out.print("<td>"+formatData(p.getData())+"</td>");
                             out.print("</tr>");
                         }
@@ -74,7 +74,7 @@ public class BuscaVendas extends HttpServlet {
     
     public static String formatData(String data){
         String novadata = "";
-        String[] aux = data.split("/");
+        String[] aux = data.split("-");
         novadata =(aux[2])+"/"+(aux[1])+"/"+(aux[0]);
         return novadata;
     } 

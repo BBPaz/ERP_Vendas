@@ -34,6 +34,14 @@ public class PedidoDao {
             String sql = "INSERT INTO tb_pedido (valor_total,_status, _data, forma_pagamento,id_vendedor, id_cliente,tipo_pagamento, pago)"
                     + "values(?,?,?,?,?,?,?,?)";
             PreparedStatement rs = con.prepareStatement(sql);
+            
+            PreparedStatement sinc = con.prepareStatement("SELECT `AUTO_INCREMENT` FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'all' AND   TABLE_NAME   = 'tb_pedido'; ");
+            ResultSet inc;
+            inc = sinc.executeQuery();
+            inc.next();
+            
+            ped.setId(inc.getInt(1));
+            inc.close();
             rs.setFloat(1, ped.getValor_total());
             rs.setString(2, ped.getStatus());
             rs.setString(3, ped.getData());
@@ -48,7 +56,9 @@ public class PedidoDao {
             
             rs.setString(7, ped.getTipo_pagamento());
             rs.setInt(8, ped.isPago()?1:0);
-            
+            for(ProdutoPedido p : ped.getLista_produtos()){
+                insertProdutoPedido(p);
+            }
             rs.execute();
             rs.close();
             con.close();
@@ -74,7 +84,7 @@ public class PedidoDao {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                p.setId(rs.getString("id_pedido"));
+                p.setId(rs.getInt("id_pedido"));
                 p.setStatus(rs.getString("_status"));
                 p.setData(rs.getString("_data"));
                 p.setForma_pagamento(rs.getString("forma_pagamento"));
@@ -111,7 +121,7 @@ public class PedidoDao {
 
             while (rs.next()) {
                 Pedido pd = new Pedido();
-                pd.setId(rs.getString("id_pedido"));
+                pd.setId(rs.getInt("id_pedido"));
                 pd.setStatus(rs.getString("_status"));
                 pd.setData(rs.getString("_data"));
                 pd.setForma_pagamento(rs.getString("forma_pagamento"));
@@ -149,7 +159,7 @@ public class PedidoDao {
             String sql = "INSERT INTO tb_produto_pedido (id_pedido, id_produto, quantidade)"
                     + "values(?,?,?)";
             PreparedStatement rs = con.prepareStatement(sql);
-            rs.setString(1, ped.getPedido().getId());
+            rs.setInt(1, ped.getPedido().getId());
             rs.setInt(3, ped.getQtd());
             rs.setString(2, ped.getProduto().getId());
       

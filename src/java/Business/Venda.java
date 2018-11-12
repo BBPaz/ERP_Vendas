@@ -210,6 +210,7 @@ public class Venda extends HttpServlet {
                 if(!exist){
                     ProdutoPedido prodPed = new ProdutoPedido(prod);
                     VendaTemp.listaProdutosPed.add(prodPed);
+                    prodPed.setPedido(VendaTemp.pedido);
                 }
     }
     
@@ -331,6 +332,7 @@ public class Venda extends HttpServlet {
                 if(!exist){
                     ServicoPedido servPed = new ServicoPedido(serv);
                     VendaTemp.listaServicosPed.add(servPed);
+                    servPed.setPedido(VendaTemp.pedido);
                 }
     }
     

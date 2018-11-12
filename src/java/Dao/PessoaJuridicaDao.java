@@ -88,7 +88,8 @@ public class PessoaJuridicaDao {
         }
         return resp;
     }
-public boolean updatePessoaJuridica(PessoaJuridica cj) {
+    
+    public boolean updatePessoaJuridica(PessoaJuridica cj) {
         boolean resp = false;
         try {
             Connection con = Conecta.getConexao();

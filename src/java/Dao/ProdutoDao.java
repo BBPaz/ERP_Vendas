@@ -32,7 +32,7 @@ public class ProdutoDao {
         return(pList);
     }
     
-    public Produto getProduto(String id){
+    public Produto getProdutoX(String id){
         ArrayList<Produto> pList = new ArrayList();
         pList.add(p1);
         pList.add(p2);
@@ -46,6 +46,31 @@ public class ProdutoDao {
         return(null);
     }
     
+    public Produto getProduto(String id){
+        Produto pn  = new Produto();
+         try {
+
+            Connection con = Conecta.getConexao();
+            String sql = "SELECT * FROM tb_produto WHERE id_produto = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, Integer.parseInt(id));
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                pn.setId(String.valueOf(rs.getInt("id_produto")));
+                pn.setNome(rs.getString("nome"));
+                pn.setValor(rs.getFloat("valor"));
+                pn.setDescricao(rs.getString("descricao"));
+            }
+
+            rs.close();
+            ps.close();
+            con.close();
+        } catch (Exception e) {
+            pn = null;
+        }
+         return pn;
+    }
     
     public ProdutoNota getProdutos(int id){
          ProdutoNota pn  = new ProdutoNota();

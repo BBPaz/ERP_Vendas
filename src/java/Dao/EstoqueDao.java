@@ -16,16 +16,16 @@ import java.sql.ResultSet;
  */
 public class EstoqueDao {
     
-   /* public int quantidadeDisponivelProduto(String idProduto){
+    public int quantidadeDisponivelProduto(String idProduto){
         //Não implementado
         if(idProduto.equals("71724")){
             return 0;
         }
         return 2;
     }
-   */ 
     
-    public int quantidadeDisponivelProduto(String idProduto){
+    
+   /* public int quantidadeDisponivelProduto(String idProduto){
         //Não implementado
         Item i = new Item();
          try {
@@ -55,7 +55,7 @@ public class EstoqueDao {
         
         }
          return 0;
-    }
+    }*/
     
 public boolean updateEstoque(Item it) {
         boolean resp = false;

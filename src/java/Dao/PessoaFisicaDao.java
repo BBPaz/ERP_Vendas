@@ -19,9 +19,27 @@ public class PessoaFisicaDao {
     
 
     
-    public boolean insertPessoaFisica(PessoaFisica cliente){
-        //NÃO IMPLEMENTADO
-        return(true);
+    public boolean insertPessoaFisica(PessoaFisica cf){
+        boolean resp = false;
+        try {
+            Connection con = Conecta.getConexao();
+            String sql = "UPDATE tb_cliente_fisico SET nome = ? ,data_nasc = ? ,email = ? ,telefone = ? "
+                    + "WHERE cpf = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, cf.getNome());
+            ps.setString(2, cf.getCpf());
+            ps.setString(3, cf.getData_nasc());
+            ps.setString(4, cf.getEmail());
+            ps.setString(5, cf.getTelefone());
+            ps.execute();
+            ps.close();
+            con.close();
+
+            resp = true;
+        } catch (Exception e) {
+            resp = false;
+        }
+        return resp = true;
     }
 
     public void getPessoas(){
