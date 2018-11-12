@@ -8,6 +8,10 @@ public class NotaFiscal {
     String data_emissao;
     String tipo_emit;
     String numero;
+    int cfop;
+    float valor_total;
+    String dados_adicionais;
+    String estado;
 
     public String getChave_autorizacao() {
         return chave_autorizacao;
@@ -16,10 +20,7 @@ public class NotaFiscal {
     public void setChave_autorizacao(String chave_autorizacao) {
         this.chave_autorizacao = chave_autorizacao;
     }
-    int cfop;
-    float valor_total;
-    String dados_adicionais;
-    String estado;
+
 
  
 

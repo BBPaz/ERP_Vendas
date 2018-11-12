@@ -19,26 +19,21 @@ import java.sql.ResultSet;
 public class DefautDao {
      public ProdutoNota getValorIcmsUf(ProdutoNota pn) {
          Cliente cl = new Cliente();
-         
         try {
-
             Connection con = Conecta.getConexao();
             String sql = "SELECT valor FROM tb_default WHERE uf= ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, cl.getEndereco().getUf());
             ResultSet rs = ps.executeQuery();
-
             while (rs.next()) {
                 pn.setValor_icms(rs.getFloat("valor"));
             }
-
             rs.close();
             ps.close();
             con.close();
         } catch (Exception e) {
             pn = null;
         }
-
         return pn;
     }
 }

@@ -39,11 +39,16 @@ public class VendaTemp {
     }
     
     public static void finalizarVenda(){
+        try{
         ZonedDateTime data = ZonedDateTime.now();
         pedido.setData(String.valueOf(data.getYear())+"-"+String.valueOf(data.getMonthValue())+"-"+String.valueOf(data.getDayOfMonth()));
         pedido.setStatus("Aberto");
         pedido.setVendedor(new Funcionario("André Marques",1));
         PedidoDao pddao = new PedidoDao();
-        pddao.insertPedido(pedido);
+        pddao.inserirPedido(pedido);
+        }
+        catch(Exception e){
+            
+        }
     }
 }
