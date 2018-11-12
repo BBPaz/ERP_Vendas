@@ -5,8 +5,14 @@
  */
 package Business;
 
+import Dao.PedidoDao;
+import entidades.Cliente;
+import entidades.Pedido;
+import entidades.PessoaFisica;
+import entidades.PessoaJuridica;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,9 +38,46 @@ public class BuscaVendas extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            
+            PedidoDao pdao = new PedidoDao();
+            String op = "";
+            op = request.getParameter("op");
+            switch (op) {
+                case "exibirVendas":
+                    {
+                        ArrayList<Pedido> ped = pdao.listaPedidos();
+                        for(Pedido p : ped){
+                            out.print("<tr id='"+p.getId()+"'>");
+                            Cliente c = p.getCliente();
+                            out.print("<td>"+p.getId()+"</td>"); 
+                            if(c instanceof PessoaFisica){
+                               out.print("<td>"+((PessoaFisica) c).getCpf()+"</td>"); 
+                            }
+                            else if(c instanceof PessoaJuridica){
+                               out.print("<td>"+((PessoaJuridica) c).getCnpj()+"</td>"); 
+                            }
+                            if(c instanceof PessoaFisica){
+                               out.print("<td>"+((PessoaFisica) c).getNome()+"</td>"); 
+                            }
+                            else if(c instanceof PessoaJuridica){
+                               out.print("<td>"+((PessoaJuridica) c).getRazao_social()+"</td>"); 
+                            }
+                            out.print("<td>"+String.format("%.2f", p.getValor_total())+"</td>");
+                            out.print("<td>"+formatData(p.getData())+"</td>");
+                            out.print("</tr>");
+                        }
+                        
+                    }
+                    break;
+            }
         }
     }
+    
+    public static String formatData(String data){
+        String novadata = "";
+        String[] aux = data.split("/");
+        novadata =(aux[2])+"/"+(aux[1])+"/"+(aux[0]);
+        return novadata;
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

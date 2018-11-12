@@ -73,7 +73,7 @@ public class PedidoDao {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                p.setId(rs.getString("id"));
+                p.setId(rs.getString("id_pedido"));
                 p.setStatus(rs.getString("_status"));
                 p.setData(rs.getString("_data"));
                 p.setForma_pagamento(rs.getString("forma_pagamento"));
@@ -99,6 +99,8 @@ public class PedidoDao {
     public ArrayList<Pedido> listaPedidos(){
         ArrayList<Pedido> p = new ArrayList<Pedido>();
         VendedorDao f = new VendedorDao();
+        PessoaFisicaDao pfdao = new PessoaFisicaDao();
+        PessoaJuridicaDao pjdao = new PessoaJuridicaDao();
         try {
             
             Connection con = Conecta.getConexao();
@@ -108,7 +110,7 @@ public class PedidoDao {
 
             while (rs.next()) {
                 Pedido pd = new Pedido();
-                pd.setId(rs.getString("id"));
+                pd.setId(rs.getString("id_pedido"));
                 pd.setStatus(rs.getString("_status"));
                 pd.setData(rs.getString("_data"));
                 pd.setForma_pagamento(rs.getString("forma_pagamento"));
@@ -116,6 +118,14 @@ public class PedidoDao {
                 pd.setPago(rs.getBoolean("pago"));
                 int id_ven = rs.getInt("id_vendedor");
                 pd.setVendedor(f.getFuncionario(id_ven));
+                pd.setValor_total(rs.getFloat("valor_total"));
+                if(rs.getString("id_cliente").length()==11){
+                    pd.setCliente(pfdao.getPessoa(rs.getString("id_cliente")));
+                }
+                else if(rs.getString("id_cliente").length()==14){
+                    pd.setCliente(pjdao.getPessoaJuridica(rs.getString("id_cliente")));
+                }
+                
                 p.add(pd);
             }
 

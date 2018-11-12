@@ -62,8 +62,8 @@
                         <div class="col-md-12 form-group">
                             <select class="form-control" id="tipoPagamento">
                                 <option>Dinheiro</option>
-                                <option>Cartão de Crédito</option>
-                                <option>Cartão de Débito</option>
+                                <option>Cartao de Credito</option>
+                                <option>Cartao de Debito</option>
                               </select>
                             <select class="form-control" id="formaPagamento">
                                 <option>1X</option>

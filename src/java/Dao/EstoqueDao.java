@@ -24,6 +24,39 @@ public class EstoqueDao {
         return 2;
     }
    */ 
+    
+    public int quantidadeDisponivelProduto(String idProduto){
+        //Não implementado
+        Item i = new Item();
+         try {
+            Connection con = Conecta.getConexao();
+            String sql = "SELECT * FROM item WHERE id_item = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, Integer.parseInt(idProduto));
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                i.setId_item(rs.getInt("id_item"));
+                i.setNome(rs.getString("nome"));
+                i.setDescricao(rs.getString("descricao"));
+                i.setPreco(rs.getDouble("preco"));
+                i.setQuantidade(rs.getInt("quantidade"));
+                
+
+
+            }
+            
+            rs.close();
+            ps.close();
+            con.close();
+        return i.getQuantidade();
+        }
+        catch(Exception e){
+        
+        }
+         return 0;
+    }
+    
 public boolean updateEstoque(Item it) {
         boolean resp = false;
         
@@ -47,6 +80,8 @@ public boolean updateEstoque(Item it) {
 
     }
     
+
+
     public Item getProduto(int id){
             Item i = new Item();
          try {

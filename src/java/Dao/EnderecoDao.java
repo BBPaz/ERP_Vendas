@@ -34,7 +34,7 @@ public class EnderecoDao {
                 n1.setRua(rs.getString("rua"));
                 n1.setNumero(rs.getString("numero"));
                 n1.setComplemento(rs.getString("complemento"));
-                n1.setId_endereco(rs.getInt("id_endereco"));
+                n1.setId_endereco(rs.getInt("id"));
 
                 //(rs.getString("rodizioVeiculo"));
 

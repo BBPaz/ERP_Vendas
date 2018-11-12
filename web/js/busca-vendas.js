@@ -2,28 +2,16 @@ $(function(){
     var dash_vendas = "/ERP_Panelas/dashboard-vendas.jsp";
     exibirVendas();
     
-    $("#cancelarVenda").on("click",function(){
-        if(confirm("Deseja mesmo cancelar a venda?")){
-            window.location.replace(dash_vendas);
-        }
-    });
-    
-    $("#buscar").on("click",function(){
-        var codProduto = $("#textProduto").val();
-        var res = $("#prodPesquisado");
-        pesquisaProduto(codProduto,res);
-
-    });
 
     function exibirVendas(){
         $.ajax({
-            url:"BuscarVendas",
+            url:"BuscaVendas",
             type:"get",
             data:"op=exibirVendas",
             success: function(data){
                 exibirProdutos();
                 console.log(data);
-                $("#form tbody").html(data);
+                $("#corpoBusca").html(data);
                 //teste(codProduto);
             },
             error: function(er){

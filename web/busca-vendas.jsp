@@ -53,23 +53,26 @@
                                     <th>Data</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="corpoBusca">
                                 <tr>
                                     <td>1</td>
                                     <td>Exemplo</td>
                                     <td>Cliente 1</td>
                                     <td>11</td>
+                                    <td>33</td>
                                 </tr>
                                 <tr>
                                     <td>2</td>
                                     <td>Exemplo</td>
                                     <td>Y%</td>
                                     <td>22</td>
+                                    <td>33</td>
                                 </tr>
                                 <tr>
                                     <td>3</td>
                                     <td>Produto 3</td>
                                     <td>Z%</td>
+                                    <td>33</td>
                                     <td>33</td>
                                 </tr>
                             </tbody>
@@ -88,7 +91,6 @@
         </div>
 
         </div>
-        <script src="js/editar-cliente.js" type="text/javascript"></script>
 </body>
 </html>
 
