@@ -12,8 +12,6 @@
         <meta charset="utf-8">
         <title>Vendas</title>
 
-        
-
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="Grupo 6 - Vendas" />
 
