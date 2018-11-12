@@ -41,7 +41,6 @@ public class CadastroCliente extends HttpServlet {
                
                 cliente.setEmail(request.getParameter("emailCliente"));
                 cliente.setTelefone(request.getParameter("numeroCliente"));
-                cliente.setCad_valido(true);
                 
                 Endereco end = new Endereco();
                 
@@ -69,7 +68,6 @@ public class CadastroCliente extends HttpServlet {
                
                 cliente.setEmail(request.getParameter("emailCliente"));
                 cliente.setTelefone(request.getParameter("numeroCliente"));
-                cliente.setCad_valido(true);
                 
                 Endereco end = new Endereco();
                 

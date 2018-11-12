@@ -60,14 +60,24 @@ public class PessoaJuridicaDao {
             Connection con = Conecta.getConexao();
             String sql = "INSERT INTO tb_cliente_juridico(cnpj,inscricao_estadual" 
                     + "razao_social,"
+
                     + "email,telefone) "
+
+                    + "cnpj,email,telefone) "
+
                     + "values(?,?,?,?,?,?,?)";
             PreparedStatement rs = con.prepareStatement(sql);
             rs.setString(1, p.getCnpj());
             rs.setString(2, p.getInscricao_estadual());
             rs.setString(3, p.getRazao_social());
+
             rs.setString(4, p.getEmail());
             rs.setString(5, p.getTelefone());
+
+            rs.setString(4, p.getCnpj());
+            rs.setString(5, p.getEmail());
+            rs.setString(6, p.getTelefone());
+
             rs.execute();
             rs.close();
             con.close();

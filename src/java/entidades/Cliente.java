@@ -5,7 +5,6 @@ public class Cliente{
     String email;
     String telefone;
     Endereco endereco;
-    boolean cad_valido;
     String estado;
 
     public Cliente() {
@@ -34,14 +33,5 @@ public class Cliente{
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
-
-    public boolean isCad_valido() {
-        return cad_valido;
-    }
-
-    public void setCad_valido(boolean cad_valido) {
-        this.cad_valido = cad_valido;
-    }
-   
     
 }
