@@ -10,6 +10,8 @@ public class Endereco {
     String rua;
     String numero;
     String complemento;
+    int id_endereco;
+   
 
     public Endereco(String uf, String cep, String bairro, String cidade, String endereco, String numero, String complemento) {
         this.uf = uf;
@@ -25,7 +27,13 @@ public class Endereco {
 
     public Endereco() {
     }
+   public int getId_endereco() {
+        return id_endereco;
+    }
 
+    public void setId_endereco(int id_endereco) {
+        this.id_endereco = id_endereco;
+    }
     public String getUf() {
         return uf;
     }

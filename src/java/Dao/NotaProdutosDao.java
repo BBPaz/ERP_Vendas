@@ -39,9 +39,7 @@ public class NotaProdutosDao {
                 n1.setTipo_emit(rs.getString("tipo_emit"));
                 n1.setNumero(rs.getString("numero"));
                 n1.setCfop(rs.getInt("cfop"));
-                n1.setValor_total(rs.getFloat("valor_total"));
-                //(rs.getString("rodizioVeiculo"));
-                
+                n1.setValor_total(rs.getFloat("valor_total")); 
 
             }
 

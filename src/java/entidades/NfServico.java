@@ -10,18 +10,67 @@ package entidades;
  * @author Bruno
  */
 public class NfServico extends NotaFiscal{
-    String codigo_servico;
+    
+      String serie;
+    String insc_municipal;
     String nome_servico;
     String nome_prestador;
     String cnpj_prestador;
     String nome_tomador;
     String cnpj_tomador;
     float val_iss;
-
-
-
+    String cpf;
+    String cnpj;
+    float valor_icms;
+    
     public NfServico() {
     }
+
+    public String getInsc_municipal() {
+        return insc_municipal;
+    }
+
+    public void setInsc_municipal(String insc_municipal) {
+        this.insc_municipal = insc_municipal;
+    }
+    String codigo_servico;
+
+    public String getSerie() {
+        return serie;
+    }
+
+    public void setSerie(String serie) {
+        this.serie = serie;
+    }
+  
+
+    public float getValor_icms() {
+        return valor_icms;
+    }
+
+    public void setValor_icms(float valor_icms) {
+        this.valor_icms = valor_icms;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+
+
+
+    
 
     
     

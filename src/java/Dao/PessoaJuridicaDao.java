@@ -5,6 +5,7 @@
  */
 package Dao;
 import entidades.Endereco;
+import entidades.PessoaFisica;
 import entidades.PessoaJuridica;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -35,7 +36,6 @@ public class PessoaJuridicaDao {
                 p.setCnpj(rs.getString("cnpj"));
                 p.setEmail(rs.getString("email"));
                 p.setTelefone(rs.getString("telefone"));
-
                 String end = rs.getString("id_endereco");
                 p.setEndereco(edao.getEndereco(end)); 
 
@@ -58,18 +58,16 @@ public class PessoaJuridicaDao {
         
         try {
             Connection con = Conecta.getConexao();
-            String sql = "INSERT INTO tb_cliente_juridico(cnpj,inscricao_estadual,cad_valido" 
+            String sql = "INSERT INTO tb_cliente_juridico(cnpj,inscricao_estadual" 
                     + "razao_social,"
-                    + "cnpj,email,telefone) "
-                    + "values(?,?,?,?,?,?,?,?)";
+                    + "email,telefone) "
+                    + "values(?,?,?,?,?,?,?)";
             PreparedStatement rs = con.prepareStatement(sql);
             rs.setString(1, p.getCnpj());
             rs.setString(2, p.getInscricao_estadual());
-            rs.setBoolean(3, p.isCad_valido());
-            rs.setString(4, p.getRazao_social());
-            rs.setString(5, p.getCnpj());
-            rs.setString(6, p.getEmail());
-            rs.setString(7, p.getTelefone());
+            rs.setString(3, p.getRazao_social());
+            rs.setString(4, p.getEmail());
+            rs.setString(5, p.getTelefone());
             rs.execute();
             rs.close();
             con.close();
@@ -80,7 +78,28 @@ public class PessoaJuridicaDao {
         }
         return resp;
     }
+public boolean updatePessoaJuridica(PessoaJuridica cj) {
+        boolean resp = false;
+        try {
+            Connection con = Conecta.getConexao();
+            String sql = "UPDATE tb_cliente_juridico SET,inscricao_estadual = ?, razao_social = ? ,email = ?,telefone = ? "
+                    + "WHERE cpf = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, cj.getInscricao_estadual());
+            ps.setString(2, cj.getRazao_social());
+            ps.setString(3, cj.getEmail());
+            ps.setString(4, cj.getTelefone());
+            ps.execute();
+            ps.close();
+            con.close();
 
+            resp = true;
+        } catch (Exception e) {
+            resp = false;
+        }
+        return resp = true;
+
+    }
     
     public boolean insertPessoaJuridica(PessoaJuridica cliente){
         //NÃO IMPLEMENTADO
