@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS `all`.`tb_produto_pedido` (
+  `id_produto` INT(11) NULL DEFAULT NULL,
+  `id_pedido` INT(11) NULL DEFAULT NULL,
+  `quantidade` INT(11) NULL DEFAULT NULL)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;

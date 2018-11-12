@@ -11,6 +11,7 @@ import entidades.Funcionario;
 import entidades.Pedido;
 import entidades.PessoaFisica;
 import entidades.PessoaJuridica;
+import entidades.ProdutoPedido;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -135,6 +136,66 @@ public class PedidoDao {
         } catch (Exception e) {
             p = null;
         }
+        return p;
+    }
+    
+    public boolean insertProdutoPedido(ProdutoPedido ped) throws Exception {
+        boolean resp;
+        //Cliente cl = ped.getCliente();
+        
+
+        try {
+            Connection con = Conecta.getConexao();
+            String sql = "INSERT INTO tb_produto_pedido (id_pedido, id_produto, quantidade)"
+                    + "values(?,?,?)";
+            PreparedStatement rs = con.prepareStatement(sql);
+            rs.setString(1, ped.getPedido().getId());
+            rs.setInt(3, ped.getQtd());
+            rs.setString(2, ped.getProduto().getId());
+      
+            rs.execute();
+            rs.close();
+            con.close();
+
+            resp = true;
+        }   catch (Exception e) {
+            resp = false;
+        }
+      
+        return resp = true;
+    }
+    
+     public ProdutoPedido getProdutoPedido(String id) {
+         ProdutoPedido p = new ProdutoPedido();
+         Pedido ped = new Pedido();
+        try {
+            
+            Connection con = Conecta.getConexao();
+            String sql = "SELECT * FROM tb_produto_pedido WHERE id_pedido= ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                
+                
+                
+                String id_ped = rs.getString("id_pedido");
+                
+                
+                
+                
+                
+                 
+            }
+
+            rs.close();
+            ps.close();
+            con.close();
+        } catch (Exception e) {
+            p = null;
+        }
+
         return p;
     }
 
