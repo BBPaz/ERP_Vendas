@@ -5,7 +5,12 @@
  */
 package Dao;
 
+import entidades.Item;
 import entidades.Produto;
+import entidades.ProdutoNota;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 /**
@@ -41,4 +46,39 @@ public class ProdutoDao {
         return(null);
     }
     
-}
+    
+    public ProdutoNota getProdutos(int id){
+         ProdutoNota pn  = new ProdutoNota();
+         try {
+
+            Connection con = Conecta.getConexao();
+            String sql = "SELECT * FROM ProdutoNota WHERE id_produto = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                pn.setId_produto(rs.getInt("id_produto"));
+                pn.setNome(rs.getString("nome"));
+                pn.setValor_total(rs.getFloat("valor_total"));
+                pn.setValor_unitario(rs.getFloat("valor_unitario"));
+                pn.setQtd_item(rs.getInt("quantidade"));
+                
+
+
+            }
+
+            rs.close();
+            ps.close();
+            con.close();
+        } catch (Exception e) {
+            pn = null;
+        }
+
+        return pn;
+       
+    }
+        
+        
+    }
+

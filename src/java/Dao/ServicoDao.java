@@ -5,7 +5,11 @@
  */
 package Dao;
 
+import entidades.ProdutoNota;
 import entidades.Servico;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 /**
@@ -40,4 +44,6 @@ public class ServicoDao {
         }
         return(null);
     }
+    
+    
 }

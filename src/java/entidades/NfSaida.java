@@ -16,6 +16,24 @@ public class NfSaida extends NotaFiscal{
     String serie;
     String insc_estadual;
     String cnpj;
+
+    public String getNatureza_operacao() {
+        return natureza_operacao;
+    }
+
+    public void setNatureza_operacao(String natureza_operacao) {
+        this.natureza_operacao = natureza_operacao;
+    }
+    String natureza_operacao;
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+    String cpf;
     String procedencia;
     String cod_contabil;
     ArrayList<ProdutoNota> produtos;

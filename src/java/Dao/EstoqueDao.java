@@ -5,22 +5,78 @@
  */
 package Dao;
 
+import entidades.Item;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 /**
  *
  * @author logonaf
  */
 public class EstoqueDao {
     
-    public int quantidadeDisponivelProduto(String idProduto){
+   /* public int quantidadeDisponivelProduto(String idProduto){
         //Não implementado
         if(idProduto.equals("71724")){
             return 0;
         }
         return 2;
     }
-    
-    public void alterarQuantidadeEstoque(){
+   */ 
+public boolean updateEstoque(Item it) {
+        boolean resp = false;
         
+        
+        try {
+            Connection con = Conecta.getConexao();
+            String sql = "UPDATE item SET quantidade = ? "
+                    + "WHERE id_item = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, it.getQuantidade());
+            ps.setInt(2, it.getId_item());
+            ps.execute();
+            ps.close();
+            con.close();
+
+            resp = true;
+        } catch (Exception e) {
+            resp = false;
+        }
+        return resp = true;
+
+    }
+    
+    public Item getProduto(int id){
+            Item i = new Item();
+         try {
+
+            Connection con = Conecta.getConexao();
+            String sql = "SELECT * FROM item WHERE id_item = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                i.setId_item(rs.getInt("id_item"));
+                i.setNome(rs.getString("nome"));
+                i.setDescricao(rs.getString("descricao"));
+                i.setPreco(rs.getDouble("preco"));
+                i.setQuantidade(rs.getInt("quantidade"));
+                
+
+
+            }
+
+            rs.close();
+            ps.close();
+            con.close();
+        } catch (Exception e) {
+            i = null;
+        }
+
+        return i;
+       
     }
             
 }

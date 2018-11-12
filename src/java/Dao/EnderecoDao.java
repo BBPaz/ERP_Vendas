@@ -34,6 +34,7 @@ public class EnderecoDao {
                 n1.setRua(rs.getString("rua"));
                 n1.setNumero(rs.getString("numero"));
                 n1.setComplemento(rs.getString("complemento"));
+                n1.setId_endereco(rs.getInt("id_endereco"));
 
                 //(rs.getString("rodizioVeiculo"));
 
@@ -79,6 +80,36 @@ public class EnderecoDao {
             }
             return resp = true;
 }
+         
+          public boolean updateEndereco(Endereco end) {
+        boolean resp = false;
+        try {
+            Connection con = Conecta.getConexao();
+            
+            String sql = "UPDATE tb_endereco SET estado = ?,cep = ? ,bairro = ?,"
+                    + "cidade = ? ,rua = ? ,numero = ?,complemento = ? where id = ?" ;
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, end.getUf());
+            ps.setString(2, end.getCep());
+            ps.setString(3, end.getBairro());
+            ps.setString(4, end.getCidade());
+            ps.setString(5, end.getRua());
+            ps.setString(6, end.getNumero());
+            ps.setString(7, end.getComplemento());
+            ps.setInt(8, end.getId_endereco());
+
+            ps.execute();
+
+            ps.close();
+            con.close();
+
+            resp = true;
+        } catch (Exception e) {
+            resp = false;
+        }
+        return resp;
+
+    }
 }
 
 

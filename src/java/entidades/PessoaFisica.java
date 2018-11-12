@@ -5,7 +5,6 @@ public class PessoaFisica extends Cliente {
     String cpf;
     String data_nasc;
     String nome;
-    char sexo;
 
     public PessoaFisica() {
     }
@@ -34,13 +33,6 @@ public class PessoaFisica extends Cliente {
         this.nome = nome;
     }
 
-    public char getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(char sexo) {
-        this.sexo = sexo;
-    }
     
     public PessoaFisica exemplo(){
         PessoaFisica pf = new PessoaFisica();
