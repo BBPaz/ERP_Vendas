@@ -145,6 +145,6 @@
         </div>
 
         </div>
-        <script src="js/editar-cliente.js" type="text/javascript"></script>
+        <script src="js/relatorio-vendas.js" type="text/javascript"></script>
 </body>
 </html>

@@ -73,18 +73,22 @@ public class Pedido {
     }
 
     public ArrayList<ProdutoPedido> getLista_produtos() {
+        valorTotal();
         return lista_produtos;
     }
 
     public void setLista_produtos(ArrayList<ProdutoPedido> lista_produtos) {
+        valorTotal();
         this.lista_produtos = lista_produtos;
     }
 
     public ArrayList<ServicoPedido> getLista_servicos() {
+        valorTotal();
         return lista_servicos;
     }
 
     public void setLista_servicos(ArrayList<ServicoPedido> lista_servicos) {
+        valorTotal();
         this.lista_servicos = lista_servicos;
     }
 

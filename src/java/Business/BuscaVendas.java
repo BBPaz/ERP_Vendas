@@ -10,6 +10,8 @@ import entidades.Cliente;
 import entidades.Pedido;
 import entidades.PessoaFisica;
 import entidades.PessoaJuridica;
+import entidades.ProdutoPedido;
+import entidades.ServicoPedido;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -61,22 +63,100 @@ public class BuscaVendas extends HttpServlet {
                              }
                              ret+="R$";
                              ret+=String.format("%.2f", p.getValor_total())+"','";
-                             ret+=formatData(p.getData())+"'\n]).draw(false);";
+                             ret+=p.getData()+"']).draw(false);";
                         }
                         out.print(ret);
                         
                     }
                     break;
+                case "exibirPedido":
+                {
+                    String id = VendaTemp.pdBusca;
+                    VendaTemp.pdBusca = "";
+                    Pedido p = new PedidoDao().getPedido(Integer.parseInt(id));
+                    out.print(exibirPedido(p));
+                }
+                    break;
+                case "colocarIdPedido":
+                {
+                    String id = request.getParameter("idPedido");
+                    VendaTemp.pdBusca = id;
+                }
+                    break;
+                default:
+                    break;
             }
+        }
+        catch(Exception e){
+            
         }
     }
     
-    public static String formatData(String data){
-        String novadata = "";
-        String[] aux = data.split("-");
-        novadata =(aux[2])+"/"+(aux[1])+"/"+(aux[0]);
-        return novadata;
-    } 
+    public String exibirPedido(Pedido p){
+        String ret = "debugger;";
+        Cliente c = p.getCliente();
+        if(c instanceof PessoaFisica){
+            ret+="$('#dados-pf').show();";
+            ret+="$('#dados-pj').hide();";
+            ret+="$('#nomeCliente').val('"+((PessoaFisica) c).getNome()+"');";
+            ret+="$('#cpfCliente').val('"+((PessoaFisica) c).getCpf()+"');";
+        }
+        else if(c instanceof PessoaJuridica){
+            ret+="$('#dados-pf').hide();";
+            ret+="$('#dados-pj').show();";
+            ret+="$('#razaoSocialCliente').val('"+((PessoaJuridica) c).getRazao_social()+"');";
+            ret+="$('#cnpjCliente').val('"+((PessoaJuridica) c).getCnpj()+"');";
+        }
+        ret+="";
+        
+
+        
+        
+        ret+="$('#statusPedido').val('"+p.getStatus()+"');";
+        ret+="$('#pagoPedido').val('"+(p.isPago()?"Sim":"Não")+"');";
+        ret+="$('#dataPedido').val('"+p.getData()+"');";
+        ret+="$('#tipoPagamento').val('"+p.getTipo_pagamento()+"');";
+        ret+="$('#formaPagamento').val('"+p.getForma_pagamento()+"');";
+        ret+="$('#valTotal').val('R$"+String.format("%.2f", p.getValor_total())+"');";
+        
+        if(p.getLista_produtos().isEmpty()){
+            ret+="$('#tabelaProdutos').hide();";
+        }
+        else{
+            ret+="$('#tabelaProdutos').show();";
+            String tb = "";
+            for(ProdutoPedido pp : p.getLista_produtos()){
+                tb+="<tr>";
+                tb+="<td>"+pp.getProduto().getId()+"</td>";
+                tb+="<td>"+pp.getProduto().getNome()+"</td>";
+                tb+="<td>R$"+String.format("%.2f", pp.getProduto().getValor())+"</td>";
+                tb+="<td>"+pp.getQtd()+"</td>";
+                tb+="<td>R$"+String.format("%.2f", pp.getValor_total())+"</td>";
+                tb+="</tr>";
+            }
+            ret+="$('#tbody_produtos').html('"+tb+"');";
+        }
+        
+        if(p.getLista_servicos().isEmpty()){
+            ret+="$('#tabelaServicos').hide();";
+        }
+        else{
+            ret+="$('#tabelaServicos').show();";
+            String tb = "";
+            for(ServicoPedido sp : p.getLista_servicos()){
+                tb+="<tr>";
+                tb+="<td>"+sp.getServico().getId()+"</td>";
+                tb+="<td>"+sp.getServico().getNome()+"</td>";
+                tb+="<td>R$"+String.format("%.2f", sp.getServico().getValor())+"</td>";
+                tb+="<td>"+sp.getMeses_duracao()+"</td>";
+                tb+="<td>R$"+String.format("%.2f", sp.getValor_total())+"</td>";
+                tb+="</tr>";
+            }
+            ret+="$('#tbody_servicos').html('"+tb+"');";
+        }
+
+        return(ret);
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

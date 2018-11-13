@@ -87,7 +87,6 @@ $(function(){
     }
     
     function clienteEncontrado(idCliente){
-        alert("Cliente encontrado");
         window.location.replace("/ERP_Panelas/verificar-cliente-venda.jsp?idCliente="+idCliente);  
     }
     

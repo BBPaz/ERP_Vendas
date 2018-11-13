@@ -5,6 +5,7 @@
  */
 package Business;
 
+import Dao.EstoqueDao;
 import Dao.PedidoDao;
 import entidades.*;
 import java.time.ZonedDateTime;
@@ -22,6 +23,7 @@ public class VendaTemp {
     public static ArrayList<ServicoPedido> listaServicosPed = new ArrayList<ServicoPedido>();
     public static Pedido pedido = new Pedido();
     public static Cliente cliente = new Cliente();
+    public static String pdBusca;
     
     public static void limpaVenda(){
          id = "";
@@ -41,15 +43,33 @@ public class VendaTemp {
     public static void finalizarVenda(){
         try{
         ZonedDateTime data = ZonedDateTime.now();
-        pedido.setData(String.valueOf(data.getYear())+"-"+String.valueOf(data.getMonthValue())+"-"+String.valueOf(data.getDayOfMonth()));
+        pedido.setData(formatData(String.valueOf(data.getYear())+"-"+String.valueOf(data.getMonthValue())+"-"+String.valueOf(data.getDayOfMonth())));
         pedido.setStatus("Aberto");
         pedido.setVendedor(new Funcionario("André Marques",1));
         PedidoDao pddao = new PedidoDao();
-        pddao.inserirPedido(pedido);
+        if(pddao.inserirPedido(pedido)){
+            for(ProdutoPedido p : pedido.getLista_produtos()){
+                new EstoqueDao().updateEstoque(p.getQtd(), Integer.parseInt(p.getProduto().getId()));
+            }
+        }
         limpaVenda();
         }
         catch(Exception e){
             
         }
+    }
+    
+    public static String formatData(String data){
+        String novadata = "";
+        String[] aux = data.split("-");
+        novadata =(aux[2])+"/"+(aux[1])+"/"+(aux[0]);
+        return novadata;
+    }
+    
+    public static String toSqlData(String data){
+        String novadata = "";
+        String[] aux = data.split("/");
+        novadata =(aux[2])+"-"+(aux[1])+"-"+(aux[0]);
+        return novadata;
     }
 }

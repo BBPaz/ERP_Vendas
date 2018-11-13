@@ -8,15 +8,15 @@ $(function(){
         tipo="fisica";
         $("#cpfCliente").val(idCliente);
         
-        $("#dadosPf").show();
-        $("#dadosPj").hide();
+        $("#dados-pf").show();
+        $("#dados-pj").hide();
     }
     else{
         tipo="juridica";
         $("#cnpjCliente").val(idCliente);
         
-        $("#dadosPf").show();
-        $("#dadosPj").hide();
+        $("#dados-pf").hide();
+        $("#dados-pj").show();
     }
         $("input").prop("disabled",false);
         $("#cnpjCliente").prop('disabled',true);

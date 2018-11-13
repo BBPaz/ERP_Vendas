@@ -39,6 +39,8 @@ $(function(){
     });
     
     $("div#finalVenda").on("click","#finalizaVenda",function(){
+       $(this).val("Finalizando a venda");
+       $(this).prop("disabled",true);
        FinalizarVenda();
     });
     
@@ -145,8 +147,8 @@ $(function(){
             success: function(data){
                 x += data;
                 console.log(x);
-                if(x === "Produto não encontrado"){
-                    alert(x);
+                if(x === "Produto não encontrado"||x===""){
+                    alert("Produto não encontrado");
                 }
                 else{
                     elemResultado.html(x);

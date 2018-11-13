@@ -17,17 +17,15 @@ import java.util.ArrayList;
  * @author logonaf
  */
 public class ServicoDao {
-    Servico p1 = new Servico("1", 15, "Anti-depressivo", "Manutenção");
-    Servico p2 = new Servico("2",600, "Uma noite no Iate", "Passeio");
-    Servico p3 = new Servico("3", 15, "Garantia Extendida para produto X", "Garantia extendida");
-    Servico p4 = new Servico("4", 15, "Conserto de produto x", "Conserto");
+    Servico p1 = new Servico("1", 40, "Manutenção de produto", "Manutenção");
+    Servico p2 = new Servico("2", 15, "Garantia Extendida", "Garantia extendida");
+    Servico p3 = new Servico("3", 60, "Conserto de produto", "Conserto");
     
     public ArrayList<Servico> getServicos(){
         ArrayList<Servico> pList = new ArrayList();
         pList.add(p1);
         pList.add(p2);
         pList.add(p3);
-        pList.add(p4);
         return(pList);
     }
     
@@ -36,7 +34,6 @@ public class ServicoDao {
         pList.add(p1);
         pList.add(p2);
         pList.add(p3);
-        pList.add(p4);
         for(Servico p: pList){
             if(p.getId().equals(id)){
                 return(p);

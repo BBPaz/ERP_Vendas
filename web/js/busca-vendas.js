@@ -24,24 +24,24 @@ $(function(){
         });
     }
     
-    function populaTabela(){
-        
-        t.row.add( [
-            'Teste',
-            'Batata',
-            'Igor',
-            'nota',
-            'Numero'
-        ]).draw(false);
-        t.row.add([
-            'Joia',
-            'Cenoura',
-            'Bruno',
-            '08310520',
-            'Pedra'
-        ] ).draw( false );
-        
-    }
+   $('table#frm').on('click','tr',function(){
+          var idPedido = $(this).find('td:first').text();
+          $.ajax({
+            url:"BuscaVendas",
+            type:"get",
+            data:"op=colocarIdPedido&idPedido="+idPedido,
+            success: function(data){
+                //exibirProdutos();
+                window.location.replace("/ERP_Panelas/exibe-pedido.jsp");
+                //teste(codProduto);
+            },
+            error: function(er){
+                var x = er.responseText;
+                console.log(x);
+            }
+        });
+
+    });
     
     
 });

@@ -5,6 +5,7 @@
  */
 package Dao;
 
+import Business.VendaTemp;
 import entidades.Cliente;
 import entidades.Endereco;
 import entidades.Funcionario;
@@ -45,7 +46,7 @@ public class PedidoDao {
             inc.close();
             rs.setFloat(1, ped.getValor_total());
             rs.setString(2, ped.getStatus());
-            rs.setString(3, ped.getData());
+            rs.setString(3, VendaTemp.toSqlData(ped.getData()));
             rs.setString(4, ped.getForma_pagamento());
             rs.setString(5, String.valueOf(ped.getVendedor().getId_vendedor()));
             
@@ -80,8 +81,8 @@ public class PedidoDao {
         try {
             
             Connection con = Conecta.getConexao();
-            String sql = "SELECT id_pedido, valor_total, _status"
-                    + "_data, forma_pagamento, id_vendedor,id_cliente,tipo_pagamento"
+            String sql = "SELECT id_pedido, valor_total, _status,"
+                    + "_data, forma_pagamento, id_vendedor,id_cliente,tipo_pagamento,"
                     + "pago FROM tb_pedido WHERE id_pedido= ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
@@ -96,6 +97,23 @@ public class PedidoDao {
                 p.setPago(rs.getBoolean("pago"));
                 int id_ven = rs.getInt("id_vendedor");
                 p.setVendedor(f.getFuncionario(id_ven));
+                String idcliente = rs.getString("id_cliente");
+                if(idcliente.length()==11){
+                  p.setCliente(new PessoaFisicaDao().getPessoa(idcliente));  
+                }
+                else{
+                    p.setCliente(new PessoaJuridicaDao().getPessoaJuridica(idcliente));
+                }
+                
+                for(ProdutoPedido pp : getProdutoPedido(String.valueOf(p.getId()))){
+                    pp.setPedido(p);
+                    p.getLista_produtos().add(pp);
+                }
+                for(ServicoPedido sp : getServicoPedido(String.valueOf(p.getId()))){
+                    sp.setPedido(p);
+                    p.getLista_servicos().add(sp);
+                }
+                p.valorTotal();
             }
             rs.close();
             ps.close();
@@ -123,7 +141,7 @@ public class PedidoDao {
                 Pedido pd = new Pedido();
                 pd.setId(rs.getInt("id_pedido"));
                 pd.setStatus(rs.getString("_status"));
-                pd.setData(rs.getString("_data"));
+                pd.setData(VendaTemp.formatData(rs.getString("_data")));
                 pd.setForma_pagamento(rs.getString("forma_pagamento"));
                 pd.setTipo_pagamento(rs.getString("tipo_pagamento"));
                 pd.setPago(rs.getBoolean("pago"));
@@ -175,9 +193,9 @@ public class PedidoDao {
         return resp = true;
     }
     
-     public ProdutoPedido getProdutoPedido(String id) {
-         ProdutoPedido p = new ProdutoPedido();
-         Pedido ped = new Pedido();
+     public ArrayList<ProdutoPedido> getProdutoPedido(String id) {
+         ArrayList<ProdutoPedido> pds = new ArrayList<ProdutoPedido>();
+         
         try {
             
             Connection con = Conecta.getConexao();
@@ -187,17 +205,20 @@ public class PedidoDao {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                String id_ped = rs.getString("id_pedido");
+                ProdutoPedido p = new ProdutoPedido();
+                p.setProduto(new ProdutoDao().getProduto(rs.getString("id_produto")));
+                p.setQtd(rs.getInt("quantidade"));
+                pds.add(p);
             }
 
             rs.close();
             ps.close();
             con.close();
         } catch (Exception e) {
-            p = null;
+            pds = null;
         }
 
-        return p;
+        return pds;
     }
      
      public boolean insertServicoPedido(ServicoPedido sp) throws Exception {
@@ -226,30 +247,32 @@ public class PedidoDao {
         return resp = true;
     }
 
-    public ServicoPedido getServicoPedido(String id) {
+    public ArrayList<ServicoPedido> getServicoPedido(String id) {
+         ArrayList<ServicoPedido> lsp = new ArrayList<ServicoPedido>();
          ServicoPedido sp = new ServicoPedido();
-         Pedido ped = new Pedido();
         try {
             
             Connection con = Conecta.getConexao();
-            String sql = "SELECT * FROM tb_servico_pedido WHERE id_servico= ?";
+            String sql = "SELECT * FROM tb_servico_pedido WHERE id_pedido= ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, id);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                String id_ped = rs.getString("id_servico");
-
+                ServicoPedido s = new ServicoPedido();
+                s.setServico(new ServicoDao().getServico(rs.getString("id_servico")));
+                s.setMeses_duracao(rs.getInt("meses_duracao"));
+                lsp.add(s);
             }
 
             rs.close();
             ps.close();
             con.close();
         } catch (Exception e) {
-            sp = null;
+            lsp = null;
         }
 
-        return sp;
+        return lsp;
     }
     
 }

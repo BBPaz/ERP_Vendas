@@ -5,6 +5,7 @@
  */
 package Dao;
 
+import Business.VendaTemp;
 import entidades.PessoaFisica;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,7 +27,7 @@ public class PessoaFisicaDao {
                     + "WHERE cpf = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, cf.getNome());
-            ps.setString(2, cf.getData_nasc());
+            ps.setString(2, VendaTemp.toSqlData(cf.getData_nasc()));
             ps.setString(3, cf.getEmail());
             ps.setString(4, cf.getTelefone());
             ps.setString(5, cf.getCpf());
@@ -46,12 +47,12 @@ public class PessoaFisicaDao {
         boolean resp = false;
         try {
             Connection con = Conecta.getConexao();
-            String sql = "UPDATE tb_cliente_fisico SET nome = ? ,data_nasc = ? ,email = ? ,telefone = ? "
+            String sql = "INSERT INTO tb_cliente_fisico SET nome = ? ,data_nasc = ? ,email = ? ,telefone = ? "
                     + "WHERE cpf = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, cf.getNome());
             ps.setString(2, cf.getCpf());
-            ps.setString(3, cf.getData_nasc());
+            ps.setString(3, VendaTemp.toSqlData(cf.getData_nasc()));
             ps.setString(4, cf.getEmail());
             ps.setString(5, cf.getTelefone());
             ps.execute();
@@ -87,7 +88,7 @@ public class PessoaFisicaDao {
                 p.setCpf(rs.getString("cpf"));
                 p.setEmail(rs.getString("email"));
                 p.setTelefone(rs.getString("telefone"));
-                p.setData_nasc(rs.getString("data_nasc"));
+                p.setData_nasc(VendaTemp.formatData(rs.getString("data_nasc")));
                 p.setNome(rs.getString("nome"));
                 String end = rs.getString("id_endereco");
                 p.setEndereco(edao.getEndereco(end)); 

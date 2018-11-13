@@ -16,17 +16,20 @@ import java.sql.ResultSet;
  */
 public class EstoqueDao {
     
-    public int quantidadeDisponivelProduto(String idProduto){
+    /*public int quantidadeDisponivelProduto(String idProduto){
         //Não implementado
         if(idProduto.equals("71724")){
             return 0;
         }
         return 2;
-    }
+    }*/
     
     
-   /* public int quantidadeDisponivelProduto(String idProduto){
+   public int quantidadeDisponivelProduto(String idProduto){
         //Não implementado
+        if(idProduto.equals("2")){
+            return 5;
+        }
         Item i = new Item();
          try {
             Connection con = Conecta.getConexao();
@@ -55,9 +58,9 @@ public class EstoqueDao {
         
         }
          return 0;
-    }*/
+    }
     
-public boolean updateEstoque(Item it) {
+    public boolean updateEstoque(int qte,int id) {
         boolean resp = false;
         
         
@@ -66,8 +69,8 @@ public boolean updateEstoque(Item it) {
             String sql = "UPDATE item SET quantidade = ? "
                     + "WHERE id_item = ?";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, it.getQuantidade());
-            ps.setInt(2, it.getId_item());
+            ps.setInt(1, qte);
+            ps.setInt(2, id);
             ps.execute();
             ps.close();
             con.close();

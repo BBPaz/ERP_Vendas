@@ -69,7 +69,7 @@
                                 </div>
                                 <div class="clearfix"></div>
                                 </div>
-                                <hr style="border-top: 1px solid #000;">
+                                <hr class='col-md-12' style="border-top: 1px solid #000;">
                                 <div class="text-center">
                                     <div class="col-md-4 form-group">
                                         <label>Status</label>
@@ -93,7 +93,7 @@
                                     </div>
                                     <div class="col-md-4 form-group">
                                         <label>Valor Total</label>
-                                        <input type="data" class="form-control"  id="formaPagamento" disabled>
+                                        <input type="data" class="form-control"  id="valTotal" disabled>
                                     </div>
                                     <div id="tabelaProdutos">
                                     <h2>Lista de Produtos</h2>
@@ -114,7 +114,7 @@
                                             </table>
                                         </div>
                                     </div>
-                                    <div id="tabelaProdutos">
+                                    <div id="tabelaServicos">
                                     <h2>Lista de Serviços</h2>
                                         <div class="col-md-12 p-30 table-responsive">
                                             <table class="table table-striped table-bordered">
