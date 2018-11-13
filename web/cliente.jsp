@@ -124,7 +124,8 @@
                         <div class="col-md-2 form-group">
                             <label>UF</label>
                             <input type="text" class="form-control"  id="estado" disabled>
-                        </div>     
+                        </div>
+                        <div id="idEndereco" style="display:none;"></div>
                         <div class="clearfix"></div>
                     </div>
             </div>

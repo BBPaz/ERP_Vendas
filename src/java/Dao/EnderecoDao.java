@@ -81,7 +81,7 @@ public class EnderecoDao {
             return resp = true;
 }
          
-          public boolean updateEndereco(Endereco end) {
+    public boolean updateEndereco(Endereco end) {
         boolean resp = false;
         try {
             Connection con = Conecta.getConexao();

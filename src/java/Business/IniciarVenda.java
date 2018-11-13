@@ -44,9 +44,9 @@ public class IniciarVenda extends HttpServlet {
             switch (op) {
                 case "BuscaPf":
                     {
-                        PessoaFisica pf = new PessoaFisica();
+                        PessoaFisica pf = null;
                         pf = pfdao.getPessoa(request.getParameter("idCliente"));
-                        if(pf!=null){
+                        if(pf.getCpf()!=null){
                             out.print("true");    
                         }
                         else
@@ -57,7 +57,7 @@ public class IniciarVenda extends HttpServlet {
                 {
                     PessoaJuridica pj = new PessoaJuridica();
                     pj = pjdao.getPessoaJuridica(request.getParameter("idCliente"));
-                    if(pj!=null){
+                    if(pj.getCnpj()!=null){
                         out.print("true");    
                     }
                     else
@@ -81,6 +81,8 @@ public class IniciarVenda extends HttpServlet {
                         ret+="$(\"#cidade\").val(\""+pf.getEndereco().getCidade()+"\");";
                         ret+="$(\"#cep\").val(\""+pf.getEndereco().getCep()+"\");";
                         ret+="$(\"#estado\").val(\""+pf.getEndereco().getUf()+"\");";
+                        ret+="$(\"#complemento\").val(\""+pf.getEndereco().getComplemento()+"\");";
+                        ret+="$(\"#idEndereco\").html(\""+pf.getEndereco().getId_endereco()+"\");";
                         out.print(ret);
                     }
                     else if(tipo.equals("juridica")){//MUDAR PARA PESSOA JURIDICA
@@ -97,6 +99,7 @@ public class IniciarVenda extends HttpServlet {
                         ret+="$(\"#bairro\").val(\""+pj.getEndereco().getBairro()+"\");";
                         ret+="$(\"#cidade\").val(\""+pj.getEndereco().getCidade()+"\");";
                         ret+="$(\"#cep\").val(\""+pj.getEndereco().getCep()+"\");";
+                        ret+="$(\"#complemento\").val(\""+pj.getEndereco().getComplemento()+"\");";
                         ret+="$(\"#estado\").val(\""+pj.getEndereco().getUf()+"\");";
                         out.print(ret);
                     }

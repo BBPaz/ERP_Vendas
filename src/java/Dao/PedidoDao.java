@@ -12,6 +12,7 @@ import entidades.Pedido;
 import entidades.PessoaFisica;
 import entidades.PessoaJuridica;
 import entidades.ProdutoPedido;
+import entidades.ServicoPedido;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -59,6 +60,9 @@ public class PedidoDao {
             for(ProdutoPedido p : ped.getLista_produtos()){
                 insertProdutoPedido(p);
             }
+            for(ServicoPedido s : ped.getLista_servicos()){
+                insertServicoPedido(s);
+            }
             rs.execute();
             rs.close();
             con.close();
@@ -92,11 +96,7 @@ public class PedidoDao {
                 p.setPago(rs.getBoolean("pago"));
                 int id_ven = rs.getInt("id_vendedor");
                 p.setVendedor(f.getFuncionario(id_ven));
-                
-                
-                 
             }
-
             rs.close();
             ps.close();
             con.close();
@@ -187,16 +187,7 @@ public class PedidoDao {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                
-                
-                
                 String id_ped = rs.getString("id_pedido");
-                
-                
-                
-                
-                
-                 
             }
 
             rs.close();
@@ -208,6 +199,57 @@ public class PedidoDao {
 
         return p;
     }
+     
+     public boolean insertServicoPedido(ServicoPedido sp) throws Exception {
+        boolean resp;
+        //Cliente cl = ped.getCliente();
+        
 
+        try {
+            Connection con = Conecta.getConexao();
+            String sql = "INSERT INTO tb_servico_pedido (id_pedido, id_servico, meses_duracao)"
+                    + "values(?,?,?)";
+            PreparedStatement rs = con.prepareStatement(sql);
+            rs.setInt(1, sp.getPedido().getId());
+            rs.setInt(3, sp.getMeses_duracao());
+            rs.setString(2, sp.getServico().getId());
+      
+            rs.execute();
+            rs.close();
+            con.close();
+
+            resp = true;
+        }   catch (Exception e) {
+            resp = false;
+        }
+      
+        return resp = true;
+    }
+
+    public ServicoPedido getServicoPedido(String id) {
+         ServicoPedido sp = new ServicoPedido();
+         Pedido ped = new Pedido();
+        try {
+            
+            Connection con = Conecta.getConexao();
+            String sql = "SELECT * FROM tb_servico_pedido WHERE id_servico= ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                String id_ped = rs.getString("id_servico");
+
+            }
+
+            rs.close();
+            ps.close();
+            con.close();
+        } catch (Exception e) {
+            sp = null;
+        }
+
+        return sp;
+    }
     
 }

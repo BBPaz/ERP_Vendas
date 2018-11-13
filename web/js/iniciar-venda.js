@@ -51,7 +51,7 @@ $(function(){
                     clienteEncontrado(idCliente);
                 }
                 else{
-                    clienteInexistente();
+                    clienteInexistente(idCliente);
                 }
             },
             error: function(er){
@@ -76,7 +76,7 @@ $(function(){
                     clienteEncontrado(idCliente);
                 }
                 else{
-                    clienteInexistente();
+                    clienteInexistente(idCliente);
                 }
             },
             error: function(er){
@@ -91,8 +91,10 @@ $(function(){
         window.location.replace("/ERP_Panelas/verificar-cliente-venda.jsp?idCliente="+idCliente);  
     }
     
-    function clienteInexistente(){
-        alert("Cliente não encontrado");
+    function clienteInexistente(idCliente){
+        if(confirm("Cliente não encontrado. Deseja cadastrar?")){
+            window.location.replace("/ERP_Panelas/cadastrar-cliente.jsp?idCliente="+idCliente);
+        }
     }
     
 });

@@ -32,18 +32,18 @@
         
         <div id="btnMenu"><img src="img/btn-menu.png"></div>
         
-        <!--%@include file="menu.jsp" %-->
-        <div class="cont-mid">
+        <%@include file="menu.jsp" %>
+        <div class="cont cont-mid">
         <div class="col-md-12">
             <div class="row">
                 
                 <div class="col-md-12">
 
                     <div class="border-titulo text-center">
-                        <div class="col-md-6">
+                        <div class="col-md-6" style='padding-top: 50px'>
                         <div class="col-md-4 form-group">
                            
-                            <input type="radio" value="Produtos" name="radioRelatorio" id="radioProdutos"><label>Produtos</label>
+                            <input type="radio" value="Produtos" name="radioRelatorio" id="radioProdutos" checked><label>Produtos</label>
                         </div>
                         <div class="col-md-4 form-group">
                             
@@ -76,21 +76,28 @@
                               </select>
                         </div>
 
-                        <div class="col-md-3 form-group">
+                        <div class="col-md-2 form-group">
                             <input type="button" class="btn form-control" value="Incluir" id="botAdd">
                         </div>
-                        <div class="col-md-3 form-group">
+                        <div class="col-md-2 form-group">
                             <input type="button" class="btn form-control" value="Incluir Todos" id="botAddTodos">
                         </div>
-                        <div class="col-md-12" style="height:120px;overflow-y: auto;">
-                            <table>
-                                <tr>
-                                    <td>A</td>
-                                </tr>
-                                <tr>
-                                    <td>B</td>
-                                </tr>
+                        <div class="col-md-2 form-group">
+                            <input type="button" class="btn form-control" value="Remover Todos" id="botRemoverTodos">
+                        </div>
+                        <div class="col-md-10" style="height:120px;overflow-y: auto;text-align: left;">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr id="d1" onclick="$('#d1').hide();"><td>Produto 1</td></tr>
+                                <tr><td>Produto 2</td></tr>
+                                <tr><td>Produto 3</td></tr>
+                                <tr><td>Produto 4</td></tr>
+                                <tr><td>Produto 5</td></tr>
+                                </tbody>
                             </table>
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <input type="button" class="btn form-control" value="Gerar" id="gerarRelatorio">
                         </div>
                         <div class="col-md-12 p-30 table-responsive">
 

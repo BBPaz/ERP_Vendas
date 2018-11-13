@@ -45,26 +45,25 @@ public class BuscaVendas extends HttpServlet {
                 case "exibirVendas":
                     {
                         ArrayList<Pedido> ped = pdao.listaPedidos();
+                        
+                        String ret = "";
+                         
                         for(Pedido p : ped){
-                            out.print("<tr class='linhaPedido' value='"+p.getId()+"'>");
                             Cliente c = p.getCliente();
-                            out.print("<td>"+p.getId()+"</td>"); 
+                            ret += "t.row.add( ['"+p.getId()+"','";
                             if(c instanceof PessoaFisica){
-                               out.print("<td>"+((PessoaFisica) c).getCpf()+"</td>"); 
-                            }
-                            else if(c instanceof PessoaJuridica){
-                               out.print("<td>"+((PessoaJuridica) c).getCnpj()+"</td>"); 
-                            }
-                            if(c instanceof PessoaFisica){
-                               out.print("<td>"+((PessoaFisica) c).getNome()+"</td>"); 
-                            }
-                            else if(c instanceof PessoaJuridica){
-                               out.print("<td>"+((PessoaJuridica) c).getRazao_social()+"</td>"); 
-                            }
-                            out.print("<td>R$"+String.format("%.2f", p.getValor_total())+"</td>");
-                            out.print("<td>"+formatData(p.getData())+"</td>");
-                            out.print("</tr>");
+                                ret+=((PessoaFisica) c).getCpf()+"','";
+                                ret+=((PessoaFisica) c).getNome()+"','";
+                             }
+                             else if(c instanceof PessoaJuridica){
+                                ret+=((PessoaJuridica) c).getCnpj()+"','"; 
+                                ret+=((PessoaJuridica) c).getRazao_social()+"','"; 
+                             }
+                             ret+="R$";
+                             ret+=String.format("%.2f", p.getValor_total())+"','";
+                             ret+=formatData(p.getData())+"'\n]).draw(false);";
                         }
+                        out.print(ret);
                         
                     }
                     break;

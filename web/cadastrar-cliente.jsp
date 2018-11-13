@@ -1,7 +1,7 @@
 <%-- 
-    Document   : busca-vendas
-    Created on : 12/11/2018, 11:22:40
-    Author     : k
+    Document   : editar-cliente
+    Created on : 11/11/2018, 21:16:12
+    Author     : Bruno
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -24,7 +24,7 @@
         <script src="js/jquery.dataTables.min.js"></script>
         <script src="js/dataTables.bootstrap4.min.js"></script>
         <script src="js/scripts.js"></script>
-        <script src="js/busca-vendas.js"></script>
+        <script src="js/cadastrar-cliente.js"></script>
         
     </head>
     <body>
@@ -33,44 +33,41 @@
         
         <div id="btnMenu"><img src="img/btn-menu.png"></div>
         
-        <%@include file="menu.jsp" %>
-        <div class="cont cont-mid">
-        <div class="col-md-12">
+        <!--%@include file="menu.jsp" %-->
+        <div class="cont-mid">
+        <div class="col-md-8">
             <div class="row">
                 
-                <div class="col-md-12">
+                <div class="col-md-8 col-md-offset-3">
 
                     <div class="border-titulo text-center">
-                        <div class="col-md-12 p-30 table-responsive">
-
-                        <table id="frm" class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Codigo</th>
-                                    <th>ID Cliente</th>
-                                    <th>Nome Cliente</th>
-                                    <th>Valor Total</th>
-                                    <th>Data</th>
-                                </tr>
-                            </thead>
-                            <tbody id="corpoBusca">
-                                
-                            </tbody>
-                        </table>
-
-                    </div>
-                        
-                        
-                        
+                        <form id="frm-cliente">
+                        <%@include file="cliente.jsp" %>
+                        </form>
                         <div class="clearfix"></div>
                     </div>
-                    <div class="clearfix"></div>
+                        <div class="clearfix"></div>
                 </div>
+                <!--div class="parent-div bg-danger d-flex align-items-center" style="height: 600px;width: 400px;">
+                    <div class="child-div bg-warning" style="height: 300px;width: 200px;">
+                      BATATA
+                    </div>
+                </div-->
                 <div class="clearfix"></div>
             </div>
         </div>
-
+        <div class="col-md-2">
+            <div class="row">
+                <div class="row">
+                    <div class="border-titulo text-center">
+                        <h2>Confirmar Cliente</h2>
+                        <input type="button" class="btn btn-primary" value="Cadastrar" id="cadCliente">
+                        <input type="button" class="btn btn-danger" value="Cancelar" id="cancelarCad">
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
 </body>
 </html>
-

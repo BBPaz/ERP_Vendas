@@ -5,6 +5,7 @@
  */
 package Business;
 
+import Dao.EnderecoDao;
 import Dao.PessoaFisicaDao;
 import Dao.PessoaJuridicaDao;
 import entidades.Endereco;
@@ -41,6 +42,7 @@ public class GerenciarCliente extends HttpServlet {
             String op = "";
             PessoaFisicaDao pfdao = new PessoaFisicaDao();
             PessoaJuridicaDao pjdao = new PessoaJuridicaDao();
+            EnderecoDao enddao = new EnderecoDao();
             op = request.getParameter("op");
             switch (op) {
                 case "GerenciaClienteFis":
@@ -105,6 +107,7 @@ public class GerenciarCliente extends HttpServlet {
                 case "alterarCliente":
                 {
                     String tipo = request.getParameter("tipo");
+                    
                     Endereco end = new Endereco();
                     
                     end.setRua(request.getParameter("log"));
@@ -114,6 +117,8 @@ public class GerenciarCliente extends HttpServlet {
                     end.setCidade(request.getParameter("cidade"));
                     end.setCep(request.getParameter("cep"));
                     end.setUf(request.getParameter("estado"));
+                    end.setId_endereco(Integer.parseInt(request.getParameter("idEndereco")));
+                    enddao.updateEndereco(end);
                     
                      if(tipo.equals("fisica")){
                          PessoaFisica pf = new PessoaFisica();
@@ -123,7 +128,7 @@ public class GerenciarCliente extends HttpServlet {
                          pf.setData_nasc(request.getParameter("dataNascCliente"));
                          pf.setTelefone(request.getParameter("numeroCliente"));
                          pf.setEmail(request.getParameter("emailCliente"));
-                         //UPDATE PESSOA FISICA
+                         pfdao.updatePessoaFisica(pf);
                      }
                      
                      else if(tipo.equals("juridica")){
@@ -135,10 +140,48 @@ public class GerenciarCliente extends HttpServlet {
                          pj.setInscricao_estadual(request.getParameter("inscEstCliente"));
                          pj.setTelefone(request.getParameter("numeroCliente"));
                          pj.setEmail(request.getParameter("emailCliente"));
-                         //UPDATE PESSOA JURIDICA
+                         pjdao.updatePessoaJuridica(pj);
                      }
                 }
                     break;
+                case "cadastrarCliente":
+                {
+                    String tipo = request.getParameter("tipo");
+                    
+                    Endereco end = new Endereco();
+                    
+                    end.setRua(request.getParameter("log"));
+                    end.setNumero(request.getParameter("numeroEndereco"));
+                    end.setComplemento(request.getParameter("complemento"));
+                    end.setBairro(request.getParameter("bairro"));
+                    end.setCidade(request.getParameter("cidade"));
+                    end.setCep(request.getParameter("cep"));
+                    end.setUf(request.getParameter("estado"));
+                    enddao.inserirEndereco(end);
+                    
+                     if(tipo.equals("fisica")){
+                         PessoaFisica pf = new PessoaFisica();
+                         pf.setEndereco(end);
+                         pf.setNome(request.getParameter("nomeCliente"));
+                         pf.setCpf(request.getParameter("cpfCliente"));
+                         pf.setData_nasc(request.getParameter("dataNascCliente"));
+                         pf.setTelefone(request.getParameter("numeroCliente"));
+                         pf.setEmail(request.getParameter("emailCliente"));
+                         pfdao.insertPessoaFisica(pf);
+                     }
+                     
+                     else if(tipo.equals("juridica")){
+                         PessoaJuridica pj = new PessoaJuridica();
+                         pj.setEndereco(end);
+                         pj.setRazao_social(request.getParameter("razaoSocialCliente"));
+                         pj.setCnpj(request.getParameter("cnpjCliente"));
+                         pj.setInscricao_municipal(request.getParameter("inscMunicCliente"));
+                         pj.setInscricao_estadual(request.getParameter("inscEstCliente"));
+                         pj.setTelefone(request.getParameter("numeroCliente"));
+                         pj.setEmail(request.getParameter("emailCliente"));
+                         pjdao.inserirPessoaJuridica(pj);
+                     }
+                }
                 default:
                     break;
                     

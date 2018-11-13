@@ -40,16 +40,16 @@
 
         <div id="btnMenu"><img src="img/btn-menu.png"></div>
 
-        <!--%@include file="menu.jsp" %-->
+        <%@include file="menu.jsp" %>
 
-        <div class="cont-mid row">
+        <div class="cont cont-mid row">
                 <div class="col-md-4 col-md-offset-4">
                     <div class="border-titulo text-center">
                             <h2>Gerenciar Cliente</h2>
                             <br>
                             <div class="form-group">
                                 CPF/CNPJ do cliente:<input type="text" class="form-control" id="numCadastro">
-                                <input type="button" class="btn btn-primary" value="Iniciar Venda" id="buscarCliente"><br>
+                                <input type="button" class="btn btn-primary" value="Buscar Cliente" id="buscarCliente"><br>
                             </div>
 
                         <div class="clearfix"></div>
